@@ -3,7 +3,7 @@ import Chevrons from "../UI/Chevrons";
 
 export default function Services() {
   return (
-    <section className="bg-stone-950 px-9 py-20 space-y-17">
+    <section className="relative bg-stone-950 px-9 py-16 space-y-15 drop-shadow-2xl">
       {/* Section Header */}
       <div className="space-y-4">
         <h2 className="font-display text-3xl uppercase tracking-tight text-white">
@@ -12,10 +12,10 @@ export default function Services() {
       </div>
 
       {/* Services Stack - Pure vertical alignment for mobile viewports */}
-      <div className="space-y-16 flex flex-col">
+      <div className="space-y-10 flex flex-col">
         <Link href="/contact/">
           {/* Service 1: Hot Shot & Goosenecks */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             {/* Icon Wrapper */}
             <div className="relative flex flex-col items-center w-max ml-5">
               <svg
@@ -32,13 +32,13 @@ export default function Services() {
               </svg>
 
               <div
-                className="h-6 w-20 -mt-4 rounded-[50%] bg-stone-800"
+                className="h-6 w-20 rounded-[50%] bg-stone-800 -mt-4.5"
                 aria-hidden="true"
               />
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-lg font-extrabold text-white tracking-tight">
+              <h3 className="text-lg font-extrabold text-white/90 tracking-tight">
                 On-Site Tire Replacement
               </h3>
               <p className="text-base text-stone-400 max-w-sm">
@@ -49,7 +49,7 @@ export default function Services() {
               </p>
             </div>
             <div className="ml-1 mt-5 flex row gap-1.5">
-              <p className="font-display tracking-wide uppercase">Schedule{" "}Appointment</p>
+              <p className="font-display tracking-wide uppercase text-white/90">Schedule{" "}Appointment</p>
               <span className="mt-1">
                 <Chevrons />
               </span>
@@ -63,7 +63,7 @@ export default function Services() {
           of your massive space-y-25 margin gap, creating a premium anchor.
         */}
         
-        <div className="border-t border-stone-700/70 w-75" aria-hidden="true" />
+        <div className="border-t border-stone-900/60 w-75" aria-hidden="true" />
 
         <Link href="/contact/">
           {/* Service 2: Box Trucks & Delivery */}
@@ -85,7 +85,7 @@ export default function Services() {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-lg font-extrabold text-white tracking-tight">
+              <h3 className="text-lg font-extrabold text-white/90 tracking-tight">
                 Commercial Curation & Sourcing
               </h3>
               <p className="text-base text-stone-400 max-w-sm">
@@ -96,7 +96,7 @@ export default function Services() {
               </p>
             </div>
                <div className="ml-1 mt-5 flex row gap-1.5">
-              <p className="font-display uppercase">Learn More</p>
+              <p className="font-display uppercase text-white/90">Learn More</p>
               <span className="mt-1">
                 <Chevrons />
               </span>

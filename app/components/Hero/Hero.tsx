@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Hero() {
   return (
     <section className="relative h-svh w-full flex flex-col justify-center p-6 bg-stone-900">
@@ -26,9 +28,11 @@ export default function Hero() {
 
         {/* Primary CTA Button - High-contrast, easy to tap */}
         <div className="pt-2 pl-3 pr-15">
-          <button className="w-full bg-transparent border-2 border-white text-white font-bold h-14 rounded-lg uppercase font-extrabold tracking-tight">
-            Schedule Service
-          </button>
+          <Link href="/contact" className="w-full block">
+            <button className="w-full bg-transparent border-2 border-white text-white font-bold h-14 rounded-lg uppercase font-extrabold tracking-tight">
+              Schedule Service
+            </button>
+          </Link>
         </div>
       </div>
     </section>

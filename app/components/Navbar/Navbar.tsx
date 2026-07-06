@@ -20,12 +20,11 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full h-24">
-      
       {/* LAYER 1: The Solid Active State Background
           This sits underneath everything. It fades smoothly from opacity 0 to 100.
           We also put the backdrop blur and border strictly on this layer. */}
       <div
-        className={`absolute inset-0 bg-stone-950 transition-opacity duration-300 pointer-events-none
+        className={`absolute inset-0 bg-stone-950 transition-opacity duration-300 pointer-events-none border-stone-700/90 border-b-[.07rem] drop-shadow-xl
           ${hasScrolled ? "opacity-100" : "opacity-0"}`}
         aria-hidden="true"
       />
@@ -42,8 +41,8 @@ export default function Navbar() {
       {/* The Content Container */}
       <div className="relative z-10 flex items-center justify-between h-full ml-[-.5rem] px-6 md:px-12">
         {/* Hamburger Icon */}
-        <button 
-          type="button" 
+        <button
+          type="button"
           className="text-white hover:text-stone-300 p-1 transition-colors"
           aria-label="Open navigation menu"
         >
@@ -53,7 +52,7 @@ export default function Navbar() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="h-12 w-12 text-white"
+            className="h-12 w-12 text-white/90"
           >
             <path
               strokeLinecap="round"
@@ -62,6 +61,7 @@ export default function Navbar() {
             />
           </svg>
         </button>
+        <img src="/logo.png" alt="company logo" width={270} height={270} className="mt-1"/>
       </div>
     </header>
   );

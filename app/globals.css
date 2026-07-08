@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Wrap it in @utility so Tailwind processes it correctly */
-@utility font-display {
-  font-family: var(--font-racing), sans-serif;
+@theme {
+  --font-display: var(--font-racing), sans-serif;
 }

@@ -1,10 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Transition } from "framer-motion";
 
 export default function ComingSoonServices() {
   // High-tension spring for that premium, snappy give-and-pull movement
-  const springTransition = { type: "spring", stiffness: 300, damping: 28 };
+  const springTransition: Transition = {
+    type: "spring",
+    stiffness: 300,
+    damping: 28,
+  };
 
   return (
     <div className="min-h-[80vh] w-full flex items-center justify-center relative overflow-hidden bg-stone-900 pt-18">

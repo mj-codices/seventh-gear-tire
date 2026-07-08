@@ -2,7 +2,12 @@
 
 import Chevrons from "../UI/Chevrons";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  Variants,
+  TargetAndTransition,
+} from "framer-motion";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -45,18 +50,21 @@ export default function Navbar() {
   }, [isOpen]);
 
   // Framer Motion Spring Configurations
-  const menuSpring = { type: "spring", stiffness: 400, damping: 40 };
-  const accordionSpring = { type: "spring", stiffness: 380, damping: 30 };
+  const menuSpring: TargetAndTransition["transition"] = {
+    type: "spring",
+    stiffness: 400,
+    damping: 40,
+  };
 
   // Framer Motion Variants
-  const menuVariants = {
+  const menuVariants: Variants = {
     closed: {
       x: "-100%",
-      transition: menuSpring,
+      transition: { ...menuSpring }, //  Spread the object properties directly here
     },
     open: {
       x: 0,
-      transition: { ...menuSpring, damping: 35 },
+      transition: { ...menuSpring, damping: 35 }, //  This one was already perfect!
     },
   };
 
@@ -177,9 +185,9 @@ export default function Navbar() {
             >
               <div>
                 {/* Header space inside the drawer — White background with the Logo */}
-             
-                  <div className="flex items-center justify-start mb-5 h-20 bg-white/90 pl-6 pr-8">
-                    <a href="/">
+
+                <div className="flex items-center justify-start mb-5 h-20 bg-white/90 pl-6 pr-8">
+                  <a href="/">
                     <img
                       src="/logo-nav.png"
                       alt="nav menu logo"
@@ -187,9 +195,9 @@ export default function Navbar() {
                       height={240}
                       className="object-contain max-h-12"
                     />
-                     </a>
-                  </div>
-           
+                  </a>
+                </div>
+
                 {/* Navigation Links */}
                 <nav className="flex flex-col text-xl text-stone-200">
                   {/* "WHAT WE OFFER" INTERACTIVE CONTAINER */}
@@ -255,7 +263,7 @@ export default function Navbar() {
                   <div className="flex flex-col w-full border-t border-stone-800">
                     <a
                       href="/contact"
-                      className="flex items-center justify-between w-full pl-8 pr-6 py-5 font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors text-left"
+                      className="flex items-center justify-between w-full pl-8 pr-6 py-6 font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors text-left"
                       onClick={() => setIsOpen(false)}
                     >
                       <span>Schedule a Service</span>

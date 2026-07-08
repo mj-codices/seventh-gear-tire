@@ -18,10 +18,10 @@ const brands = [
 export default function BrandMarquee() {
   return (
     // Bottom Layer: The deeper base background
-    <div className="relative w-full bg-stone-900 pb-20 pt-1 overflow-hidden z-0">
+    <div className="relative w-full bg-stone-900 pb-15 pt-1 overflow-hidden z-0">
       {/* 1. Added w-max to force the container to be as wide as both rows combined */}
       <motion.div
-        className="flex whitespace-nowrap w-max pt-10"
+        className="flex whitespace-nowrap w-max pt-4.5"
         animate={{ x: [0, "-50%"] }} // 2. Changed from -100% to -50%
         transition={{
           ease: "linear",
@@ -61,7 +61,7 @@ export default function BrandMarquee() {
         Top Layer: The main card container. 
         Instead of a fixed height, we let content dictate it to prevent text clipping on small screens.
       */}
-      <div className="relative mx-auto mt-20 w-[calc(100%-3rem)] rounded-md bg-stone-950 px-10 py-7 border-l border-r border-stone-800/40 drop-shadow-xl">
+      <div className="relative mx-auto mt-13 w-[calc(100%-3rem)] rounded-md bg-stone-950 px-10 py-7 border-l border-r border-stone-800/40 drop-shadow-xl">
         <div className="grid grid-cols-2 border-stone-800">
           {/* Top Left Item */}
           <div className="p-2 border-r border-b border-stone-900 space-y-1 mt-4">

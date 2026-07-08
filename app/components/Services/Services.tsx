@@ -74,7 +74,7 @@ export default function Services() {
   </svg>
 </div>
         </div>
-        <Link href="/contact/">
+        <Link href="/services/">
           <div className="space-y-4">
             <h3 className="text-lg font-extrabold text-white/90 tracking-tight">
               On-Site Tire Replacement
@@ -88,7 +88,7 @@ export default function Services() {
           </div>
           <div className="ml-1 mt-5 flex row gap-1.5">
             <p className="font-display tracking-wide uppercase text-white/90">
-              Schedule Appointment
+              Learn More
             </p>
             <span className="mt-1">
               <Chevrons />
@@ -104,7 +104,7 @@ export default function Services() {
 
         <div className="border-t border-stone-900 w-75" aria-hidden="true" />
 
-        <Link href="/contact/">
+        <Link href="/services/">
           {/* Service 2: Box Trucks & Delivery */}
 
           {/* Added flex and flex-col to match the physical structural stacking style of card one */}

@@ -3,8 +3,12 @@
 import Chevrons from "../UI/Chevrons";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const isContactRoute = pathname === "/contact";
+  const isServiceRoute = pathname === "/services";
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -107,13 +111,15 @@ export default function Navbar() {
               />
             </svg>
           </button>
-          <img
-            src="/logo.png"
-            alt="company logo"
-            width={270}
-            height={270}
-            className="-mt-1"
-          />
+          {!isContactRoute && !isServiceRoute && (
+            <img
+              src="/logo-alt.png"
+              alt="company logo"
+              width={270}
+              height={270}
+              className="-mt-1"
+            />
+          )}
         </div>
       </header>
 
@@ -136,7 +142,7 @@ export default function Navbar() {
               animate="open"
               exit="closed"
               variants={closeButtonVariants}
-              className="fixed top-7 left-[86vw] z-50 md:left-[calc(max-md-width+24px)]"
+              className="fixed top-6 left-[86vw] z-50 md:left-[calc(max-md-width+24px)]"
             >
               <button
                 type="button"
@@ -171,16 +177,19 @@ export default function Navbar() {
             >
               <div>
                 {/* Header space inside the drawer — White background with the Logo */}
-                <div className="flex items-center justify-start mb-5 h-20 bg-white/90 pl-6 pr-8">
-                  <img
-                    src="/logo-nav.png"
-                    alt="nav menu logo"
-                    width={240}
-                    height={240}
-                    className="object-contain max-h-12"
-                  />
-                </div>
-
+             
+                  <div className="flex items-center justify-start mb-5 h-20 bg-white/90 pl-6 pr-8">
+                    <a href="/">
+                    <img
+                      src="/logo-nav.png"
+                      alt="nav menu logo"
+                      width={240}
+                      height={240}
+                      className="object-contain max-h-12"
+                    />
+                     </a>
+                  </div>
+           
                 {/* Navigation Links */}
                 <nav className="flex flex-col text-xl text-stone-200">
                   {/* "WHAT WE OFFER" INTERACTIVE CONTAINER */}
@@ -210,30 +219,30 @@ export default function Navbar() {
                           // transition={accordionSpring}
                           className="overflow-hidden"
                         >
-                          <div className="flex flex-col mt-2 bg-stone-900 text-base text-stone-400 uppercase">
+                          <div className="flex flex-col mt-2 bg-stone-900 text-base text-stone-300 uppercase">
                             <a
-                              href="#tire-replacement"
+                              href="/services"
                               onClick={() => setIsOpen(false)}
                               className="flex items-center justify-between py-5 pl-10 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left"
                             >
                               <span>
                                 On-site Tire <br /> Replacement
                               </span>
-                              <span className="mt-0.5 mr-6 shrink-0 opacity-80">
-                                <Chevrons />
+                              <span className="mt-0.5 mr-6 shrink-0">
+                                <Chevrons className="text-stone-600" />
                               </span>
                             </a>
 
                             <a
-                              href="#otr-heavy"
+                              href="/services"
                               onClick={() => setIsOpen(false)}
                               className="flex items-center justify-between py-5 pl-10 pr-4 font-display hover:text-white transition-colors text-left"
                             >
                               <span>
                                 Commercial curation <br /> and sourcing
                               </span>
-                              <span className="mt-0.5 mr-6 shrink-0 opacity-80">
-                                <Chevrons />
+                              <span className="mt-0.5 mr-6 shrink-0">
+                                <Chevrons className="text-stone-600" />
                               </span>
                             </a>
                           </div>
@@ -245,11 +254,11 @@ export default function Navbar() {
                   {/* "SECURE A TIME SLOT" LINK */}
                   <div className="flex flex-col w-full border-t border-stone-800">
                     <a
-                      href="#scheduling-section"
+                      href="/contact"
                       className="flex items-center justify-between w-full pl-8 pr-6 py-5 font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors text-left"
                       onClick={() => setIsOpen(false)}
                     >
-                      <span>Secure a Time Slot</span>
+                      <span>Schedule a Service</span>
                       <span className="mt-0.5">
                         <Chevrons />
                       </span>

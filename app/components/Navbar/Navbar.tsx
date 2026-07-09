@@ -80,28 +80,28 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 w-full h-20">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full h-20 sm:h-30">
         {/* LAYER 1: The Solid Active State Background */}
         <div
           className={`absolute inset-0 bg-stone-950 transition-opacity duration-300 pointer-events-none border-stone-800/90 border-b-[.1rem] drop-shadow-xl
-            ${hasScrolled ? "opacity-100" : "opacity-0"}`}
+      ${hasScrolled ? "opacity-100" : "opacity-0"}`}
           aria-hidden="true"
         />
 
         {/* LAYER 2: The Initial Transparent Gradient Scrim */}
         <div
           className={`absolute inset-0 bg-gradient-to-b from-stone-950 via-stone-950/60 to-transparent transition-opacity duration-300 pointer-events-none
-            ${hasScrolled ? "opacity-0" : "opacity-100"}`}
+      ${hasScrolled ? "opacity-0" : "opacity-100"}`}
           aria-hidden="true"
         />
 
         {/* The Content Container */}
-        <div className="relative z-10 flex items-center justify-between h-full ml-[-.5rem] px-6 md:px-12">
+        <div className="relative z-10 flex items-center gap-2 sm:gap-6 h-full ml-[-.5rem] px-6 sm:px-12">
           {/* Hamburger Icon */}
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="text-white hover:text-stone-300 p-1 transition-colors"
+            className="text-white hover:text-stone-300 p-1 transition-colors flex-shrink-0"
             aria-label="Open navigation menu"
           >
             <svg
@@ -110,7 +110,7 @@ export default function Navbar() {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="h-12 w-12 text-white/90"
+              className="h-12 w-12 sm:h-15 sm:w-15 text-white/90"
             >
               <path
                 strokeLinecap="round"
@@ -119,15 +119,20 @@ export default function Navbar() {
               />
             </svg>
           </button>
-          {!isContactRoute && !isServiceRoute && (
-            <img
-              src="/logo-alt.png"
-              alt="company logo"
-              width={270}
-              height={270}
-              className="-mt-1"
-            />
-          )}
+
+          {/* Logo Wrapper Container */}
+          {/* Removed left-10, added responsive width scaling and flex vertical centering */}
+          <span className="flex items-center ml-4 flex-shrink-0 w-[240px] sm:w-[330px]">
+            {!isContactRoute && !isServiceRoute && (
+              <img
+                src="/logo-alt.png"
+                alt="company logo"
+                width={270}
+                height={270}
+                className="-mt-1 w-full h-auto object-contain"
+              />
+            )}
+          </span>
         </div>
       </header>
 
@@ -141,7 +146,7 @@ export default function Navbar() {
               animate="open"
               exit="closed"
               variants={overlayVariants}
-              className="fixed top-0 left-0 bottom-0 z-50 w-[100vw] max-w-md bg-stone-950/60 backdrop-blur-sm"
+              className="fixed inset-0 z-50 bg-stone-950/60 backdrop-blur-sm"
             />
 
             {/* Floating Close Button in the Blur Zone */}
@@ -150,7 +155,7 @@ export default function Navbar() {
               animate="open"
               exit="closed"
               variants={closeButtonVariants}
-              className="fixed top-6 left-[86vw] z-50 md:left-[calc(max-md-width+24px)]"
+              className="fixed top-6 left-[86vw] sm:left-[91.5vw] z-50 md:left-[calc(max-md-width+24px)]"
             >
               <button
                 type="button"
@@ -181,19 +186,16 @@ export default function Navbar() {
               animate="open"
               exit="closed"
               variants={menuVariants}
-              className="fixed top-0 left-0 bottom-0 z-50 w-[83vw] max-w-md bg-stone-950 border-r border-stone-800 shadow-2xl flex flex-col justify-between"
+              className="fixed top-0 left-0 bottom-0 z-50 w-[80vw] sm:w-[90vw] bg-stone-950 border-r border-stone-800 shadow-2xl flex flex-col justify-between"
             >
               <div>
-                {/* Header space inside the drawer — White background with the Logo */}
-
-                <div className="flex items-center justify-start mb-5 h-20 bg-white/90 pl-6 pr-8">
-                  <a href="/">
+                <div className="flex items-center justify-start mb-5 h-20 sm:h-30 bg-white/90 pl-6 sm:pl-12 pr-8">
+                  <a href="/" className="flex items-center">
                     <img
                       src="/logo-nav.png"
                       alt="nav menu logo"
                       width={240}
-                      height={240}
-                      className="object-contain max-h-12"
+                      className="object-contain max-h-12 sm:max-h-14 w-auto"
                     />
                   </a>
                 </div>
@@ -205,7 +207,7 @@ export default function Navbar() {
                     <button
                       type="button"
                       onClick={() => setIsServicesOpen(!isServicesOpen)}
-                      className="flex items-center justify-between w-full pl-8 pr-6 pt-2 pb-5 text-left font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors"
+                      className="flex items-center justify-between w-full pl-8 sm:pl-15 pr-6 pt-2 pb-5 text-left font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors"
                     >
                       <span>What We Offer</span>
                       <motion.span
@@ -231,7 +233,7 @@ export default function Navbar() {
                             <a
                               href="/services"
                               onClick={() => setIsOpen(false)}
-                              className="flex items-center justify-between py-5 pl-10 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left"
+                              className="flex items-center justify-between py-5 pl-10 sm:pl-20 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left"
                             >
                               <span>
                                 On-site Tire <br /> Replacement
@@ -244,7 +246,7 @@ export default function Navbar() {
                             <a
                               href="/services"
                               onClick={() => setIsOpen(false)}
-                              className="flex items-center justify-between py-5 pl-10 pr-4 font-display hover:text-white transition-colors text-left"
+                              className="flex items-center justify-between py-5 pl-10 sm:pl-20 pr-4 font-display hover:text-white transition-colors text-left"
                             >
                               <span>
                                 Commercial curation <br /> and sourcing
@@ -263,7 +265,7 @@ export default function Navbar() {
                   <div className="flex flex-col w-full border-t border-stone-800">
                     <a
                       href="/contact"
-                      className="flex items-center justify-between w-full pl-8 pr-6 py-6 font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors text-left"
+                      className="flex items-center justify-between w-full pl-8 sm:pl-15 pr-6 py-6 font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors text-left"
                       onClick={() => setIsOpen(false)}
                     >
                       <span>Schedule a Service</span>

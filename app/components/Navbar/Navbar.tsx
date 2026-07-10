@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import Chevrons from "../UI/Chevrons";
 import { useState, useEffect } from "react";
 import {
@@ -17,6 +17,13 @@ export default function Navbar() {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isDropdownHovered, setIsDropdownHovered] = useState(false);
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,11 +67,11 @@ export default function Navbar() {
   const menuVariants: Variants = {
     closed: {
       x: "-100%",
-      transition: { ...menuSpring }, //  Spread the object properties directly here
+      transition: { ...menuSpring },
     },
     open: {
       x: 0,
-      transition: { ...menuSpring, damping: 35 }, //  This one was already perfect!
+      transition: { ...menuSpring, damping: 35 },
     },
   };
 
@@ -84,55 +91,168 @@ export default function Navbar() {
         {/* LAYER 1: The Solid Active State Background */}
         <div
           className={`absolute inset-0 bg-stone-950 transition-opacity duration-300 pointer-events-none border-stone-800/90 border-b-[.1rem] drop-shadow-xl
-      ${hasScrolled ? "opacity-100" : "opacity-0"}`}
+      ${hasScrolled || isDropdownHovered ? "opacity-100" : "opacity-0"}`}
           aria-hidden="true"
         />
 
         {/* LAYER 2: The Initial Transparent Gradient Scrim */}
         <div
           className={`absolute inset-0 bg-gradient-to-b from-stone-950 via-stone-950/60 to-transparent transition-opacity duration-300 pointer-events-none
-      ${hasScrolled ? "opacity-0" : "opacity-100"}`}
+      ${hasScrolled || isDropdownHovered ? "opacity-0" : "opacity-100"}`}
           aria-hidden="true"
         />
 
         {/* The Content Container */}
-        <div className="relative z-10 flex items-center gap-2 sm:gap-6 h-full ml-[-.5rem] px-6 sm:px-12">
-          {/* Hamburger Icon */}
-          <button
-            type="button"
-            onClick={() => setIsOpen(true)}
-            className="text-white hover:text-stone-300 p-1 transition-colors flex-shrink-0"
-            aria-label="Open navigation menu"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-12 w-12 sm:h-15 sm:w-15 text-white/90"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
-              />
-            </svg>
-          </button>
-
-          {/* Logo Wrapper Container */}
-          {/* Removed left-10, added responsive width scaling and flex vertical centering */}
-          <span className="flex items-center ml-4 flex-shrink-0 w-[240px] sm:w-[330px]">
-            {!isContactRoute && !isServiceRoute && (
-              <img
-                src="/logo-alt.png"
-                alt="company logo"
-                width={270}
-                height={270}
-                className="-mt-1 w-full h-auto object-contain"
-              />
+        <div className="relative z-10 flex items-center justify-between w-full h-full ml-[-.5rem] lg:ml-0 px-6 sm:px-12">
+          {/* LEFT INNER CLUSTER: Hamburger, Logo, and Desktop Exploration Links */}
+          <div className="flex items-center gap-2 sm:gap-6 md:gap-8">
+            {/* Hamburger Icon — Only render on primary pages, hide on template routes and lg+ */}
+            {isMounted && !isContactRoute && !isServiceRoute && (
+              <button
+                type="button"
+                onClick={() => setIsOpen(true)}
+                className="text-white hover:text-stone-300 p-1 transition-colors flex-shrink-0 lg:hidden cursor-pointer"
+                aria-label="Open navigation menu"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-12 w-12 sm:h-15 sm:w-15 md:h-16 md:w-16 text-white/90"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
+                  />
+                </svg>
+              </button>
             )}
-          </span>
+
+            {/* Logo Wrapper Container */}
+            <span className="flex items-center ml-4 lg:ml-0 flex-shrink-0 w-[240px] sm:w-[330px] md:w-[380px] lg:w-[410px]">
+              {isMounted && !isContactRoute && !isServiceRoute && (
+                <Link href="/" className="w-full cursor-pointer">
+                  <img
+                    src="/logo-alt.png"
+                    alt="company logo"
+                    width={270}
+                    height={270}
+                    className="-mt-1 w-full h-auto object-contain"
+                  />
+                </Link>
+              )}
+            </span>
+
+            {/* DESKTOP NAV LINKS */}
+            <nav className="hidden lg:flex items-center lg:-ml-4 xl:ml-12 h-full text-sm font-display uppercase tracking-wider text-stone-300">
+              {/* ROUTING GUARD: Hide "What We Offer" link on /services or /contact */}
+              {!isContactRoute && !isServiceRoute && (
+                <div
+                  className="group h-full flex items-center -mt-2"
+                  onMouseEnter={() => setIsDropdownHovered(true)}
+                  onMouseLeave={() => setIsDropdownHovered(false)}
+                >
+                  <button
+                    type="button"
+                    className={`flex items-center gap-1.5 transition-colors duration-200 ${
+                      isDropdownHovered
+                        ? "text-white"
+                        : "text-stone-300 hover:text-white"
+                    }`}
+                  >
+                    <span className="text-base uppercase">What We Offer</span>
+                    <span
+                      className={`inline-block transform transition-transform duration-200 mt-1 ${
+                        isDropdownHovered
+                          ? "rotate-90 text-white"
+                          : "group-hover:rotate-90 text-stone-500"
+                      }`}
+                      aria-hidden="true"
+                    >
+                      <Chevrons />
+                    </span>
+                  </button>
+
+                  {/* Premium Extension Panel */}
+                  <div className="absolute top-[120px] left-120 xl:left-135 w-70 bg-stone-950 border-x border-b border-stone-800 rounded-b-md shadow-2xl opacity-0 pointer-events-none translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                    <div
+                      className="absolute left-0 right-0 h-[55px] -top-[54px] bg-transparent pointer-events-auto"
+                      aria-hidden="true"
+                    />
+
+                    {/* Link 1: On-Site Tire Replacement */}
+                    <a
+                      href="/services"
+                      className="group/link flex items-center gap-6 px-5 py-6 text-sm font-bold text-stone-300 hover:bg-taupe-900/20 hover:text-white transition-colors border-b border-stone-800"
+                    >
+                      <span className="text-stone-500 group-hover/link:text-red-600/80 transition-colors duration-200 flex-shrink-0">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 16 16"
+                          fill="currentColor"
+                          className="w-8 h-8"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="m7.539 14.841.003.003.002.002a.755.755 0 0 0 .912 0l.002-.002.003-.003.012-.009a5.57 5.57 0 0 0 .19-.153 15.588 15.588 0 0 0 2.046-2.082c1.101-1.362 2.291-3.342 2.291-5.597A5 5 0 0 0 3 7c0 2.255 1.19 4.235 2.292 5.597a15.591 15.591 0 0 0 2.046 2.082 8.916 8.916 0 0 0 .189.153l.012.01ZM8 8.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                      <span>On-Site Tire Replacement</span>
+                    </a>
+
+                    {/* Link 2: Commercial Curation & Sourcing */}
+                    <a
+                      href="/services"
+                      className="group/link flex items-center gap-6 px-5 py-6 text-sm font-bold text-stone-300 hover:bg-taupe-900/20 hover:text-white transition-colors last:rounded-b-md"
+                    >
+                      <span className="text-stone-500 group-hover/link:text-red-600/80 transition-colors duration-200 flex-shrink-0">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 16 16"
+                          fill="currentColor"
+                          className="w-7 h-7 translate-x-1"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M8.5 1.709a.75.75 0 0 0-1 0 8.963 8.963 0 0 1-4.84 2.217.75.75 0 0 0-.654.72 10.499 10.499 0 0 0 5.647 9.672.75.75 0 0 0 .694-.001 10.499 10.499 0 0 0 5.647-9.672.75.75 0 0 0-.654-.719A8.963 8.963 0 0 1 8.5 1.71Zm2.34 5.504a.75.75 0 0 0-1.18-.926L7.394 9.17l-1.156-.99a.75.75 0 1 0-.976 1.138l1.75 1.5a.75.75 0 0 0 1.078-.106l2.75-3.5Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                      <span>Commercial Curation &amp; Sourcing</span>
+                    </a>
+                  </div>
+                </div>
+              )}
+            </nav>
+          </div>
+
+          {/* RIGHT SIDE CTA ACTION */}
+          {/* RIGHT SIDE CTA ACTION */}
+          <div className="flex items-center mt-1">
+            {isMounted && (isContactRoute || isServiceRoute) ? (
+              /* This renders on ALL screen sizes, but only on template pages */
+              <a
+                href="/"
+                className="inline-block bg-transparent text-white font-display text-sm font-bold uppercase tracking-widest px-5 py-3 sm:px-6 sm:py-3.5 rounded border-2 border-stone-700 hover:border-red-800 hover:bg-red-800 transition-all duration-300 shadow-md whitespace-nowrap mt-3 -ml-40"
+              >
+                Back To Home
+              </a>
+            ) : (
+              /* This drops back to the original desktop-only behavior on standard pages */
+              <a
+                href="/contact"
+                className="hidden lg:inline-block bg-transparent text-white font-display text-sm font-bold uppercase tracking-widest px-6 py-3.5 rounded border-2 border-red-800 hover:bg-red-800 active:bg-red-900 transition-all duration-300 shadow-md hover:shadow-red-900/20"
+              >
+                Schedule Service
+              </a>
+            )}
+          </div>
         </div>
       </header>
 
@@ -140,7 +260,6 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Dark Backdrop Overlay — Matches drawer layout dimensions so the gutter is non-clickable */}
             <motion.div
               initial="closed"
               animate="open"
@@ -149,7 +268,6 @@ export default function Navbar() {
               className="fixed inset-0 z-50 bg-stone-950/60 backdrop-blur-sm"
             />
 
-            {/* Floating Close Button in the Blur Zone */}
             <motion.div
               initial="closed"
               animate="open"
@@ -180,7 +298,6 @@ export default function Navbar() {
               </button>
             </motion.div>
 
-            {/* Slide-out Drawer Container */}
             <motion.div
               initial="closed"
               animate="open"
@@ -189,47 +306,42 @@ export default function Navbar() {
               className="fixed top-0 left-0 bottom-0 z-50 w-[80vw] sm:w-[90vw] bg-stone-950 border-r border-stone-800 shadow-2xl flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-start mb-5 h-20 sm:h-30 bg-white/90 pl-6 sm:pl-12 pr-8">
-                  <a href="/" className="flex items-center">
+                <div className="flex items-center justify-start mb-5 h-20 sm:h-30 md:h-35 bg-white/90 pl-6 sm:pl-12 pr-8">
+                  <Link href="/" className="flex items-center">
                     <img
                       src="/logo-nav.png"
                       alt="nav menu logo"
                       width={240}
-                      className="object-contain max-h-12 sm:max-h-14 w-auto"
+                      className="object-contain max-h-12 sm:max-h-14 md:max-h-15 w-auto"
                     />
-                  </a>
+                  </Link>
                 </div>
 
-                {/* Navigation Links */}
-                <nav className="flex flex-col text-xl text-stone-200">
-                  {/* "WHAT WE OFFER" INTERACTIVE CONTAINER */}
+                <nav className="flex flex-col text-xl md:text-2xl text-stone-200">
                   <div className="flex flex-col w-full">
                     <button
                       type="button"
                       onClick={() => setIsServicesOpen(!isServicesOpen)}
-                      className="flex items-center justify-between w-full pl-8 sm:pl-15 pr-6 pt-2 pb-5 text-left font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors"
+                      className="flex items-center justify-between w-full pl-8 sm:pl-15 pr-6 pt-2 md:pt-6 pb-5 md:pb-10 text-left font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors"
                     >
                       <span>What We Offer</span>
                       <motion.span
                         animate={{ rotate: isServicesOpen ? 90 : 0 }}
-                        // transition={accordionSpring}
                         className="inline-flex items-center justify-center mt-0.5"
                       >
                         <Chevrons />
                       </motion.span>
                     </button>
 
-                    {/* Expandable Dropdown Content Area */}
                     <AnimatePresence initial={false}>
                       {isServicesOpen && (
                         <motion.div
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          // transition={accordionSpring}
                           className="overflow-hidden"
                         >
-                          <div className="flex flex-col mt-2 bg-stone-900 text-base text-stone-300 uppercase">
+                          <div className="flex flex-col mt-2 bg-stone-900 text-base md:text-lg text-stone-300 uppercase">
                             <a
                               href="/services"
                               onClick={() => setIsOpen(false)}
@@ -261,11 +373,10 @@ export default function Navbar() {
                     </AnimatePresence>
                   </div>
 
-                  {/* "SECURE A TIME SLOT" LINK */}
                   <div className="flex flex-col w-full border-t border-stone-800">
                     <a
                       href="/contact"
-                      className="flex items-center justify-between w-full pl-8 sm:pl-15 pr-6 py-6 font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors text-left"
+                      className="flex items-center justify-between w-full pl-8 sm:pl-15 pr-6 py-6 md:py-9 font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors text-left"
                       onClick={() => setIsOpen(false)}
                     >
                       <span>Schedule a Service</span>

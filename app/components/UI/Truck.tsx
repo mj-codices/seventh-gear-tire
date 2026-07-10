@@ -8,6 +8,7 @@ export default function Truck() {
       height="45"
       preserveAspectRatio="xMidYMid meet"
       version="1.0"
+      className="md:h-14"
     
     >
       <defs>

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative h-svh w-full flex flex-col justify-center p-6 sm:p-12 bg-stone-900">
+    <section className="relative h-svh w-full flex flex-col justify-center p-6 sm:p-12 md:p-16 xl:p-30 bg-stone-900">
       {/* Background Image with a dark overlay to make text pop */}
       <div className="absolute inset-0 z-0">
         {/* <img 
@@ -14,7 +14,7 @@ export default function Hero() {
       </div>
 
       {/* Content Stack - Anchored to the bottom for comfortable thumb-tapping */}
-      <div className="relative z-10 w-full max-w-xl space-y-6 sm:space-y-9 mb-10 mt-5">
+      <div className="relative z-10 w-full max-w-xl xl:max-w-2xl space-y-6 sm:space-y-9 mb-10 mt-5 md:mt-25">
         <h1 className="font-display text-5xl sm:text-6xl leading-13 sm:leading-16 font-extrabold tracking-wider text-white/90 px-3">
           <span className="text-red-800 brightness-140">Commercial Tires.</span>
           <br />
@@ -29,7 +29,7 @@ export default function Hero() {
         {/* Primary CTA Button - High-contrast, easy to tap */}
         <div className="pt-2 pl-3 pr-15">
           <Link href="/contact" className="w-full block">
-            <button className="w-full max-w-xs bg-transparent border-2 border-white text-white font-bold h-14 rounded-lg uppercase font-extrabold tracking-tight">
+            <button className="w-full max-w-xs bg-transparent border-2 border-white text-white font-bold h-14 rounded-md uppercase font-extrabold tracking-tight transition duration-300 hover:bg-red-800 hover:border-red-800 cursor-pointer">
               Schedule Service
             </button>
           </Link>

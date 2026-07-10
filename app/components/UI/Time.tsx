@@ -8,6 +8,7 @@ export default function () {
       height="50"
       preserveAspectRatio="xMidYMid meet"
       version="1.0"
+      className="md:h-15"
     >
       <defs>
         <clipPath id="eb7ca18fe5">

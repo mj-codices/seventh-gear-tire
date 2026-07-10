@@ -8,6 +8,7 @@ export default function () {
       height="60"
       preserveAspectRatio="xMidYMid meet"
       version="1.0"
+      className="w-11 h-11 md:w-13 md:h-13"
     >
       <path
         fill="currentColor"

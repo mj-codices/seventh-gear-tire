@@ -33,7 +33,7 @@ export default function ComingSoonServices() {
         {/* Heading */}
         <h1 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-white/90 uppercase mb-4">
           Services Page <br />
-          <span className="text-red-800 brightness-140">
+          <span className="text-red-700/90">
             Under Construction
           </span>
         </h1>

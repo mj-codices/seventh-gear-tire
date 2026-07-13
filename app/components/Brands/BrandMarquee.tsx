@@ -20,42 +20,53 @@ export default function BrandMarquee() {
     // Bottom Layer: The deeper base background
     <div className="relative w-full bg-stone-900 pb-15 sm:pb-25 pt-1 overflow-hidden z-0">
       {/* 1. Added w-max to force the container to be as wide as both rows combined */}
-      <motion.div
-        className="flex whitespace-nowrap w-max pt-4.5 sm:pt-10 md:pt-15"
-        animate={{ x: [0, "-50%"] }} // 2. Changed from -100% to -50%
-        transition={{
-          ease: "linear",
-          duration: 25,
-          repeat: Infinity,
+      {/* 1. Added a wrapper with a horizontal fade mask */}
+      <div
+        className="w-full overflow-hidden"
+        style={{
+          maskImage:
+            "linear-gradient(to right, transparent, white 20%, white 80%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, white 20%, white 80%, transparent)",
         }}
       >
-        {/* First Loop Pass - Added flex-shrink-0 */}
-        <div className="flex items-center gap-20 sm:gap-25 md:gap-30 xl:gap-40 pr-20 sm:pr-30 md:pr-35 flex-shrink-0">
-          {brands.map((brand, idx) => (
-            <span
-              key={`track1-${idx}`}
-              className={`${brand.style} text-3xl sm:text-4xl md:text-5xl text-stone-500 select-none`}
-            >
-              {brand.name}
-            </span>
-          ))}
-        </div>
-
-        {/* Second Loop Pass - Added flex-shrink-0 */}
-        <div
-          className="flex items-center gap-20 sm:gap-25 md:gap-30 xl:gap-40 pr-20 sm:pr-30 md:pr-35 flex-shrink-0"
-          aria-hidden="true"
+        <motion.div
+          className="flex whitespace-nowrap w-max pt-4.5 sm:pt-10 md:pt-15"
+          animate={{ x: [0, "-50%"] }}
+          transition={{
+            ease: "linear",
+            duration: 25,
+            repeat: Infinity,
+          }}
         >
-          {brands.map((brand, idx) => (
-            <span
-              key={`track2-${idx}`}
-              className={`${brand.style} text-3xl sm:text-4xl md:text-5xl text-stone-500`}
-            >
-              {brand.name}
-            </span>
-          ))}
-        </div>
-      </motion.div>
+          {/* First Loop Pass */}
+          <div className="flex items-center gap-20 sm:gap-25 md:gap-30 xl:gap-40 pr-20 sm:pr-30 md:pr-35 flex-shrink-0">
+            {brands.map((brand, idx) => (
+              <span
+                key={`track1-${idx}`}
+                className={`${brand.style} text-3xl sm:text-4xl md:text-5xl text-stone-500 select-none`}
+              >
+                {brand.name}
+              </span>
+            ))}
+          </div>
+
+          {/* Second Loop Pass */}
+          <div
+            className="flex items-center gap-20 sm:gap-25 md:gap-30 xl:gap-40 pr-20 sm:pr-30 md:pr-35 flex-shrink-0"
+            aria-hidden="true"
+          >
+            {brands.map((brand, idx) => (
+              <span
+                key={`track2-${idx}`}
+                className={`${brand.style} text-3xl sm:text-4xl md:text-5xl text-stone-500`}
+              >
+                {brand.name}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+      </div>
 
       <div className="relative mx-auto mt-13 sm:mt-25 md:mt-30 w-[calc(100%-3rem)] sm:w-[calc(100%-6rem)] md:w-[calc(100%-10rem)] rounded-md bg-stone-950 px-6 pt-9 sm:pt-15 md:pt-20 pb-12 sm:pb-20 md:pb-25 border-l border-r border-stone-800/40 drop-shadow-xl lg:drop-shadow-3xl">
         {/* Changed xl:grid-cols-4 to lg:grid-cols-4 to snap into a single row at 1024px */}

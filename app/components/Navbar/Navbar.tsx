@@ -165,7 +165,7 @@ export default function Navbar() {
                   >
                     <span className="text-base uppercase">What We Offer</span>
                     <span
-                      className={`inline-block transform transition-transform duration-200 mt-1 ${
+                      className={`inline-block transform transition-transform duration-500 mt-1 ${
                         isDropdownHovered
                           ? "rotate-90 text-white"
                           : "group-hover:rotate-90 text-stone-500"
@@ -232,7 +232,7 @@ export default function Navbar() {
             </nav>
           </div>
 
-          {/* RIGHT SIDE CTA ACTION */}
+         
           {/* RIGHT SIDE CTA ACTION */}
           <div className="flex items-center mt-1">
             {isMounted && (isContactRoute || isServiceRoute) ? (
@@ -323,11 +323,17 @@ export default function Navbar() {
                       type="button"
                       onClick={() => setIsServicesOpen(!isServicesOpen)}
                       className="flex items-center justify-between w-full pl-8 sm:pl-15 pr-6 pt-2 md:pt-6 pb-5 md:pb-10 text-left font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors"
+                      
                     >
                       <span>What We Offer</span>
                       <motion.span
                         animate={{ rotate: isServicesOpen ? 90 : 0 }}
                         className="inline-flex items-center justify-center mt-0.5"
+                          transition={{
+                          type: "tween",
+                          duration: 0.3, // Higher number = slower animation (0.6 seconds is a smooth, stately speed)
+                          ease: "easeInOut",
+                        }}
                       >
                         <Chevrons />
                       </motion.span>

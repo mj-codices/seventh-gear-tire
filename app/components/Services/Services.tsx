@@ -90,10 +90,10 @@ export default function Services() {
               </p>
             </div>
             <div className="ml-1 mt-5 flex items-center gap-1.5">
-              <p className="font-display tracking-wide uppercase text-white/90 sm:text-lg">
+              <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors sm:text-lg">
                 Learn More
               </p>
-              <span className="transform translate-y-0.5 group-hover:translate-x-1 transition-transform duration-300 ease-in-out">
+              <span className="transform translate-y-0.5 group-hover:translate-x-1 transition-transform duration-500 ease-in-out">
                 <Chevrons />
               </span>
             </div>
@@ -119,10 +119,10 @@ export default function Services() {
               </p>
             </div>
             <div className="ml-1 mt-5 flex items-center gap-1.5">
-              <p className="font-display uppercase text-white/90 sm:text-lg">
+              <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors sm:text-lg">
                 Learn More
               </p>
-              <span className="transform translate-y-0.5 group-hover:translate-x-1 transition-transform duration-300 ease-in-out">
+              <span className="transform translate-y-0.5 group-hover:translate-x-1 transition-transform duration-500 ease-in-out">
                 <Chevrons />
               </span>
             </div>

@@ -90,14 +90,14 @@ export default function Navbar() {
       <header className="fixed top-0 left-0 right-0 z-50 w-full h-20 sm:h-30">
         {/* LAYER 1: The Solid Active State Background */}
         <div
-          className={`absolute inset-0 bg-stone-950 transition-opacity duration-300 pointer-events-none border-stone-800/90 border-b-[.1rem] drop-shadow-xl
+          className={`absolute inset-0 bg-stone-950 transition-opacity duration-400 pointer-events-none border-stone-800/90 border-b-[.1rem] drop-shadow-xl
       ${hasScrolled || isDropdownHovered ? "opacity-100" : "opacity-0"}`}
           aria-hidden="true"
         />
 
         {/* LAYER 2: The Initial Transparent Gradient Scrim */}
         <div
-          className={`absolute inset-0 bg-gradient-to-b from-stone-950 via-stone-950/60 to-transparent transition-opacity duration-300 pointer-events-none
+          className={`absolute inset-0 bg-gradient-to-b from-stone-950 via-stone-950/60 to-transparent transition-opacity duration-400 pointer-events-none
       ${hasScrolled || isDropdownHovered ? "opacity-0" : "opacity-100"}`}
           aria-hidden="true"
         />
@@ -165,7 +165,7 @@ export default function Navbar() {
                   >
                     <span className="text-base uppercase">What We Offer</span>
                     <span
-                      className={`inline-block transform transition-transform duration-500 mt-1 ${
+                      className={`inline-block transform transition-transform duration-400 mt-1 ${
                         isDropdownHovered
                           ? "rotate-90 text-white"
                           : "group-hover:rotate-90 text-stone-500"
@@ -177,62 +177,66 @@ export default function Navbar() {
                   </button>
 
                   {/* Premium Extension Panel */}
-                  <div className="absolute top-[120px] left-120 xl:left-135 w-70 bg-stone-950 border-x border-b border-stone-800 rounded-b-md shadow-2xl opacity-0 pointer-events-none translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                  {/* 1. Main Container: Stays physically locked in place so the invisible bridge never moves */}
+                  <div className="absolute top-[120px] left-120 xl:left-135 w-70 z-50 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300">
+                    {/* The Invisible Bridge: Now permanently anchored */}
                     <div
                       className="absolute left-0 right-0 h-[55px] -top-[54px] bg-transparent pointer-events-auto"
                       aria-hidden="true"
                     />
 
-                    {/* Link 1: On-Site Tire Replacement */}
-                    <a
-                      href="/services"
-                      className="group/link flex items-center gap-6 px-5 py-6 text-sm font-bold text-stone-300 hover:bg-taupe-900/20 hover:text-white transition-colors border-b border-stone-800"
-                    >
-                      <span className="text-stone-500 group-hover/link:text-red-600/80 transition-colors duration-200 flex-shrink-0">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 16 16"
-                          fill="currentColor"
-                          className="w-8 h-8"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="m7.539 14.841.003.003.002.002a.755.755 0 0 0 .912 0l.002-.002.003-.003.012-.009a5.57 5.57 0 0 0 .19-.153 15.588 15.588 0 0 0 2.046-2.082c1.101-1.362 2.291-3.342 2.291-5.597A5 5 0 0 0 3 7c0 2.255 1.19 4.235 2.292 5.597a15.591 15.591 0 0 0 2.046 2.082 8.916 8.916 0 0 0 .189.153l.012.01ZM8 8.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </span>
-                      <span>On-Site Tire Replacement</span>
-                    </a>
+                    {/* 2. Inner Wrapper: Handles the visual slide, fade, and momentum */}
+                    <div className="w-full bg-stone-950 border-x border-b border-stone-800 rounded-b-md shadow-2xl transform -translate-y-6 transition-transform duration-400 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-y-0">
+                      {/* Link 1: On-Site Tire Replacement */}
+                      <a
+                        href="/services"
+                        className="group/link flex items-center gap-6 px-5 py-6 text-sm font-bold text-stone-300 hover:bg-taupe-900/20 hover:text-white transition-colors border-b border-stone-800"
+                      >
+                        <span className="text-stone-500 group-hover/link:text-red-600/80 transition-colors duration-200 flex-shrink-0">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 16 16"
+                            fill="currentColor"
+                            className="w-8 h-8"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="m7.539 14.841.003.003.002.002a.755.755 0 0 0 .912 0l.002-.002.003-.003.012-.009a5.57 5.57 0 0 0 .19-.153 15.588 15.588 0 0 0 2.046-2.082c1.101-1.362 2.291-3.342 2.291-5.597A5 5 0 0 0 3 7c0 2.255 1.19 4.235 2.292 5.597a15.591 15.591 0 0 0 2.046 2.082 8.916 8.916 0 0 0 .189.153l.012.01ZM8 8.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </span>
+                        <span>On-Site Tire Replacement</span>
+                      </a>
 
-                    {/* Link 2: Commercial Curation & Sourcing */}
-                    <a
-                      href="/services"
-                      className="group/link flex items-center gap-6 px-5 py-6 text-sm font-bold text-stone-300 hover:bg-taupe-900/20 hover:text-white transition-colors last:rounded-b-md"
-                    >
-                      <span className="text-stone-500 group-hover/link:text-red-600/80 transition-colors duration-200 flex-shrink-0">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 16 16"
-                          fill="currentColor"
-                          className="w-7 h-7 translate-x-1"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M8.5 1.709a.75.75 0 0 0-1 0 8.963 8.963 0 0 1-4.84 2.217.75.75 0 0 0-.654.72 10.499 10.499 0 0 0 5.647 9.672.75.75 0 0 0 .694-.001 10.499 10.499 0 0 0 5.647-9.672.75.75 0 0 0-.654-.719A8.963 8.963 0 0 1 8.5 1.71Zm2.34 5.504a.75.75 0 0 0-1.18-.926L7.394 9.17l-1.156-.99a.75.75 0 1 0-.976 1.138l1.75 1.5a.75.75 0 0 0 1.078-.106l2.75-3.5Z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </span>
-                      <span>Commercial Curation &amp; Sourcing</span>
-                    </a>
+                      {/* Link 2: Commercial Curation & Sourcing */}
+                      <a
+                        href="/services"
+                        className="group/link flex items-center gap-6 px-5 py-6 text-sm font-bold text-stone-300 hover:bg-taupe-900/20 hover:text-white transition-colors last:rounded-b-md"
+                      >
+                        <span className="text-stone-500 group-hover/link:text-red-600/80 transition-colors duration-200 flex-shrink-0">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 16 16"
+                            fill="currentColor"
+                            className="w-7 h-7 translate-x-1"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M8.5 1.709a.75.75 0 0 0-1 0 8.963 8.963 0 0 1-4.84 2.217.75.75 0 0 0-.654.72 10.499 10.499 0 0 0 5.647 9.672.75.75 0 0 0 .694-.001 10.499 10.499 0 0 0 5.647-9.672.75.75 0 0 0-.654-.719A8.963 8.963 0 0 1 8.5 1.71Zm2.34 5.504a.75.75 0 0 0-1.18-.926L7.394 9.17l-1.156-.99a.75.75 0 1 0-.976 1.138l1.75 1.5a.75.75 0 0 0 1.078-.106l2.75-3.5Z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </span>
+                        <span>Commercial Curation &amp; Sourcing</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               )}
             </nav>
           </div>
 
-         
           {/* RIGHT SIDE CTA ACTION */}
           <div className="flex items-center mt-1">
             {isMounted && (isContactRoute || isServiceRoute) ? (
@@ -323,13 +327,12 @@ export default function Navbar() {
                       type="button"
                       onClick={() => setIsServicesOpen(!isServicesOpen)}
                       className="flex items-center justify-between w-full pl-8 sm:pl-15 pr-6 pt-2 md:pt-6 pb-5 md:pb-10 text-left font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors"
-                      
                     >
                       <span>What We Offer</span>
                       <motion.span
                         animate={{ rotate: isServicesOpen ? 90 : 0 }}
                         className="inline-flex items-center justify-center mt-0.5"
-                          transition={{
+                        transition={{
                           type: "tween",
                           duration: 0.3, // Higher number = slower animation (0.6 seconds is a smooth, stately speed)
                           ease: "easeInOut",

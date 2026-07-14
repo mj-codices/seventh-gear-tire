@@ -2,14 +2,17 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative h-svh w-full flex flex-col justify-center p-6 sm:p-12 md:p-16 xl:p-30 bg-stone-900">
-      {/* Background Image with a dark overlay to make text pop */}
+    <section className="relative h-svh w-full flex flex-col justify-center p-6 sm:p-12 md:p-16 xl:p-30 bg-stone-900 overflow-hidden">
+      {/* Background Video with a dark overlay to make text pop */}
       <div className="absolute inset-0 z-0">
-        {/* <img 
-          src="/tires.jpg" 
-          alt="tires" 
+        <video 
+          src="/tire_01.mp4" /* Replace with your actual video path in the public folder */
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
           className="h-full w-full object-cover opacity-60"
-        /> */}
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-900/40 to-transparent" />
       </div>
 

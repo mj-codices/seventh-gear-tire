@@ -74,10 +74,10 @@ export default function BrandMarquee() {
           {/* 1. First Item */}
           {/* Swapped xl: values out for lg: variants */}
           <div className="px-4 sm:px-10 md:px-20 lg:px-6 xl:px-16 pt-4 xl:pt-5 pb-8 lg:py-4 border-r border-b border-stone-900 lg:border-b-0 flex flex-col items-center justify-center">
-            <div className="text-white" aria-hidden="true">
+            <div className="text-stone-400" aria-hidden="true">
               <Truck />
             </div>
-            <h5 className="font-sans text-xs sm:text-base font-bold text-white/90 text-center leading-relaxed tracking-wide">
+            <h5 className="font-sans text-xs sm:text-base font-bold text-stone-400/90 text-center leading-relaxed tracking-wide">
               Light, medium, and heavy-duty fleet focus.
             </h5>
           </div>
@@ -86,12 +86,12 @@ export default function BrandMarquee() {
           {/* Swapped xl: values out for lg: variants */}
           <div className="px-4 sm:px-12 md:px-20 lg:px-6 xl:px-16 pt-4 md:pt-7 pb-8 lg:py-4 border-b border-stone-900 lg:border-b-0 lg:border-r border-stone-900 flex flex-col items-center justify-center gap-2 md:gap-4 lg:gap-2">
             <div
-              className="text-white flex items-center justify-center"
+              className="text-stone-400 flex items-center justify-center"
               aria-hidden="true"
             >
               <SunShield />
             </div>
-            <h5 className="font-sans text-xs sm:text-base font-bold text-white/90 text-center leading-relaxed tracking-wide">
+            <h5 className="font-sans text-xs sm:text-base font-bold text-stone-400/90 text-center leading-relaxed tracking-wide">
               Tires optimized for rough Texas roads.
             </h5>
           </div>
@@ -100,29 +100,29 @@ export default function BrandMarquee() {
           {/* Swapped xl: values out for lg: variants, and stripped out the extra mobile border-b tracking entirely */}
           <div className="pt-2 sm:pt-5 lg:pt-0 pb-8 lg:py-4 border-r border-stone-900 lg:border-b-0 flex flex-col items-center justify-center gap-1 px-3 sm:px-5 md:px-20 lg:px-6 xl:px-10 translate-1.5">
             <div
-              className="text-white/90 flex items-center justify-center"
+              className="text-stone-400/90 flex items-center justify-center"
               aria-hidden="true"
             >
               <Time />
             </div>
-            <h5 className="font-sans text-xs sm:text-base font-bold text-white/90 text-center leading-relaxed tracking-wide">
+            <h5 className="font-sans text-xs sm:text-base font-bold text-stone-400/90 text-center leading-relaxed tracking-wide">
               No waiting rooms or dealership lineups.
             </h5>
           </div>
 
           {/* 4. Fourth Item */}
-          {/* Swapped xl: values out for lg: variants so margins clear properly on the horizontal axis */}
-          <div className="p-4 lg:p-0 flex items-center justify-center mt-6 md:mt-10 lg:mt-10 lg:mt-0 lg:px-6">
+          {/* Remove the outer layout padding from this wrapper so it doesn't create dead zones */}
+          <div className="flex items-center justify-center mt-6 md:mt-10 lg:mt-10">
             <Link
               href="/contact"
-              className="group text-center text-white/90 w-full"
+              className="group flex items-center justify-center w-full h-full p-6 text-center text-stone-200 rounded-xl transition-colors hover:text-white active:bg-white/5 lg:p-6"
             >
-              <h5 className="font-display uppercase leading-normal tracking-wide text-center sm:text-lg">
+              <h5 className="font-display uppercase leading-normal tracking-wider text-center sm:text-lg">
                 Spec your{" "}
                 <span className="inline-flex items-center gap-1 whitespace-nowrap">
                   fleet
                   <span
-                    className="text-white/70 group-hover:translate-x-1 transition-transform duration-300 mt-1"
+                    className="group-hover:translate-x-1 transition-transform duration-500 mt-1"
                     aria-hidden="true"
                   >
                     <Chevrons />

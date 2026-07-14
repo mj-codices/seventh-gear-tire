@@ -25,7 +25,7 @@ export default function Services() {
 
           {/* 3. The Top-Right SVG */}
           <svg
-            className="absolute -top-7.5 sm:-top-12.5 sm:-right-6 -right-3 lg:h-25 lg:w-25 lg:-right-6 lg:-top-6 w-30 h-30 sm:w-45 sm:h-45 text-stone-500/60 pointer-events-none"
+            className="absolute -top-7.5 sm:-top-12.5 sm:-right-6 -right-3 lg:h-31 lg:w-31 lg:-right-8 lg:-top-8 w-30 h-30 sm:w-45 sm:h-45 text-stone-500/60 pointer-events-none"
             viewBox="0 0 100 100"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -40,9 +40,9 @@ export default function Services() {
           </svg>
 
           {/* 4. The Bottom-Left Geometric Slab SVG */}
-          <div className="absolute bottom-2 lg:bottom-0 left-0 sm:-left-5 lg:left-0 text-red-800 -translate-x-4 pointer-events-none">
+          <div className="absolute bottom-2 lg:bottom-0 left-0 sm:-left-5 lg:-left-3.5 text-red-800 -translate-x-4 pointer-events-none">
             <svg
-              className="w-60 sm:w-85 md:w-95 lg:w-60 h-6.5 sm:h-10"
+              className="w-60 sm:w-85 md:w-95 lg:w-70 h-6.5 sm:h-10"
               viewBox="0 0 320 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

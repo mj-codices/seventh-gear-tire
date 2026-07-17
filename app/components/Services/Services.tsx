@@ -3,7 +3,7 @@ import Chevrons from "../UI/Chevrons";
 
 export default function Services() {
   return (
-    <section className="relative bg-stone-950 px-9 sm:px-15 md:px-20 xl:px-33 pt-5 pb-15 md:pb-20 xl:pb-35 space-y-15 z-10 drop-shadow-xl lg:drop-shadow-4xl">
+    <section className="relative bg-stone-950 px-9 sm:px-15 md:px-20 xl:px-33 pt-10 sm:pt-30 pb-15 md:pb-20 xl:pb-35 space-y-15 z-10 drop-shadow-xl lg:drop-shadow-4xl">
       {/* Section Header */}
       <h2 className="font-display text-4xl sm:text-[40px] md:text-[50px] text-white/90 leading-11 sm:pb-4 md:pb-8 sm:max-w-lg md:max-w-2xl xl:max-w-3xl">
         Uptime solutions engineered for your fleet.
@@ -12,10 +12,9 @@ export default function Services() {
       {/* Services Stack: Changed xl: prefixes to lg: so the side-by-side configuration triggers earlier */}
       <div className="flex flex-col space-y-7 md:space-y-12 lg:space-y-0 lg:grid lg:grid-cols-[auto_1fr] lg:gap-x-16 xl:gap-x-20 lg:items-start">
         {/* LEFT COLUMN: Image Wrapper */}
-        {/* Cleaned up responsive padding overrides for both lg and xl milestones */}
         <div className="relative flex flex-col w-full max-w-md sm:max-w-lg lg:max-w-[420px] mr-3.5 pr-3 pb-3 lg:mr-0 lg:pr-0">
           {/* 2. Inner Layer */}
-          <div className="w-full h-full rounded-xl overflow-hidden mb-2 lg:aspect-[5/4]">
+          <div className="w-full h-full lg:h-auto lg:aspect-[5/4] rounded-xl overflow-hidden mb-2 relative lg:after:absolute lg:after:inset-0 lg:after:bg-[radial-gradient(circle,rgba(0,0,0,0)_40%,rgba(0,0,0,0.7)_100%)] lg:after:pointer-events-none">
             <img
               className="w-full h-full object-cover brightness-110"
               src="/services.jpeg"

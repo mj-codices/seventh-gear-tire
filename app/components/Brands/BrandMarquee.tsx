@@ -98,7 +98,7 @@ export default function BrandMarquee() {
 
           {/* 3. Third Item (Time Quadrant) */}
           {/* Swapped xl: values out for lg: variants, and stripped out the extra mobile border-b tracking entirely */}
-          <div className="pt-2 sm:pt-5 lg:pt-0 pb-8 lg:py-4 border-r border-stone-900 lg:border-b-0 flex flex-col items-center justify-center gap-1 px-3 sm:px-5 md:px-20 lg:px-6 xl:px-10 translate-1.5">
+          <div className="pt-2 sm:pt-5 lg:pt-0 pb-8 lg:py-4 border-r border-stone-900 lg:border-b-0 flex flex-col items-center justify-center gap-1 px-6">
             <div
               className="text-stone-400/90 flex items-center justify-center"
               aria-hidden="true"

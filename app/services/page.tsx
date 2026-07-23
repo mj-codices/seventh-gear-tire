@@ -1,6 +1,6 @@
-import ComingSoonServices from "./components/ServicesTemplate"
-export default function Services(){
-    return (
-        <ComingSoonServices/>
-    )
+import ComingSoonServices from "../components/services/ServicesTemplate";
+
+ComingSoonServices;
+export default function Services() {
+  return <ComingSoonServices />;
 }

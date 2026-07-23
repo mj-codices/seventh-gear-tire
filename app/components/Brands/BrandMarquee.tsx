@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Chevrons from "../UI/Chevrons";
-import Truck from "../UI/Truck";
-import Time from "../UI/Time";
-import SunShield from "../UI/SunShield";
+import Chevrons from "../ui/Chevrons";
+import Truck from "../ui/Truck";
+import Time from "../ui/Time";
+import SunShield from "../ui/SunShield";
 
 // Sample tire brands to populate the loop
 const brands = [
@@ -68,13 +68,13 @@ export default function BrandMarquee() {
         </motion.div>
       </div>
 
-      <div className="relative mx-auto mt-13 sm:mt-25 md:mt-30 w-[calc(100%-3rem)] sm:w-[calc(100%-6rem)] md:w-[calc(100%-10rem)] rounded-md bg-stone-950 px-6 pt-9 sm:pt-15 md:pt-20 pb-12 sm:pb-20 md:pb-25 border-l border-r border-stone-800/40 drop-shadow-xl lg:drop-shadow-3xl">
+      <div className="relative mx-auto mt-13 sm:mt-25 md:mt-30 w-[calc(100%-4rem)] sm:w-[calc(100%-6rem)] md:w-[calc(100%-10rem)] rounded-2xl bg-stone-950 px-6 pt-9 sm:pt-15 md:pt-20 pb-12 sm:pb-20 md:pb-25 border-1 border-stone-700/50 drop-shadow-xl lg:drop-shadow-3xl">
         {/* Changed xl:grid-cols-4 to lg:grid-cols-4 to snap into a single row at 1024px */}
         <div className="grid grid-cols-2 lg:grid-cols-4 border-stone-800">
           {/* 1. First Item */}
           {/* Swapped xl: values out for lg: variants */}
-          <div className="px-4 sm:px-10 md:px-20 lg:px-6 xl:px-16 pt-4 xl:pt-5 pb-8 lg:py-4 border-r border-b border-stone-900 lg:border-b-0 flex flex-col items-center justify-center">
-            <div className="text-stone-400" aria-hidden="true">
+          <div className="px-3 sm:px-10 md:px-20 lg:px-6 xl:px-16 pt-4 xl:pt-5 pb-8 lg:py-4 border-r border-b border-stone-900 lg:border-b-0 flex flex-col items-center justify-center">
+            <div className="text-stone-200" aria-hidden="true">
               <Truck />
             </div>
             <h5 className="font-sans text-xs sm:text-base font-bold text-stone-400/90 text-center leading-relaxed tracking-wide">
@@ -86,7 +86,7 @@ export default function BrandMarquee() {
           {/* Swapped xl: values out for lg: variants */}
           <div className="px-4 sm:px-12 md:px-20 lg:px-6 xl:px-16 pt-4 md:pt-7 pb-8 lg:py-4 border-b border-stone-900 lg:border-b-0 lg:border-r border-stone-900 flex flex-col items-center justify-center gap-2 md:gap-4 lg:gap-2">
             <div
-              className="text-stone-400 flex items-center justify-center"
+              className="text-stone-200 flex items-center justify-center"
               aria-hidden="true"
             >
               <SunShield />
@@ -98,9 +98,9 @@ export default function BrandMarquee() {
 
           {/* 3. Third Item (Time Quadrant) */}
           {/* Swapped xl: values out for lg: variants, and stripped out the extra mobile border-b tracking entirely */}
-          <div className="pt-2 sm:pt-5 lg:pt-0 pb-8 lg:py-4 border-r border-stone-900 lg:border-b-0 flex flex-col items-center justify-center gap-1 px-6">
+          <div className="pt-2 sm:pt-5 lg:pt-3 pb-8 lg:py-4 border-r border-stone-900 lg:border-b-0 flex flex-col items-center justify-center gap-1 pr-2 sm:pr-0 sm:px-6">
             <div
-              className="text-stone-400/90 flex items-center justify-center"
+              className="text-stone-200/90 flex items-center justify-center"
               aria-hidden="true"
             >
               <Time />
@@ -112,10 +112,10 @@ export default function BrandMarquee() {
 
           {/* 4. Fourth Item */}
           {/* Remove the outer layout padding from this wrapper so it doesn't create dead zones */}
-          <div className="flex items-center justify-center mt-6 md:mt-10 lg:mt-10">
+          <div className="flex items-center justify-center ml-1 sm:ml-0 mt-3 sm:mt-6 md:mt-10 lg:mt-10">
             <Link
               href="/contact"
-              className="group flex items-center justify-center w-full h-full p-6 text-center text-stone-200 rounded-xl transition-colors hover:text-white active:bg-white/5 lg:p-6"
+              className="group flex items-center justify-center w-full h-full p-5 text-center text-stone-200 rounded-xl transition-colors hover:text-white active:bg-white/5 lg:p-6"
             >
               <h5 className="font-display uppercase leading-normal tracking-wider text-center sm:text-lg">
                 Spec your{" "}

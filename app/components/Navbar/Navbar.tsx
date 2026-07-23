@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Chevrons from "../UI/Chevrons";
+import Chevrons from "../ui/Chevrons";
 import { useState, useEffect } from "react";
 import {
   motion,
@@ -12,8 +12,8 @@ import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const isContactRoute = pathname === "/contact";
   const isServiceRoute = pathname === "/services";
+
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -25,20 +25,25 @@ export default function Navbar() {
     setIsMounted(true);
   }, []);
 
+  // Scroll Listener with Hysteresis (Dead Zone) to prevent flickering near 20px
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll > 30) {
         setHasScrolled(true);
-      } else {
+      } else if (currentScroll < 10) {
         setHasScrolled(false);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent background scrolling when menu is open
+  // Prevent background scrolling when mobile menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -87,7 +92,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 w-full h-20 sm:h-30">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full h-20 md:h-30">
         {/* LAYER 1: The Solid Active State Background */}
         <div
           className={`absolute inset-0 bg-stone-950 transition-opacity duration-400 pointer-events-none border-stone-800/90 border-b-[.1rem] drop-shadow-xl
@@ -106,8 +111,8 @@ export default function Navbar() {
         <div className="relative z-10 flex items-center justify-between w-full h-full ml-[-.5rem] lg:ml-0 px-6 sm:px-12">
           {/* LEFT INNER CLUSTER: Hamburger, Logo, and Desktop Exploration Links */}
           <div className="flex items-center gap-2 sm:gap-6 md:gap-8">
-            {/* Hamburger Icon — Only render on primary pages, hide on template routes and lg+ */}
-            {isMounted && !isContactRoute && !isServiceRoute && (
+            {/* Hamburger Icon — Hidden only on /services */}
+            {isMounted && !isServiceRoute && (
               <button
                 type="button"
                 onClick={() => setIsOpen(true)}
@@ -120,7 +125,7 @@ export default function Navbar() {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="h-12 w-12 sm:h-15 sm:w-15 md:h-16 md:w-16 text-white/90"
+                  className="h-12 md:h-16 md:w-16 text-white/90"
                 >
                   <path
                     strokeLinecap="round"
@@ -132,8 +137,8 @@ export default function Navbar() {
             )}
 
             {/* Logo Wrapper Container */}
-            <span className="flex items-center ml-4 lg:ml-0 flex-shrink-0 w-[240px] sm:w-[330px] md:w-[380px] lg:w-[410px]">
-              {isMounted && !isContactRoute && !isServiceRoute && (
+            <span className="flex items-center ml-1 md:ml-4 lg:ml-0 flex-shrink-0 w-[240px] sm:w-[280px] md:w-[380px] lg:w-[410px]">
+              {isMounted && !isServiceRoute && (
                 <Link href="/" className="w-full cursor-pointer">
                   <img
                     src="/logo-alt.png"
@@ -148,8 +153,8 @@ export default function Navbar() {
 
             {/* DESKTOP NAV LINKS */}
             <nav className="hidden lg:flex items-center lg:-ml-4 xl:ml-12 h-full text-sm font-display uppercase tracking-wider text-stone-300">
-              {/* ROUTING GUARD: Hide "What We Offer" link on /services or /contact */}
-              {!isContactRoute && !isServiceRoute && (
+              {/* ROUTING GUARD: Hidden only on /services */}
+              {!isServiceRoute && (
                 <div
                   className="group h-full flex items-center -mt-2"
                   onMouseEnter={() => setIsDropdownHovered(true)}
@@ -177,17 +182,13 @@ export default function Navbar() {
                   </button>
 
                   {/* Premium Extension Panel */}
-                  {/* 1. Main Container: Stays physically locked in place so the invisible bridge never moves */}
                   <div className="absolute top-[120px] left-120 xl:left-135 w-70 z-50 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300">
-                    {/* The Invisible Bridge: Now permanently anchored */}
                     <div
                       className="absolute left-0 right-0 h-[55px] -top-[54px] bg-transparent pointer-events-auto"
                       aria-hidden="true"
                     />
 
-                    {/* 2. Inner Wrapper: Handles the visual slide, fade, and momentum */}
                     <div className="w-full bg-stone-950 border-x border-b border-stone-800 rounded-b-md shadow-2xl transform -translate-y-6 transition-transform duration-400 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-y-0">
-                      {/* Link 1: On-Site Tire Replacement */}
                       <a
                         href="/services"
                         className="group/link flex items-center gap-6 px-5 py-6 text-sm font-bold text-stone-300 hover:bg-taupe-900/20 hover:text-white transition-colors border-b border-stone-800"
@@ -209,7 +210,6 @@ export default function Navbar() {
                         <span>On-Site Tire Replacement</span>
                       </a>
 
-                      {/* Link 2: Commercial Curation & Sourcing */}
                       <a
                         href="/services"
                         className="group/link flex items-center gap-6 px-5 py-6 text-sm font-bold text-stone-300 hover:bg-taupe-900/20 hover:text-white transition-colors last:rounded-b-md"
@@ -239,8 +239,7 @@ export default function Navbar() {
 
           {/* RIGHT SIDE CTA ACTION */}
           <div className="flex items-center mt-1">
-            {isMounted && (isContactRoute || isServiceRoute) ? (
-              /* This renders on ALL screen sizes, but only on template pages */
+            {isMounted && isServiceRoute ? (
               <a
                 href="/"
                 className="inline-block bg-transparent text-white font-display text-sm font-bold uppercase tracking-widest px-5 py-3 sm:px-6 sm:py-3.5 rounded border-2 border-stone-700 hover:border-red-800 hover:bg-red-800 transition-all duration-300 shadow-md whitespace-nowrap mt-3 -ml-40"
@@ -248,7 +247,6 @@ export default function Navbar() {
                 Back To Home
               </a>
             ) : (
-              /* This drops back to the original desktop-only behavior on standard pages */
               <a
                 href="/contact"
                 className="hidden lg:inline-block bg-transparent text-white font-display text-sm font-bold uppercase tracking-widest px-6 py-3.5 rounded border-2 border-red-800 hover:bg-red-800 active:bg-red-900 transition-all duration-300 shadow-md hover:shadow-red-900/20"
@@ -277,7 +275,7 @@ export default function Navbar() {
               animate="open"
               exit="closed"
               variants={closeButtonVariants}
-              className="fixed top-6 left-[86vw] sm:left-[91.5vw] z-50 md:left-[calc(max-md-width+24px)]"
+              className="fixed top-6 max-[380px]:left-[85vw] left-[86vw] sm:left-[91.5vw] z-50 md:left-[calc(max-md-width+24px)]"
             >
               <button
                 type="button"
@@ -310,13 +308,13 @@ export default function Navbar() {
               className="fixed top-0 left-0 bottom-0 z-50 w-[80vw] sm:w-[90vw] bg-stone-950 border-r border-stone-800 shadow-2xl flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-start mb-5 h-20 sm:h-30 md:h-35 bg-white/90 pl-6 sm:pl-12 pr-8">
+                <div className="flex items-center justify-start mb-5 h-20 md:h-35 bg-white/90 pl-6 sm:pl-12 pr-8">
                   <Link href="/" className="flex items-center">
                     <img
                       src="/logo-nav.png"
                       alt="nav menu logo"
                       width={240}
-                      className="object-contain max-h-12 sm:max-h-14 md:max-h-15 w-auto"
+                      className="object-contain max-h-12 sm:max-h-12 md:max-h-15 w-auto"
                     />
                   </Link>
                 </div>
@@ -334,7 +332,7 @@ export default function Navbar() {
                         className="inline-flex items-center justify-center mt-0.5"
                         transition={{
                           type: "tween",
-                          duration: 0.3, // Higher number = slower animation (0.6 seconds is a smooth, stately speed)
+                          duration: 0.3,
                           ease: "easeInOut",
                         }}
                       >

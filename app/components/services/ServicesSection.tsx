@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Chevrons from "../UI/Chevrons";
+import Chevrons from "../ui/Chevrons";
 
 export default function Services() {
   return (
@@ -81,11 +81,10 @@ export default function Services() {
               <h3 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-white/90 tracking-tight group-hover:text-white transition-colors duration-300">
                 On-Site Tire Replacement
               </h3>
-              <p className="text-base sm:text-lg md:text-xl text-stone-400 max-w-md sm:max-w-lg md:max-w-2xl leading-8 md:leading-10">
+              <p className="text-base sm:text-lg md:text-xl text-stone-400 max-w-md sm:max-w-lg md:max-w-2xl leading-6.5 md:leading-10">
                 Commercial-grade mounting, precision computer balancing, and
                 fresh rubber delivered directly to your home base or warehouse
-                yard. Engineered for light to medium-duty trucks, box trucks,
-                and regional delivery vans.
+                yard.
               </p>
             </div>
             <div className="ml-1 mt-5 flex items-center gap-1.5">
@@ -110,10 +109,10 @@ export default function Services() {
               <h3 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-white/90 tracking-tight group-hover:text-white transition-colors duration-300">
                 Commercial Curation & Sourcing
               </h3>
-              <p className="text-base sm:text-lg md:text-xl text-stone-400 max-w-md sm:max-w-lg md:max-w-2xl leading-8 md:leading-10">
-                Whether your fleet demands closed-shoulder drive tires for
-                maximum Texas highway efficiency, or aggressive lugs engineered
-                for rugged regional job sites, we match your weight margins with
+              <p className="text-base sm:text-lg md:text-xl text-stone-400 max-w-md sm:max-w-lg md:max-w-2xl leading-6.5 md:leading-10">
+                Whether you demand closed-shoulder drive tires for
+                maximum highway efficiency, or lugs engineered
+                for rugged job sites, we match your weight margins with
                 top-tier inventory.
               </p>
             </div>

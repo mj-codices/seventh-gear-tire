@@ -17,9 +17,9 @@ export default function Hero() {
       </div>
 
       {/* Content Stack - Anchored to the bottom for comfortable thumb-tapping */}
-      <div className="relative z-10 w-full max-w-xl xl:max-w-2xl space-y-6 sm:space-y-9 mb-10 mt-5 md:mt-25">
+      <div className="relative z-10 w-full max-w-xl xl:max-w-2xl space-y-6 sm:space-y-9 mb-10 max-[380px]:mt-25 mt-5 md:mt-25">
         <h1 className="font-display text-5xl sm:text-6xl leading-13 sm:leading-16 font-extrabold tracking-wider text-white/90 px-3">
-          <span className="text-red-800 brightness-140">Commercial Tires.</span>
+          <span className="text-red-600 brightness-110">Commercial Tires.</span>
           <br />
           Delivered & Fitted On-Site.
         </h1>

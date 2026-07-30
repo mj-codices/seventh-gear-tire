@@ -1,0 +1,178 @@
+"use client";
+
+import { Dispatch, SetStateAction, FormEvent, ChangeEvent } from "react";
+import { Step1ServiceType } from "./Step1ServiceType";
+import { Step2OnsiteDetails } from "./Step2OnsiteDetails";
+import { Step3TireInfo } from "./Step3TireInfo";
+import { Step4ContactLocation } from "./Step4ContactLocation";
+import { SubmissionSuccess } from "./SubmissionSuccess";
+import { motion, AnimatePresence } from "framer-motion";
+
+export interface OptionItem {
+  id: string;
+  title: string;
+}
+
+export interface VehicleOption {
+  value: string;
+  label: string;
+}
+
+interface ContactFormProps {
+  selectedService: string;
+  setSelectedService: Dispatch<SetStateAction<string>>;
+  selectedOnsiteOption: string;
+  setSelectedOnsiteOption: Dispatch<SetStateAction<string>>;
+  selectedVehicleType: string;
+  setSelectedVehicleType: Dispatch<SetStateAction<string>>;
+  tireSize: string;
+  setTireSize: Dispatch<SetStateAction<string>>;
+  selectedTireType: string;
+  setSelectedTireType: Dispatch<SetStateAction<string>>;
+
+  // 1. ADDED PHOTO PROPS HERE
+  photoFile?: File | null;
+  handlePhotoChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+
+  locationValue: string;
+  setLocationValue: Dispatch<SetStateAction<string>>;
+  isLocating: boolean;
+  isGpsCaptured: boolean;
+  setIsGpsCaptured: Dispatch<SetStateAction<boolean>>;
+  handleGetLocation: () => void;
+
+  onsiteOptions: OptionItem[];
+  vehicleTypes: VehicleOption[];
+  tireTypeOptions: OptionItem[];
+
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  isSubmitting: boolean;
+  isSubmitted: boolean;
+  submittedName: string;
+  handleResetForm: () => void;
+}
+
+export function ContactForm({
+  selectedService,
+  setSelectedService,
+  selectedOnsiteOption,
+  setSelectedOnsiteOption,
+  selectedVehicleType,
+  setSelectedVehicleType,
+  tireSize,
+  setTireSize,
+  selectedTireType,
+  setSelectedTireType,
+  photoFile, // 2. RECIEVED HERE
+  handlePhotoChange, // 2. RECIEVED HERE
+  locationValue,
+  setLocationValue,
+  isLocating,
+  isGpsCaptured,
+  setIsGpsCaptured,
+  handleGetLocation,
+  onsiteOptions,
+  vehicleTypes,
+  tireTypeOptions,
+  handleSubmit,
+  isSubmitting,
+  isSubmitted,
+  submittedName,
+  handleResetForm,
+}: ContactFormProps) {
+  return (
+    <div className="max-w-3xl">
+      <motion.section
+        id="contact-form-section"
+        layout={isSubmitted ? true : false}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="p-6 sm:p-8 bg-stone-900/60 border border-stone-800 rounded-2xl overflow-hidden scroll-mt-28"
+      >
+        <AnimatePresence mode="wait">
+          {isSubmitted ? (
+            <motion.div
+              key="success-card"
+              initial={{ opacity: 0, scale: 0.96, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: -8 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+            >
+              <SubmissionSuccess
+                contactName={submittedName}
+                locationValue={locationValue}
+                serviceType={selectedOnsiteOption || selectedService}
+                vehicleType={selectedVehicleType}
+                tireSize={tireSize}
+                onReset={handleResetForm}
+              />
+            </motion.div>
+          ) : (
+            <motion.form
+              key="contact-form"
+              onSubmit={handleSubmit}
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0, scale: 0.97, y: -6 }}
+              transition={{ duration: 0.2, ease: "easeIn" }}
+            >
+              <div className="space-y-8">
+                {/* STEP 1: SERVICE TYPE SELECTION */}
+                <Step1ServiceType
+                  selectedService={selectedService}
+                  setSelectedService={setSelectedService}
+                />
+
+                {/* STEP 2: EXTENDED CLICK LIST */}
+                {selectedService === "onsite_service" && (
+                  <Step2OnsiteDetails
+                    selectedOnsiteOption={selectedOnsiteOption}
+                    setSelectedOnsiteOption={setSelectedOnsiteOption}
+                    selectedVehicleType={selectedVehicleType}
+                    setSelectedVehicleType={setSelectedVehicleType}
+                    onsiteOptions={onsiteOptions}
+                    vehicleTypes={vehicleTypes}
+                  />
+                )}
+
+                {/* STEP 3 & STEP 4 */}
+                <AnimatePresence>
+                  {selectedService === "onsite_service" &&
+                    selectedOnsiteOption !== "" && (
+                      <motion.div
+                        key="steps-3-and-4"
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        className="space-y-10 mt-8"
+                      >
+                        {/* 3. PASSED DOWN TO STEP 3 TIRE INFO */}
+                        <Step3TireInfo
+                          tireSize={tireSize}
+                          setTireSize={setTireSize}
+                          selectedTireType={selectedTireType}
+                          setSelectedTireType={setSelectedTireType}
+                          tireTypeOptions={tireTypeOptions}
+                          photoFile={photoFile}
+                          handlePhotoChange={handlePhotoChange}
+                        />
+
+                        <Step4ContactLocation
+                          locationValue={locationValue}
+                          setLocationValue={setLocationValue}
+                          isGpsCaptured={isGpsCaptured}
+                          setIsGpsCaptured={setIsGpsCaptured}
+                          isLocating={isLocating}
+                          handleGetLocation={handleGetLocation}
+                          isSubmitting={isSubmitting}
+                        />
+                      </motion.div>
+                    )}
+                </AnimatePresence>
+              </div>
+            </motion.form>
+          )}
+        </AnimatePresence>
+      </motion.section>
+    </div>
+  );
+}

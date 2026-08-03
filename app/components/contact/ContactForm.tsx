@@ -1,6 +1,12 @@
 "use client";
 
-import { Dispatch, SetStateAction, FormEvent, ChangeEvent } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  FormEvent,
+  ChangeEvent,
+  useState,
+} from "react";
 import { Step1ServiceType } from "./Step1ServiceType";
 import { Step2OnsiteDetails } from "./Step2OnsiteDetails";
 import { Step3TireInfo } from "./Step3TireInfo";
@@ -30,7 +36,7 @@ interface ContactFormProps {
   selectedTireType: string;
   setSelectedTireType: Dispatch<SetStateAction<string>>;
 
-  // 1. ADDED PHOTO PROPS HERE
+  // PHOTO PROPS
   photoFile?: File | null;
   handlePhotoChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 
@@ -63,8 +69,8 @@ export function ContactForm({
   setTireSize,
   selectedTireType,
   setSelectedTireType,
-  photoFile, // 2. RECIEVED HERE
-  handlePhotoChange, // 2. RECIEVED HERE
+  photoFile,
+  handlePhotoChange,
   locationValue,
   setLocationValue,
   isLocating,
@@ -80,8 +86,26 @@ export function ContactForm({
   submittedName,
   handleResetForm,
 }: ContactFormProps) {
+  // 1. HONEYPOT STATE FOR BOT PROTECTION
+  const [honeypot, setHoneypot] = useState("");
+
+  // 2. WRAP SUBMIT TO CHECK HONEYPOT BEFORE INVOKING PARENT'S handleSubmit
+const onFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.currentTarget);
+  const botField = formData.get("website_url") as string;
+
+  if (botField || honeypot) {
+    console.warn("🤖 Bot submission detected and blocked via Honeypot.");
+    return;
+  }
+
+  await handleSubmit(e);
+};
+
   return (
-    <div className="max-w-3xl">
+    <div className="max-w-3xl mx-auto">
       <motion.section
         id="contact-form-section"
         layout={isSubmitted ? true : false}
@@ -109,11 +133,29 @@ export function ContactForm({
           ) : (
             <motion.form
               key="contact-form"
-              onSubmit={handleSubmit}
+              onSubmit={onFormSubmit}
               initial={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.97, y: -6 }}
               transition={{ duration: 0.2, ease: "easeIn" }}
+              className="justify-center"
             >
+              {/* HIDDEN HONEYPOT INPUT FOR SPAM PROTECTION */}
+              <div
+                aria-hidden="true"
+                className="opacity-100 absolute -z-10 pointer-events-none h-0 w-0 overflow-hidden"
+              >
+                <label htmlFor="website_url">Do not fill this field</label>
+                <input
+                  type="text"
+                  id="website_url"
+                  name="website_url"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                />
+              </div>
+
               <div className="space-y-8">
                 {/* STEP 1: SERVICE TYPE SELECTION */}
                 <Step1ServiceType
@@ -145,7 +187,7 @@ export function ContactForm({
                         transition={{ duration: 0.4, ease: "easeOut" }}
                         className="space-y-10 mt-8"
                       >
-                        {/* 3. PASSED DOWN TO STEP 3 TIRE INFO */}
+                        {/* PASSED DOWN TO STEP 3 TIRE INFO */}
                         <Step3TireInfo
                           tireSize={tireSize}
                           setTireSize={setTireSize}

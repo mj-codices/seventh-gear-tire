@@ -35,7 +35,7 @@ export function Step2OnsiteDetails({
   return (
     <div className="pt-4 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
       <div>
-        <h3 className="text-xs sm:text-xl font-bold text-white/60 font-display tracking-widest uppercase border-b border-stone-800/60 pb-3 leading-6">
+        <h3 className="text-xs sm:text-xl font-bold text-white/90 font-display tracking-widest uppercase border-b border-stone-800/60 pb-3 leading-6">
           Step 2 — What do you need done?
         </h3>
       </div>

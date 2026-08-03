@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Chevrons from "../ui/Chevrons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   motion,
   AnimatePresence,
@@ -20,6 +20,28 @@ export default function Navbar() {
   const [isDropdownHovered, setIsDropdownHovered] = useState(false);
 
   const [isMounted, setIsMounted] = useState(false);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // Check if the click occurred outside the dropdown container
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownHovered(false);
+      }
+    };
+
+    if (isDropdownHovered) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownHovered]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -156,13 +178,26 @@ export default function Navbar() {
               {/* ROUTING GUARD: Hidden only on /services */}
               {!isServiceRoute && (
                 <div
-                  className="group h-full flex items-center -mt-2"
-                  onMouseEnter={() => setIsDropdownHovered(true)}
-                  onMouseLeave={() => setIsDropdownHovered(false)}
+                  ref={dropdownRef}
+                  className="relative flex items-center h-full"
+                  onMouseEnter={() => {
+                    if (window.matchMedia("(hover: hover)").matches) {
+                      setIsDropdownHovered(true);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (window.matchMedia("(hover: hover)").matches) {
+                      setIsDropdownHovered(false);
+                    }
+                  }}
                 >
                   <button
                     type="button"
-                    className={`flex items-center gap-1.5 transition-colors duration-200 ${
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsDropdownHovered((prev) => !prev);
+                    }}
+                    className={`flex items-center gap-1.5 transition-colors duration-200 cursor-pointer ${
                       isDropdownHovered
                         ? "text-white"
                         : "text-stone-300 hover:text-white"
@@ -170,10 +205,10 @@ export default function Navbar() {
                   >
                     <span className="text-base uppercase">What We Offer</span>
                     <span
-                      className={`inline-block transform transition-transform duration-400 mt-1 ${
+                      className={`inline-block transform transition-transform duration-300 mt-1 ${
                         isDropdownHovered
                           ? "rotate-90 text-white"
-                          : "group-hover:rotate-90 text-stone-500"
+                          : "text-stone-500"
                       }`}
                       aria-hidden="true"
                     >
@@ -181,57 +216,62 @@ export default function Navbar() {
                     </span>
                   </button>
 
-                  {/* Premium Extension Panel */}
-                  <div className="absolute top-[120px] left-120 xl:left-135 w-70 z-50 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300">
-                    <div
-                      className="absolute left-0 right-0 h-[55px] -top-[54px] bg-transparent pointer-events-auto"
-                      aria-hidden="true"
-                    />
-
-                    <div className="w-full bg-stone-950 border-x border-b border-stone-800 rounded-b-md shadow-2xl transform -translate-y-6 transition-transform duration-400 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-y-0">
-                      <a
-                        href="/services"
-                        className="group/link flex items-center gap-6 px-5 py-6 text-sm font-bold text-stone-300 hover:bg-taupe-900/20 hover:text-white transition-colors border-b border-stone-800"
+                  {/* Premium Extension Panel Controlled via React State */}
+                  <AnimatePresence>
+                    {isDropdownHovered && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute top-[calc(100%-12px)] left-0 w-72 pt-15 z-50"
                       >
-                        <span className="text-stone-500 group-hover/link:text-red-600/80 transition-colors duration-200 flex-shrink-0">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 16 16"
-                            fill="currentColor"
-                            className="w-8 h-8"
+                        <div className="w-full bg-stone-950 border border-stone-800 rounded-b-lg shadow-2xl overflow-hidden">
+                          <a
+                            href="/services"
+                            className="group/link flex items-center gap-4 px-5 py-4.5 text-sm font-bold text-stone-300 hover:bg-stone-900 hover:text-white transition-colors border-b border-stone-800"
                           >
-                            <path
-                              fillRule="evenodd"
-                              d="m7.539 14.841.003.003.002.002a.755.755 0 0 0 .912 0l.002-.002.003-.003.012-.009a5.57 5.57 0 0 0 .19-.153 15.588 15.588 0 0 0 2.046-2.082c1.101-1.362 2.291-3.342 2.291-5.597A5 5 0 0 0 3 7c0 2.255 1.19 4.235 2.292 5.597a15.591 15.591 0 0 0 2.046 2.082 8.916 8.916 0 0 0 .189.153l.012.01ZM8 8.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </span>
-                        <span>On-Site Tire Replacement</span>
-                      </a>
+                            <span className="text-stone-500 group-hover/link:text-red-600 transition-colors duration-200 flex-shrink-0">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 16"
+                                fill="currentColor"
+                                className="w-6 h-6"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="m7.539 14.841.003.003.002.002a.755.755 0 0 0 .912 0l.002-.002.003-.003.012-.009a5.57 5.57 0 0 0 .19-.153 15.588 15.588 0 0 0 2.046-2.082c1.101-1.362 2.291-3.342 2.291-5.597A5 5 0 0 0 3 7c0 2.255 1.19 4.235 2.292 5.597a15.591 15.591 0 0 0 2.046 2.082 8.916 8.916 0 0 0 .189.153l.012.01ZM8 8.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                            <span>On-Site Tire Replacement</span>
+                          </a>
 
-                      <a
-                        href="/services"
-                        className="group/link flex items-center gap-6 px-5 py-6 text-sm font-bold text-stone-300 hover:bg-taupe-900/20 hover:text-white transition-colors last:rounded-b-md"
-                      >
-                        <span className="text-stone-500 group-hover/link:text-red-600/80 transition-colors duration-200 flex-shrink-0">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 16 16"
-                            fill="currentColor"
-                            className="w-7 h-7 translate-x-1"
+                          <a
+                            href="/services"
+                            className="group/link flex items-center gap-4 px-5 py-4.5 text-sm font-bold text-stone-300 hover:bg-stone-900 hover:text-white transition-colors"
                           >
-                            <path
-                              fillRule="evenodd"
-                              d="M8.5 1.709a.75.75 0 0 0-1 0 8.963 8.963 0 0 1-4.84 2.217.75.75 0 0 0-.654.72 10.499 10.499 0 0 0 5.647 9.672.75.75 0 0 0 .694-.001 10.499 10.499 0 0 0 5.647-9.672.75.75 0 0 0-.654-.719A8.963 8.963 0 0 1 8.5 1.71Zm2.34 5.504a.75.75 0 0 0-1.18-.926L7.394 9.17l-1.156-.99a.75.75 0 1 0-.976 1.138l1.75 1.5a.75.75 0 0 0 1.078-.106l2.75-3.5Z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </span>
-                        <span>Commercial Curation &amp; Sourcing</span>
-                      </a>
-                    </div>
-                  </div>
+                            <span className="text-stone-500 group-hover/link:text-red-600 transition-colors duration-200 flex-shrink-0">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 16"
+                                fill="currentColor"
+                                className="w-6 h-6"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M8.5 1.709a.75.75 0 0 0-1 0 8.963 8.963 0 0 1-4.84 2.217.75.75 0 0 0-.654.72 10.499 10.499 0 0 0 5.647 9.672.75.75 0 0 0 .694-.001 10.499 10.499 0 0 0 5.647-9.672.75.75 0 0 0-.654-.719A8.963 8.963 0 0 1 8.5 1.71Zm2.34 5.504a.75.75 0 0 0-1.18-.926L7.394 9.17l-1.156-.99a.75.75 0 1 0-.976 1.138l1.75 1.5a.75.75 0 0 0 1.078-.106l2.75-3.5Z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                            <span>Commercial Curation &amp; Sourcing</span>
+                          </a>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               )}
             </nav>
@@ -308,7 +348,7 @@ export default function Navbar() {
               className="fixed top-0 left-0 bottom-0 z-50 w-[80vw] sm:w-[90vw] bg-stone-950 border-r border-stone-800 shadow-2xl flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-start mb-5 h-20 md:h-35 bg-white/90 pl-6 sm:pl-12 pr-8">
+                <div className="flex items-center justify-start mb-5 h-20 md:h-30 bg-white/90 pl-6 sm:pl-12 pr-8">
                   <Link href="/" className="flex items-center">
                     <img
                       src="/logo-nav.png"

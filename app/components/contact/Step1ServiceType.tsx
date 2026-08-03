@@ -42,7 +42,7 @@ export function Step1ServiceType({
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-top-2 duration-300">
       <div>
-        <h2 className="text-xs sm:text-2xl font-bold text-white/60 font-display tracking-widest uppercase border-b border-stone-800/60 pb-3 leading-6">
+        <h2 className="text-xs sm:text-xl font-bold text-white/90 font-display tracking-widest uppercase border-b border-stone-800/60 pb-2 leading-6 sm:leading-8">
           Step 1 — What kind of help do you need?
         </h2>
       </div>

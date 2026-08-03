@@ -152,7 +152,7 @@ export default function ContactPage() {
   };
 
   return (
-    <section className="relative min-h-screen bg-stone-950 text-stone-100 py-32 px-9 lg:py-16 lg:px-8">
+    <section className="relative min-h-screen bg-stone-950 text-stone-100 pt-32 sm:pt-40 md:pt-50 px-9 lg:pt-55 pb-10">
       {/* Background Image */}
       <img
         src="/contact_main.png"
@@ -167,19 +167,19 @@ export default function ContactPage() {
       />
 
       {/* Main Container */}
-      <div className="relative z-10 max-w-7xl mx-auto space-y-18">
-        <header className="max-w-3xl">
+      <div className="relative z-10 space-y-18 lg:space-y-25">
+        <header className="max-w-3xl mx-auto">
           <div>
             <div>
-              <p className="text-white/90 font-display text-base font-bold uppercase tracking-widest mb-2.5">
+              <p className="text-white/90 font-display text-base font-bold uppercase tracking-widest mb-2.5 sm:mb-4">
                 Request Service
               </p>
               <div className="w-12 h-[.2rem] bg-red-700" />
             </div>
-            <h1 className="text-4xl sm:text-4xl lg:text-5xl font-display text-white/95 leading-tighter mt-1">
+            <h1 className="text-4xl sm:text-5xl lg:text-5xl font-display text-white/95 leading-tighter sm:leading-13 mt-1 sm:mt-3">
               Need Immediate Tire Service or a Fleet Quote?
             </h1>
-            <p className="mt-4 text-white text-base sm:text-lg leading-6 max-w-2xl">
+            <p className="mt-4 sm:mt-6 text-white text-base sm:text-lg md:text-xl leading-6 max-w-2xl">
               Select your service type below to send your equipment details
               directly to dispatch.
             </p>

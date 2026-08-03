@@ -25,9 +25,9 @@ export function Step4ContactLocation({
 }: Step4ContactLocationProps) {
   return (
     <div className="pt-3 space-y-6 border-stone-800/80 animate-in fade-in slide-in-from-top-2 duration-300">
-      <div className="flex items-center justify-between border-b border-stone-800/60 pb-4">
+      <div className="flex items-center justify-between border-b border-stone-800/60 pb-2.5">
         <div className="flex items-center gap-2">
-          <h3 className="text-xs sm:text-sm font-bold text-white/60 font-display tracking-widest uppercase">
+          <h3 className="text-xs sm:text-xl font-bold text-white/90 font-display tracking-widest uppercase">
             {stepTitle}
           </h3>
         </div>
@@ -55,7 +55,7 @@ export function Step4ContactLocation({
           />
         </div>
         {/* Phone Input */}
-        <div className="space-y-3 sm:col-span-1">
+        <div className="space-y-3 sm:col-span-1 sm:-mt-2">
           <label
             htmlFor="contact_phone"
             className="text-xs uppercase font-display font-bold text-white/60 tracking-wider block"

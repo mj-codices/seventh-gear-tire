@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Footer() {
   return (
     <div>
@@ -6,7 +8,7 @@ export default function Footer() {
         <div className="max-w-5xl w-full">
           {/* Left Side: Brand & Identity */}
           <div className="flex justify-center tracking-[.03rem] -mt-2 opacity-95">
-            <img
+            <Image
               src="/logo-alt.png"
               alt="company logo"
               width={326}

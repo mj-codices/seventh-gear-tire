@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useState, FormEvent, ChangeEvent } from "react"; // 👈 1. Added ChangeEvent import
 import { ContactForm } from "../components/contact/ContactForm";
 import {
@@ -154,10 +154,14 @@ export default function ContactPage() {
   return (
     <section className="relative min-h-screen bg-stone-950 text-stone-100 pt-32 sm:pt-40 md:pt-50 px-9 lg:pt-55 pb-10">
       {/* Background Image */}
-      <img
+      <Image
         src="/contact_main.png"
         alt="Commercial tire service on Texas highway"
+        width={1920}
+        height={500}
+        priority
         className="absolute top-0 inset-x-0 w-full h-[500px] object-cover object-[49%_center] z-0 opacity-70"
+        unoptimized
       />
 
       {/* Overlay */}

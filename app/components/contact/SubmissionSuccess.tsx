@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 
 interface SubmissionSuccessProps {
-  contactName: string;
   serviceType: string;
   locationValue: string;
   vehicleType?: string;
@@ -61,7 +60,6 @@ function formatVehicleLabel(vehicle: string): string {
 }
 
 export function SubmissionSuccess({
-  contactName,
   serviceType,
   locationValue,
   vehicleType,
@@ -106,7 +104,8 @@ export function SubmissionSuccess({
             Dispatch Request Received
           </h3>
           <p className="text-[11px] text-stone-400 mt-4 font-sans leading-5">
-            A dispatch specialist will call you shortly to discuss your request and provide an exact quote before sending out service.
+            A dispatch specialist will call you shortly to discuss your request
+            and provide an exact quote before sending out service.
           </p>
         </div>
       </div>

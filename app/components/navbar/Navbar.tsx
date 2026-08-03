@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import Chevrons from "../ui/Chevrons";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -19,7 +20,7 @@ export default function Navbar() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isDropdownHovered, setIsDropdownHovered] = useState(false);
 
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(true);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -44,6 +45,7 @@ export default function Navbar() {
   }, [isDropdownHovered]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
   }, []);
 
@@ -77,11 +79,15 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    if (!isOpen) {
-      setIsServicesOpen(false);
-    }
-  }, [isOpen]);
+  const handleToggleMenu = (nextState?: boolean) => {
+    setIsOpen((prev) => {
+      const value = typeof nextState === "boolean" ? nextState : !prev;
+      if (!value) {
+        setIsServicesOpen(false); // Reset dropdown when drawer closes
+      }
+      return value;
+    });
+  };
 
   // Framer Motion Spring Configurations
   const menuSpring: TargetAndTransition["transition"] = {
@@ -137,7 +143,7 @@ export default function Navbar() {
             {isMounted && !isServiceRoute && (
               <button
                 type="button"
-                onClick={() => setIsOpen(true)}
+                onClick={() => handleToggleMenu(true)}
                 className="text-white hover:text-stone-300 p-1 transition-colors flex-shrink-0 lg:hidden cursor-pointer"
                 aria-label="Open navigation menu"
               >
@@ -162,7 +168,7 @@ export default function Navbar() {
             <span className="flex items-center ml-1 md:ml-4 lg:ml-0 flex-shrink-0 w-[240px] sm:w-[280px] md:w-[380px] lg:w-[410px]">
               {isMounted && !isServiceRoute && (
                 <Link href="/" className="w-full cursor-pointer">
-                  <img
+                  <Image
                     src="/logo-alt.png"
                     alt="company logo"
                     width={270}
@@ -227,7 +233,7 @@ export default function Navbar() {
                         className="absolute top-[calc(100%-12px)] left-0 w-72 pt-15 z-50"
                       >
                         <div className="w-full bg-stone-950 border border-stone-800 rounded-b-lg shadow-2xl overflow-hidden">
-                          <a
+                          <Link
                             href="/services"
                             className="group/link flex items-center gap-4 px-5 py-4.5 text-sm font-bold text-stone-300 hover:bg-stone-900 hover:text-white transition-colors border-b border-stone-800"
                           >
@@ -246,9 +252,9 @@ export default function Navbar() {
                               </svg>
                             </span>
                             <span>On-Site Tire Replacement</span>
-                          </a>
+                          </Link>
 
-                          <a
+                          <Link
                             href="/services"
                             className="group/link flex items-center gap-4 px-5 py-4.5 text-sm font-bold text-stone-300 hover:bg-stone-900 hover:text-white transition-colors"
                           >
@@ -267,7 +273,7 @@ export default function Navbar() {
                               </svg>
                             </span>
                             <span>Commercial Curation &amp; Sourcing</span>
-                          </a>
+                          </Link>
                         </div>
                       </motion.div>
                     )}
@@ -280,19 +286,19 @@ export default function Navbar() {
           {/* RIGHT SIDE CTA ACTION */}
           <div className="flex items-center mt-1">
             {isMounted && isServiceRoute ? (
-              <a
+              <Link
                 href="/"
                 className="inline-block bg-transparent text-white font-display text-sm font-bold uppercase tracking-widest px-5 py-3 sm:px-6 sm:py-3.5 rounded border-2 border-stone-700 hover:border-red-800 hover:bg-red-800 transition-all duration-300 shadow-md whitespace-nowrap mt-3 -ml-40"
               >
                 Back To Home
-              </a>
+              </Link>
             ) : (
-              <a
+              <Link
                 href="/contact"
                 className="hidden lg:inline-block bg-transparent text-white font-display text-sm font-bold uppercase tracking-widest px-6 py-3.5 rounded border-2 border-red-800 hover:bg-red-800 active:bg-red-900 transition-all duration-300 shadow-md hover:shadow-red-900/20"
               >
                 Schedule Service
-              </a>
+              </Link>
             )}
           </div>
         </div>
@@ -319,7 +325,7 @@ export default function Navbar() {
             >
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
+                onClick={() => handleToggleMenu(false)}
                 className="text-white hover:text-stone-300 transition-colors"
                 aria-label="Close navigation menu"
               >
@@ -350,12 +356,14 @@ export default function Navbar() {
               <div>
                 <div className="flex items-center justify-start mb-5 h-20 md:h-30 bg-white/90 pl-6 sm:pl-12 pr-8">
                   <Link href="/" className="flex items-center">
-                    <img
+                    <Image
                       src="/logo-nav.png"
                       alt="nav menu logo"
                       width={240}
+                      height={60}
                       className="object-contain max-h-12 sm:max-h-12 md:max-h-15 w-auto"
                     />
+                    
                   </Link>
                 </div>
 
@@ -389,9 +397,9 @@ export default function Navbar() {
                           className="overflow-hidden"
                         >
                           <div className="flex flex-col mt-2 bg-stone-900 text-base md:text-lg text-stone-300 uppercase">
-                            <a
+                            <Link
                               href="/services"
-                              onClick={() => setIsOpen(false)}
+                              onClick={() => handleToggleMenu(false)}
                               className="flex items-center justify-between py-5 pl-10 sm:pl-20 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left"
                             >
                               <span>
@@ -400,11 +408,11 @@ export default function Navbar() {
                               <span className="mt-0.5 mr-6 shrink-0">
                                 <Chevrons className="text-stone-600" />
                               </span>
-                            </a>
+                            </Link>
 
-                            <a
+                            <Link
                               href="/services"
-                              onClick={() => setIsOpen(false)}
+                              onClick={() => handleToggleMenu(false)}
                               className="flex items-center justify-between py-5 pl-10 sm:pl-20 pr-4 font-display hover:text-white transition-colors text-left"
                             >
                               <span>
@@ -413,7 +421,7 @@ export default function Navbar() {
                               <span className="mt-0.5 mr-6 shrink-0">
                                 <Chevrons className="text-stone-600" />
                               </span>
-                            </a>
+                            </Link>
                           </div>
                         </motion.div>
                       )}
@@ -421,16 +429,16 @@ export default function Navbar() {
                   </div>
 
                   <div className="flex flex-col w-full border-t border-stone-800">
-                    <a
+                    <Link
                       href="/contact"
                       className="flex items-center justify-between w-full pl-8 sm:pl-15 pr-6 py-6 md:py-9 font-display uppercase tracking-wider text-stone-200 hover:text-white transition-colors text-left"
-                      onClick={() => setIsOpen(false)}
+                      onClick={() => handleToggleMenu(false)}
                     >
                       <span>Schedule a Service</span>
                       <span className="mt-0.5">
                         <Chevrons />
                       </span>
-                    </a>
+                    </Link>
                   </div>
                 </nav>
               </div>

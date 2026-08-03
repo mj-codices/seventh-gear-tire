@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Chevrons from "../ui/Chevrons";
+import Image from "next/image";
 
 export default function Services() {
   return (
@@ -14,12 +15,17 @@ export default function Services() {
         {/* LEFT COLUMN: Image Wrapper */}
         <div className="relative flex flex-col w-full max-w-md sm:max-w-lg lg:max-w-[420px] mr-3.5 pr-3 pb-3 lg:mr-0 lg:pr-0">
           {/* 2. Inner Layer */}
-          <div className="w-full h-full lg:h-auto lg:aspect-[5/4] rounded-xl overflow-hidden mb-2 relative lg:after:absolute lg:after:inset-0 lg:after:bg-[radial-gradient(circle,rgba(0,0,0,0)_40%,rgba(0,0,0,0.7)_100%)] lg:after:pointer-events-none">
-            <img
-              className="w-full h-full object-cover brightness-110"
-              src="/services.jpeg"
-              alt="working on tire"
-            />
+          <div className="relative flex flex-col w-full max-w-md sm:max-w-lg lg:max-w-[420px] mr-3.5 pr-3 pb-3 lg:mr-0 lg:pr-0">
+            {/* Inner Layer */}
+            <div className="w-full h-64 lg:aspect-[5/4] rounded-xl overflow-hidden mb-2 relative lg:after:absolute lg:after:inset-0 lg:after:bg-[radial-gradient(circle,rgba(0,0,0,0)_40%,rgba(0,0,0,0.7)_100%)] lg:after:pointer-events-none lg:after:z-10">
+              <Image
+                src="/services.jpeg"
+                alt="Working on tire"
+                fill
+                sizes="(max-width: 1024px) 100vw, 420px"
+                className="object-cover brightness-110"
+              />
+            </div>
           </div>
 
           {/* 3. The Top-Right SVG */}
@@ -110,10 +116,9 @@ export default function Services() {
                 Commercial Curation & Sourcing
               </h3>
               <p className="text-base sm:text-lg md:text-xl text-stone-400 max-w-md sm:max-w-lg md:max-w-2xl leading-6.5 md:leading-10">
-                Whether you demand closed-shoulder drive tires for
-                maximum highway efficiency, or lugs engineered
-                for rugged job sites, we match your weight margins with
-                top-tier inventory.
+                Whether you demand closed-shoulder drive tires for maximum
+                highway efficiency, or lugs engineered for rugged job sites, we
+                match your weight margins with top-tier inventory.
               </p>
             </div>
             <div className="ml-1 mt-5 flex items-center gap-1.5">

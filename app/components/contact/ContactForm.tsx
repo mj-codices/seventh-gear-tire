@@ -122,7 +122,6 @@ const onFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
               transition={{ duration: 0.35, ease: "easeOut" }}
             >
               <SubmissionSuccess
-                contactName={submittedName}
                 locationValue={locationValue}
                 serviceType={selectedOnsiteOption || selectedService}
                 vehicleType={selectedVehicleType}

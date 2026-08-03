@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Transition } from "framer-motion";
+import Image from "next/image";
 
 export default function ComingSoonServices() {
   // High-tension spring for that premium, snappy give-and-pull movement
@@ -27,7 +28,7 @@ export default function ComingSoonServices() {
           transition={{ delay: 0.2, duration: 0.4 }}
           className="inline-block px-3 py-1 mr-3"
         >
-          <img src="/temp-logo.png" alt="" />
+          <Image src="/temp-logo.png" alt="" />
         </motion.span>
 
         {/* Heading */}

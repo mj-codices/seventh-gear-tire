@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Chevrons from "../ui/Chevrons";
@@ -19,7 +20,6 @@ export default function BrandMarquee() {
   return (
     // Bottom Layer: The deeper base background
     <div className="relative w-full bg-stone-900 pb-15 sm:pb-25 pt-1 overflow-hidden z-0">
-      {/* 1. Added w-max to force the container to be as wide as both rows combined */}
       {/* 1. Added a wrapper with a horizontal fade mask */}
       <div
         className="w-full overflow-hidden"
@@ -31,7 +31,7 @@ export default function BrandMarquee() {
         }}
       >
         <motion.div
-          className="flex whitespace-nowrap w-max pt-4.5 sm:pt-10 md:pt-15"
+          className="flex whitespace-nowrap w-max pt-4.5 sm:pt-10 md:pt-10"
           animate={{ x: [0, "-50%"] }}
           transition={{
             ease: "linear",
@@ -40,7 +40,7 @@ export default function BrandMarquee() {
           }}
         >
           {/* First Loop Pass */}
-          <div className="flex items-center gap-20 sm:gap-25 md:gap-30 xl:gap-40 pr-20 sm:pr-30 md:pr-35 flex-shrink-0">
+          <div className="flex items-center gap-20 sm:gap-25 md:gap-30 pr-20 sm:pr-30 md:pr-30 flex-shrink-0">
             {brands.map((brand, idx) => (
               <span
                 key={`track1-${idx}`}
@@ -53,7 +53,7 @@ export default function BrandMarquee() {
 
           {/* Second Loop Pass */}
           <div
-            className="flex items-center gap-20 sm:gap-25 md:gap-30 xl:gap-40 pr-20 sm:pr-30 md:pr-35 flex-shrink-0"
+            className="flex items-center gap-20 sm:gap-25 md:gap-30 pr-20 sm:pr-30 md:pr-30 flex-shrink-0"
             aria-hidden="true"
           >
             {brands.map((brand, idx) => (
@@ -68,69 +68,102 @@ export default function BrandMarquee() {
         </motion.div>
       </div>
 
-      <div className="relative mx-auto mt-13 sm:mt-25 md:mt-30 w-[calc(100%-4rem)] sm:w-[calc(100%-6rem)] md:w-[calc(100%-10rem)] rounded-2xl bg-stone-950 px-6 pt-9 sm:pt-15 md:pt-20 pb-12 sm:pb-20 md:pb-25 border-1 border-stone-700/50 drop-shadow-xl lg:drop-shadow-3xl">
-        {/* Changed xl:grid-cols-4 to lg:grid-cols-4 to snap into a single row at 1024px */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 border-stone-800">
-          {/* 1. First Item */}
-          {/* Swapped xl: values out for lg: variants */}
-          <div className="px-3 sm:px-10 md:px-20 lg:px-6 xl:px-16 pt-4 xl:pt-5 pb-8 lg:py-4 border-r border-b border-stone-900 lg:border-b-0 flex flex-col items-center justify-center">
-            <div className="text-stone-200" aria-hidden="true">
-              <Truck />
-            </div>
-            <h5 className="font-sans text-xs sm:text-base font-bold text-stone-400/90 text-center leading-relaxed tracking-wide">
-              Light, medium, and heavy-duty fleet focus.
-            </h5>
+      <div className="relative mx-auto mt-13 sm:mt-25 md:mt-20 w-[calc(100%-4rem)] sm:w-[calc(100%-6rem)] md:w-[calc(100%-8rem)] rounded-2xl bg-stone-950 px-6 pt-9 sm:pt-15 md:pt-12 pb-12 sm:pb-20 md:pb-20 border-1 border-stone-700/50 drop-shadow-xl lg:drop-shadow-3xl">
+        {/* Inner Card Container (added overflow-hidden for rounded corner clipping) */}
+        <div className="relative mx-auto mt-13 sm:mt-25 md:mt-5 w-[calc(100%-4rem)] sm:w-[calc(100%-6rem)] md:w-[calc(100%-4rem)] rounded-2xl bg-stone-950 px-6 pt-9 sm:pt-15 md:pt-18 pb-12 sm:pb-20 md:pb-15 border border-stone-700/50 drop-shadow-xl lg:drop-shadow-3xl overflow-hidden">
+          {/* Background Image Layer */}
+          <div className="absolute inset-0 pointer-events-none z-0">
+            <Image
+              src="/marquee.png"
+              alt=""
+              fill
+              className="object-cover object-bottom opacity-20 mix-blend-luminosity" // Swapped object-center to object-bottom
+              priority={false}
+            />
+            {/* Gradient Overlay to ensure readable contrast on top of the image */}
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/50 to-stone-950/10" />
           </div>
 
-          {/* 2. Second Item */}
-          {/* Swapped xl: values out for lg: variants */}
-          <div className="px-4 sm:px-12 md:px-20 lg:px-6 xl:px-16 pt-4 md:pt-7 pb-8 lg:py-4 border-b border-stone-900 lg:border-b-0 lg:border-r border-stone-900 flex flex-col items-center justify-center gap-2 md:gap-4 lg:gap-2">
-            <div
-              className="text-stone-200 flex items-center justify-center"
-              aria-hidden="true"
-            >
-              <SunShield />
-            </div>
-            <h5 className="font-sans text-xs sm:text-base font-bold text-stone-400/90 text-center leading-relaxed tracking-wide">
-              Tires optimized for rough Texas roads.
-            </h5>
-          </div>
-
-          {/* 3. Third Item (Time Quadrant) */}
-          {/* Swapped xl: values out for lg: variants, and stripped out the extra mobile border-b tracking entirely */}
-          <div className="pt-2 sm:pt-5 lg:pt-3 pb-8 lg:py-4 border-r border-stone-900 lg:border-b-0 flex flex-col items-center justify-center gap-1 pr-2 sm:pr-0 sm:px-6">
-            <div
-              className="text-stone-200/90 flex items-center justify-center"
-              aria-hidden="true"
-            >
-              <Time />
-            </div>
-            <h5 className="font-sans text-xs sm:text-base font-bold text-stone-400/90 text-center leading-relaxed tracking-wide">
-              No waiting rooms or dealership lineups.
-            </h5>
-          </div>
-
-          {/* 4. Fourth Item */}
-          {/* Remove the outer layout padding from this wrapper so it doesn't create dead zones */}
-          <div className="flex items-center justify-center ml-1 sm:ml-0 mt-3 sm:mt-6 md:mt-10 lg:mt-10">
-            <Link
-              href="/contact"
-              className="group flex items-center justify-center w-full h-full p-5 text-center text-stone-200 rounded-xl transition-colors hover:text-white active:bg-white/5 lg:p-6"
-            >
-              <h5 className="font-display uppercase leading-normal tracking-wider text-center sm:text-lg">
-                Spec your{" "}
-                <span className="inline-flex items-center gap-1 whitespace-nowrap">
-                  fleet
-                  <span
-                    className="group-hover:translate-x-1 transition-transform duration-500 mt-1"
-                    aria-hidden="true"
-                  >
-                    <Chevrons />
-                  </span>
+          {/* Content Wrapper (placed z-10 above background image) */}
+          <div className="relative z-10">
+            {/* Header Block */}
+            <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+              <h2 className="font-display text-3xl sm:text-[40px] font-bold text-stone-100 leading-12 tracking-wider">
+                Every make. Every model. <br className="hidden sm:inline" />
+                <span className="bg-gradient-to-r from-stone-200 via-stone-400 to-stone-500 bg-clip-text text-transparent">
+                  Nationwide coverage across major OEMs.
                 </span>
-              </h5>
-            </Link>
+              </h2>
+
+              <p className="px-6 mt-6 text-base sm:text-lg text-stone-400 max-w-2xl font-normal leading-9">
+                From heavy commercial fleets to light-duty transports, we
+                support full factory spec fitments and regional service
+                guarantees across all primary manufacturers.
+              </p>
+            </div>
+
+            {/* Feature Grid Divider */}
+            <div className="mx-auto w-[300px] border-2 max-w-md h-px my-10 sm:mb-18 sm:mt-10 border-red-800" />
+
+            {/* Feature Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              <div className="p-5 sm:p-6 rounded-xl bg-stone-900/50 border border-stone-800/60 backdrop-blur-sm">
+                <p className="text-2xl font-semibold text-stone-100 font-mono">
+                  100%
+                </p>
+                <p className="text-sm font-medium text-stone-300 mt-1">
+                  OEM Spec Match
+                </p>
+                <p className="text-xs text-stone-500 mt-2">
+                  Guaranteed fitment standards straight from factory engineering
+                  guidelines.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-xl bg-stone-900/50 border border-stone-800/60 backdrop-blur-sm">
+                <p className="text-2xl font-semibold text-stone-100 font-mono">
+                  24/7
+                </p>
+                <p className="text-sm font-medium text-stone-300 mt-1">
+                  Class 1–8 Support
+                </p>
+                <p className="text-xs text-stone-500 mt-2">
+                  Full vehicle spectrum readiness for duty requirements across
+                  all sizes.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-xl bg-stone-900/50 border border-stone-800/60 backdrop-blur-sm">
+                <p className="text-2xl font-semibold text-stone-100 font-mono">
+                  Regional
+                </p>
+                <p className="text-sm font-medium text-stone-300 mt-1">
+                  Fleet Dispatch
+                </p>
+                <p className="text-xs text-stone-500 mt-2">
+                  Rapid deployment units routed directly to active operational
+                  hubs.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-xl bg-stone-900/50 border border-stone-800/60 backdrop-blur-sm">
+                <p className="text-2xl font-semibold text-stone-100 font-mono">
+                  Direct
+                </p>
+                <p className="text-sm font-medium text-stone-300 mt-1">
+                  Tier-1 Supply
+                </p>
+                <p className="text-xs text-stone-500 mt-2">
+                  Immediate inventory access directly backed by top manufacturer
+                  partners.
+                </p>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 border-stone-800">
+          {/* Optional bottom items */}
         </div>
       </div>
     </div>

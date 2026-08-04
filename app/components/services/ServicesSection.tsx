@@ -14,7 +14,7 @@ export default function Services() {
       <div className="flex flex-col space-y-7 md:space-y-12 lg:space-y-0 lg:grid lg:grid-cols-[auto_1fr] lg:gap-x-16 xl:gap-x-20 lg:items-start">
         {/* LEFT COLUMN: Image Wrapper */}
         <div className="relative flex flex-col w-full max-w-md sm:max-w-lg lg:max-w-[520px] mr-3.5 pr-3 pb-3 lg:mr-0 lg:pr-0">
-          {/* Inner Layer */}
+
           {/* Inner Layer */}
           <div className="w-full h-80 sm:h-84 lg:aspect-[5/4] rounded-xl overflow-hidden mb-2 relative after:absolute after:inset-0 after:bg-[radial-gradient(circle,rgba(0,0,0,0)_40%,rgba(0,0,0,0.7)_100%)] after:pointer-events-none after:z-10">
             <Image

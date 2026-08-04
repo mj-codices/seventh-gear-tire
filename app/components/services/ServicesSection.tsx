@@ -13,19 +13,17 @@ export default function Services() {
       {/* Services Stack: Changed xl: prefixes to lg: so the side-by-side configuration triggers earlier */}
       <div className="flex flex-col space-y-7 md:space-y-12 lg:space-y-0 lg:grid lg:grid-cols-[auto_1fr] lg:gap-x-16 xl:gap-x-20 lg:items-start">
         {/* LEFT COLUMN: Image Wrapper */}
-        <div className="relative flex flex-col w-full max-w-md sm:max-w-lg lg:max-w-[420px] mr-3.5 pr-3 pb-3 lg:mr-0 lg:pr-0">
-          {/* 2. Inner Layer */}
-          <div className="relative flex flex-col w-full max-w-md sm:max-w-lg lg:max-w-[420px] mr-3.5 pr-3 pb-3 lg:mr-0 lg:pr-0">
-            {/* Inner Layer */}
-            <div className="w-full h-64 lg:aspect-[5/4] rounded-xl overflow-hidden mb-2 relative lg:after:absolute lg:after:inset-0 lg:after:bg-[radial-gradient(circle,rgba(0,0,0,0)_40%,rgba(0,0,0,0.7)_100%)] lg:after:pointer-events-none lg:after:z-10">
-              <Image
-                src="/services.jpeg"
-                alt="Working on tire"
-                fill
-                sizes="(max-width: 1024px) 100vw, 420px"
-                className="object-cover brightness-110"
-              />
-            </div>
+        <div className="relative flex flex-col w-full max-w-md sm:max-w-lg lg:max-w-[520px] mr-3.5 pr-3 pb-3 lg:mr-0 lg:pr-0">
+          {/* Inner Layer */}
+          {/* Inner Layer */}
+          <div className="w-full h-80 sm:h-84 lg:aspect-[5/4] rounded-xl overflow-hidden mb-2 relative after:absolute after:inset-0 after:bg-[radial-gradient(circle,rgba(0,0,0,0)_40%,rgba(0,0,0,0.7)_100%)] after:pointer-events-none after:z-10">
+            <Image
+              src="/services.jpeg"
+              alt="Working on tire"
+              fill
+              sizes="(max-width: 1024px) 100vw, 520px"
+              className="object-cover brightness-110"
+            />
           </div>
 
           {/* 3. The Top-Right SVG */}
@@ -45,7 +43,7 @@ export default function Services() {
           </svg>
 
           {/* 4. The Bottom-Left Geometric Slab SVG */}
-          <div className="absolute bottom-2 lg:bottom-0 left-0 sm:-left-5 lg:-left-3.5 text-red-800 -translate-x-4 pointer-events-none">
+          <div className="absolute bottom-2 sm:bottom-0.5 left-0 sm:-left-5 lg:-left-3.5 text-red-800 -translate-x-4 pointer-events-none">
             <svg
               className="w-60 sm:w-85 md:w-95 lg:w-70 h-6.5 sm:h-10"
               viewBox="0 0 320 32"

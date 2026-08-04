@@ -89,7 +89,7 @@ export function SubmissionSuccess({
     <div className="pt-2 space-y-6">
       {/* Success Badge / Header */}
       <div className="p-6 bg-stone-900/90 border border-stone-800 rounded-xl text-center space-y-4">
-        <div className="mx-auto w-12 h-12 rounded-full bg-stone-950/60 border border-stone-800 flex items-center justify-center text-red-700">
+        <div className="mx-auto w-12 h-12 md:w-15 md:h-15 rounded-full bg-stone-950/60 border border-stone-800 flex items-center justify-center text-red-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -100,10 +100,10 @@ export function SubmissionSuccess({
           </svg>
         </div>
         <div>
-          <h3 className="text-xl font-display font-bold text-white/90 uppercase tracking-wider">
+          <h3 className="text-xl md:text-2xl font-display font-bold text-white/90 uppercase tracking-wider">
             Dispatch Request Received
           </h3>
-          <p className="text-[11px] text-stone-400 mt-4 font-sans leading-5">
+          <p className="text-[11px] md:text-[15px] text-stone-400 mt-4 font-sans leading-5 md:leading-7">
             A dispatch specialist will call you shortly to discuss your request
             and provide an exact quote before sending out service.
           </p>
@@ -111,7 +111,7 @@ export function SubmissionSuccess({
       </div>
 
       {/* Inline Summary Bullet List */}
-      <ul className="px-3 py-1 text-[10px] space-y-3">
+      <ul className="px-3 py-1 text-[10px] md:text-[12px] space-y-3 md:space-y-6">
         {/* Service Type (Always rendered) */}
         <li className="flex items-center justify-between text-stone-400">
           <span className="flex items-center gap-2.5">
@@ -171,7 +171,7 @@ export function SubmissionSuccess({
       <button
         type="button"
         onClick={onReset}
-        className="w-full py-3.5 px-6 bg-stone-900 hover:bg-stone-850 border border-stone-800 hover:border-stone-700 text-stone-300 hover:text-white font-display font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-150 cursor-pointer"
+        className="w-full py-3.5 px-6 bg-stone-900 hover:bg-stone-850 border border-stone-800 hover:border-stone-700 text-stone-300 hover:text-white font-display font-bold text-xs md:text-base uppercase tracking-widest rounded-lg transition-all duration-150 cursor-pointer"
       >
         Submit Another Request
       </button>

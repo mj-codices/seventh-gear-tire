@@ -28,7 +28,7 @@ export default function ComingSoonServices() {
           transition={{ delay: 0.2, duration: 0.4 }}
           className="inline-block px-3 py-1 mr-3"
         >
-          <Image src="/temp-logo.png" alt="" />
+          <Image src="/temp-logo.png" alt="" width={200} height={200} />
         </motion.span>
 
         {/* Heading */}

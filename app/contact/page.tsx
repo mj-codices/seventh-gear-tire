@@ -152,7 +152,7 @@ export default function ContactPage() {
   };
 
   return (
-    <section className="relative min-h-screen bg-stone-950 text-stone-100 pt-32 sm:pt-40 md:pt-50 px-9 lg:pt-55 pb-10">
+    <section className="relative min-h-screen bg-stone-950 text-stone-100 pt-32 sm:pt-40 md:pt-50 px-9 lg:pt-45 pb-10">
       {/* Background Image */}
       <Image
         src="/contact_main.png"

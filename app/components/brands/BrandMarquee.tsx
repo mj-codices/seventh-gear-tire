@@ -2,10 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Chevrons from "../ui/Chevrons";
-import Truck from "../ui/Truck";
-import Time from "../ui/Time";
-import SunShield from "../ui/SunShield";
 
 // Sample tire brands to populate the loop
 const brands = [

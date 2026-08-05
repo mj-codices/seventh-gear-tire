@@ -22,7 +22,7 @@ export default function Services() {
               alt="Working on tire"
               fill
               sizes="(max-width: 1024px) 100vw, 520px"
-              className="object-cover brightness-110"
+              className="object-cover opacity-90"
             />
           </div>
 
@@ -45,7 +45,7 @@ export default function Services() {
           {/* 4. The Bottom-Left Geometric Slab SVG */}
           <div className="absolute bottom-2 sm:bottom-0.5 left-0 sm:-left-5 lg:-left-3.5 text-red-800 -translate-x-4 pointer-events-none">
             <svg
-              className="w-60 sm:w-85 md:w-95 lg:w-70 h-6.5 sm:h-10"
+              className="w-60 sm:w-85 md:w-95 lg:w-80 h-6.5 sm:h-10"
               viewBox="0 0 320 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

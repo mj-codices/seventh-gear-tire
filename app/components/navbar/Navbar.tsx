@@ -232,10 +232,10 @@ export default function Navbar() {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className="absolute top-[calc(100%-9px)] left-0 w-72 pt-15 z-50"
                       >
-                        <div className="w-full bg-stone-950 border border-stone-800 rounded-b-lg shadow-2xl overflow-hidden">
+                        <div className="w-full bg-stone-950 border-b-[.1rem] border-l-[.1rem] border-r-[.1rem] border-t border-stone-800 rounded-b-lg shadow-2xl overflow-hidden">
                           <Link
                             href="/services"
-                            className="group/link flex items-center gap-4 px-5 py-4.5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors border-b border-stone-800"
+                            className="group/link flex items-center gap-4 px-5 py-5.5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors border-b border-stone-800"
                           >
                             <span className="text-stone-500 group-hover/link:text-red-600 transition-colors duration-200 flex-shrink-0">
                               <svg
@@ -256,7 +256,7 @@ export default function Navbar() {
 
                           <Link
                             href="/services"
-                            className="group/link flex items-center gap-4 px-5 py-4.5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors"
+                            className="group/link flex items-center gap-4 px-5 py-5.5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors"
                           >
                             <span className="text-stone-500 group-hover/link:text-red-600 transition-colors duration-200 flex-shrink-0">
                               <svg

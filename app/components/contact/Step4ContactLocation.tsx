@@ -212,7 +212,7 @@ export function Step4ContactLocation({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-4 px-6 bg-red-800 hover:bg-red-600 active:bg-red-900 active:scale-[0.97] text-white font-display font-bold text-sm sm:text-base uppercase tracking-wider rounded-lg shadow-lg shadow-red-950/30 hover:shadow-red-900/50 transition-all duration-150 flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 disabled:active:bg-red-800"
+          className="w-full py-4 px-6 bg-red-800 active:bg-red-900 active:scale-[0.97] text-white font-display font-bold text-sm sm:text-base uppercase tracking-wider rounded-lg shadow-lg shadow-red-950/30 flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 disabled:active:bg-red-800"
         >
           <span>
             {isSubmitting ? "Submitting Request..." : submitButtonText}

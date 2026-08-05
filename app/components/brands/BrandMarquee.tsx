@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Chevrons from "../ui/Chevrons";
 
 // Sample tire brands to populate the loop
 const brands = [
@@ -40,7 +41,7 @@ export default function BrandMarquee() {
             {brands.map((brand, idx) => (
               <span
                 key={`track1-${idx}`}
-                className={`${brand.style} text-3xl sm:text-4xl md:text-5xl text-stone-500 select-none`}
+                className={`${brand.style} text-3xl sm:text-[38px] text-stone-500 select-none`}
               >
                 {brand.name}
               </span>
@@ -55,7 +56,7 @@ export default function BrandMarquee() {
             {brands.map((brand, idx) => (
               <span
                 key={`track2-${idx}`}
-                className={`${brand.style} text-3xl sm:text-4xl md:text-5xl text-stone-500`}
+                className={`${brand.style} text-3xl sm:text-[38px] text-stone-500`}
               >
                 {brand.name}
               </span>
@@ -64,42 +65,45 @@ export default function BrandMarquee() {
         </motion.div>
       </div>
 
-      <div className="relative mx-auto mt-13 sm:mt-25 md:mt-20 w-[calc(100%-4rem)] sm:w-[calc(100%-6rem)] md:w-[calc(100%-8rem)] rounded-2xl bg-stone-950 px-6 pt-9 sm:pt-15 md:pt-12 pb-12 sm:pb-20 md:pb-20 border-1 border-stone-700/50 drop-shadow-xl lg:drop-shadow-3xl">
+      <div className="relative mx-auto mt-13 sm:mt-25 md:mt-20 w-[calc(100%-4rem)] sm:w-[calc(100%-6rem)] md:w-[calc(100%-8rem)] rounded-2xl bg-stone-950 px-6 pt-3 md:pt-15 pb-12 sm:pb-20 md:pb-20 border-1 border-stone-700/50 drop-shadow-xl lg:drop-shadow-3xl">
         {/* Inner Card Container (added overflow-hidden for rounded corner clipping) */}
-        <div className="relative mx-auto mt-13 sm:mt-25 md:mt-5 w-[calc(100%-4rem)] sm:w-[calc(100%-6rem)] md:w-[calc(100%-4rem)] rounded-2xl bg-stone-950 px-6 pt-9 sm:pt-15 md:pt-18 pb-12 sm:pb-20 md:pb-15 border border-stone-700/50 drop-shadow-xl lg:drop-shadow-3xl overflow-hidden">
+        <div className="relative mx-auto mt-13 sm:mt-25 md:mt-5 w-[calc(100%-4rem)] sm:w-[calc(100%-6rem)] md:w-[calc(100%-4rem)] rounded-2xl bg-stone-950 px-6 pt-9 sm:pt-15 md:pt-18 pb-12 sm:pb-20 md:pb-15 drop-shadow-xl lg:drop-shadow-3xl overflow-hidden">
           {/* Background Image Layer */}
           <div className="absolute inset-0 pointer-events-none z-0">
             <Image
-              src="/marquee.png"
+              src="/marquee.jpeg"
               alt=""
               fill
-              className="object-cover object-bottom opacity-20 mix-blend-luminosity" // Swapped object-center to object-bottom
+              className="object-cover object-[center_50%] opacity-20 mix-blend-luminosity" // Swapped object-center to object-bottom
               priority={false}
+              loading="eager"
             />
             {/* Gradient Overlay to ensure readable contrast on top of the image */}
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/50 to-stone-950/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-stone-800/10" />
           </div>
 
           {/* Content Wrapper (placed z-10 above background image) */}
           <div className="relative z-10">
             {/* Header Block */}
-            <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-              <h2 className="font-display text-3xl sm:text-[40px] font-bold text-stone-100 leading-12 tracking-wider">
-                Every make. Every model. <br className="hidden sm:inline" />
+            <div className="flex flex-col items-center text-center max-w-3xl mx-auto max-[500px]:hidden">
+              <h2 className="font-display text-3xl sm:text-[40px] font-bold text-white/80 leading-12 tracking-wider">
+                Cut lead times. Save rotation.{" "}
+                <br className="hidden sm:inline" />
                 <span className="bg-gradient-to-r from-stone-200 via-stone-400 to-stone-500 bg-clip-text text-transparent">
-                  Nationwide coverage across major OEMs.
+                  Rapid hub dispatch and zero staging delay.
                 </span>
               </h2>
 
               <p className="px-6 mt-6 text-base sm:text-lg text-stone-400 max-w-2xl font-normal leading-9">
-                From heavy commercial fleets to light-duty transports, we
-                support full factory spec fitments and regional service
-                guarantees across all primary manufacturers.
+                We support factory spec fitments across all major commercial
+                platforms. By maintaining direct Tier-1 supply partnerships, we
+                cut lead times down to minutes, getting your asset back in
+                rotation immediately.
               </p>
             </div>
 
             {/* Feature Grid Divider */}
-            <div className="mx-auto w-[300px] border-2 max-w-md h-px my-10 sm:mb-18 sm:mt-10 border-red-800" />
+            <div className="mx-auto w-[300px] border-2 max-w-md h-px my-10 sm:mb-18 sm:mt-10 border-red-800 max-[500px]:hidden" />
 
             {/* Feature Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -113,19 +117,6 @@ export default function BrandMarquee() {
                 <p className="text-xs text-stone-500 mt-2">
                   Guaranteed fitment standards straight from factory engineering
                   guidelines.
-                </p>
-              </div>
-
-              <div className="p-5 sm:p-6 rounded-xl bg-stone-900/50 border border-stone-800/60 backdrop-blur-sm">
-                <p className="text-2xl font-semibold text-stone-100 font-mono">
-                  24/7
-                </p>
-                <p className="text-sm font-medium text-stone-300 mt-1">
-                  Class 1–8 Support
-                </p>
-                <p className="text-xs text-stone-500 mt-2">
-                  Full vehicle spectrum readiness for duty requirements across
-                  all sizes.
                 </p>
               </div>
 
@@ -154,6 +145,21 @@ export default function BrandMarquee() {
                   partners.
                 </p>
               </div>
+
+              {/* 4th Card Link Wrapper */}
+              <Link href="/contact" className="block h-full w-full">
+                <div className="group h-full w-full p-5 sm:p-6 rounded-xl bg-stone-900/50 hover:bg-stone-900/70 border border-stone-800/60 hover:border-stone-800 backdrop-blur-sm transition-all duration-300 cursor-pointer flex flex-col items-center justify-center text-center">
+                  <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors text-base sm:text-lg">
+                    Spec your <br className="hidden md:inline" />
+                    <span className="inline-flex items-center gap-1.5">
+                      fleet
+                      <span className="transform translate-y-0.5 group-hover:translate-x-1.5 transition-transform duration-500 ease-in-out text-amber-400">
+                        <Chevrons />
+                      </span>
+                    </span>
+                  </p>
+                </div>
+              </Link>
             </div>
           </div>
         </div>

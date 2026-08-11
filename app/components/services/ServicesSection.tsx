@@ -6,15 +6,14 @@ export default function Services() {
   return (
     <section className="relative bg-stone-950 px-9 sm:px-15 md:px-20 xl:px-33 pt-10 sm:pt-30 pb-15 md:pb-20 xl:pb-35 space-y-15 z-10 drop-shadow-xl lg:drop-shadow-4xl">
       {/* Section Header */}
-      <h2 className="font-display text-4xl sm:text-[40px] md:text-[50px] text-white/90 leading-11 sm:pb-4 md:pb-8 sm:max-w-lg md:max-w-2xl xl:max-w-3xl">
+      <h2 className="font-display text-4xl sm:text-[40px] md:text-[50px] text-white/90 leading-11 pb-4 sm:pb-6 md:pb-12 sm:max-w-lg md:max-w-2xl xl:max-w-3xl">
         Uptime solutions engineered for your fleet.
       </h2>
 
       {/* Services Stack: Changed xl: prefixes to lg: so the side-by-side configuration triggers earlier */}
-      <div className="flex flex-col space-y-7 md:space-y-12 lg:space-y-0 lg:grid lg:grid-cols-[auto_1fr] lg:gap-x-16 xl:gap-x-20 lg:items-start">
+      <div className="flex flex-col space-y-10 md:space-y-12 lg:space-y-0 lg:grid lg:grid-cols-[auto_1fr] lg:gap-x-16 xl:gap-x-20 lg:items-start">
         {/* LEFT COLUMN: Image Wrapper */}
         <div className="relative flex flex-col w-full max-w-md sm:max-w-lg lg:max-w-[520px] mr-3.5 pr-3 pb-3 lg:mr-0 lg:pr-0">
-
           {/* Inner Layer */}
           <div className="w-full h-80 sm:h-84 lg:aspect-[5/4] rounded-xl overflow-hidden mb-2 relative after:absolute after:inset-0 after:bg-[radial-gradient(circle,rgba(0,0,0,0)_40%,rgba(0,0,0,0.7)_100%)] after:pointer-events-none after:z-10">
             <Image
@@ -78,24 +77,37 @@ export default function Services() {
 
         {/* RIGHT COLUMN: The Services Content Stack */}
         {/* Swapped xl: values out for lg: to handle spatial distribution and centering alongside the image block */}
-        <div className="flex flex-col space-y-7 md:space-y-12 lg:space-y-10 lg:justify-center lg:h-full">
+        <div className="flex flex-col space-y-10 md:space-y-12 lg:space-y-10 lg:justify-center lg:h-full">
           {/* Service 1 */}
           <Link href="/services/" className="group block">
             <div className="space-y-4 sm:space-y-6">
-              <h3 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-white/90 tracking-tight group-hover:text-white transition-colors duration-300">
-                On-Site Tire Replacement
+              {/* Heading with Racing Sweep Animation */}
+              <h3 className="relative inline-block text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-10 text-white/70 overflow-hidden">
+                {/* Base Text (Muted white/70) */}
+                <span>On-Site Tire Replacement</span>
+
+                {/* Solid White Overlay (Wipes in from left to right on hover) */}
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 text-white flex items-center whitespace-nowrap [clip-path:polygon(0_0,0_0,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] transition-[clip-path] duration-400 ease-in-out pointer-events-none select-none"
+                >
+                  On-Site Tire Replacement
+                </span>
               </h3>
-              <p className="text-base sm:text-lg md:text-xl text-stone-400 max-w-md sm:max-w-lg md:max-w-2xl leading-6.5 md:leading-10">
+
+              <p className="text-base sm:text-lg md:text-xl text-stone-400 max-w-md sm:max-w-lg md:max-w-2xl leading-7.5 md:leading-10">
                 Commercial-grade mounting, precision computer balancing, and
                 fresh rubber delivered directly to your home base or warehouse
                 yard.
               </p>
             </div>
+
             <div className="ml-1 mt-5 flex items-center gap-1.5">
-              <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors sm:text-lg">
+              {/* Learn More (Restored to simple color fade) */}
+              <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors duration-300 sm:text-lg">
                 Learn More
               </p>
-              <span className="transform translate-y-0.5 group-hover:translate-x-1 transition-transform duration-500 ease-in-out">
+              <span className="transform translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-500 ease-in-out text-amber-400">
                 <Chevrons />
               </span>
             </div>
@@ -110,20 +122,33 @@ export default function Services() {
           {/* Service 2 */}
           <Link href="/services/" className="group block">
             <div className="space-y-4 sm:space-y-6">
-              <h3 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-white/90 tracking-tight group-hover:text-white transition-colors duration-300">
-                Commercial Curation & Sourcing
+              {/* Heading with Racing Sweep Animation */}
+              <h3 className="relative inline-block text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-10 text-white/75 overflow-hidden">
+                {/* Base Text (Muted white/75) */}
+                <span>Commercial Curation &amp; Sourcing</span>
+
+                {/* Solid White Overlay (Wipes in from left to right on hover) */}
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 text-white flex items-center whitespace-nowrap [clip-path:polygon(0_0,0_0,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] transition-[clip-path] duration-400 ease-in-out pointer-events-none select-none"
+                >
+                  Commercial Curation &amp; Sourcing
+                </span>
               </h3>
-              <p className="text-base sm:text-lg md:text-xl text-stone-400 max-w-md sm:max-w-lg md:max-w-2xl leading-6.5 md:leading-10">
+
+              <p className="text-base sm:text-lg md:text-xl text-stone-400 max-w-md sm:max-w-lg md:max-w-2xl leading-7.5 md:leading-10">
                 Whether you demand closed-shoulder drive tires for maximum
                 highway efficiency, or lugs engineered for rugged job sites, we
                 match your weight margins with top-tier inventory.
               </p>
             </div>
+
             <div className="ml-1 mt-5 flex items-center gap-1.5">
-              <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors sm:text-lg">
+              {/* Learn More (Clean color fade) */}
+              <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors duration-300 sm:text-lg">
                 Learn More
               </p>
-              <span className="transform translate-y-0.5 group-hover:translate-x-1 transition-transform duration-500 ease-in-out">
+              <span className="transform translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-500 ease-in-out">
                 <Chevrons />
               </span>
             </div>

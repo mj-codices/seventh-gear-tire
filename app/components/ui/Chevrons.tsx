@@ -8,7 +8,7 @@ export default function Chevrons({ className = "text-red-500/80" }: IconProps) {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 256 256"
       /* Removing hardcoded width/height lets you control size completely via Tailwind classes like h-6 w-6 */
-      className={`h-5 w-5 fill-current ${className}`}
+      className={`h-4 fill-current ${className}`}
       fillRule="nonzero"
     >
       <g

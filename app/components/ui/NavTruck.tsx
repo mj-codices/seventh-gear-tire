@@ -13,7 +13,7 @@ export default function NavTruck({ className = "", ...props }: NavTruckProps) {
       height="50"
       preserveAspectRatio="xMidYMid meet"
       version="1.0"
-      className={`md:h-14 lg:h-13 ${className}`.trim()}
+      className={`h-12 sm:h-13 md:h-14 lg:h-13 ${className}`.trim()}
       {...props}
     >
       <defs>

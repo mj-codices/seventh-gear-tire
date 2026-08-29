@@ -205,6 +205,7 @@ export default function Navbar() {
                   <Image
                     src="/logo-alt.png"
                     alt="company logo"
+                    loading="eager"
                     width={270}
                     height={270}
                     className="-mt-1 w-full h-auto object-contain"
@@ -214,7 +215,7 @@ export default function Navbar() {
             </span>
 
             {/* DESKTOP NAV LINKS */}
-            <nav className="hidden lg:flex items-center gap-8 xl:gap-12 lg:-ml-4 xl:ml-12 h-full text-sm font-display uppercase tracking-wider text-stone-300">
+            <nav className="hidden lg:flex items-center gap-8 xl:gap-12 lg:-ml-4 xl:ml-12 h-full text-sm font-display tracking-wider text-stone-300">
               {/* ROUTING GUARD: Hidden only on /services */}
               {!isServiceRoute && (
                 <>
@@ -269,52 +270,70 @@ export default function Navbar() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 6, scale: 0.98 }}
                           transition={{ duration: 0.2, ease: "easeOut" }}
-                          className="absolute top-[calc(100%-9px)] left-0 w-80 pt-15 z-50"
+                          className="absolute top-[calc(100%-9px)] left-0 w-90 pt-15 z-50"
                         >
                           <div className="w-full bg-stone-950 border-b-[.1rem] border-l-[.1rem] border-r-[.1rem] border-t border-stone-800 rounded-b-lg shadow-2xl overflow-hidden">
                             {/* Item 1: Direct Tire Purchasing & Fleet Sales */}
                             <Link
                               href="/services"
-                              className="group/link flex items-center gap-5 px-3 py-5.5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors border-b border-stone-800"
+                              className="group/link flex items-center gap-8 px-3 py-5.5 text-sm text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors border-b border-stone-800"
                             >
-                              <span className="text-stone-500 group-hover/link:text-red-700 transition-colors duration-200 flex-shrink-0">
+                              <span className="text-stone-500 group-hover/link:text-red-700 transition-colors duration-200 flex-shrink-0 -mt-10">
                                 <Truck2 />
                               </span>
-                              <span>
-                                Tire Distribution &amp;
-                                <br />
-                                Fleet Sales
-                              </span>
+
+                              {/* Content Wrapper for Vertical Stacking */}
+                              <div className="flex flex-col">
+                                <span className="leading-tight font-bold uppercase">
+                                  Tire Distribution &amp; Fleet <br /> Sales
+                                </span>
+                                <p className="text-xs font-sans text-stone-400 mt-3 leading-snug pr-15">
+                                  Commercial fleet supply, tires, and scheduled
+                                  delivery.
+                                </p>
+                              </div>
                             </Link>
 
                             {/* Item 2: In-Shop Service */}
                             <Link
                               href="/services"
-                              className="group/link flex items-center gap-[1.4rem] px-5 py-5.5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors border-b border-stone-800"
+                              className="group/link flex items-center gap-[2.3rem] px-5 py-5.5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors border-b border-stone-800"
                             >
-                              <span className="text-stone-500 group-hover/link:text-red-700 transition-colors duration-200 flex-shrink-0 pb-1">
+                              <span className="text-stone-500 group-hover/link:text-red-700 transition-colors duration-200 flex-shrink-0 -mt-7 translate-x-1.5">
                                 <TireServiceIcon />
                               </span>
-                              <span>
-                                Shop Tire &amp;
-                                <br />
-                                Light Mechanical
-                              </span>
+
+                              {/* Content Wrapper for Vertical Stacking */}
+                              <div className="flex flex-col">
+                                <span className="leading-tight font-bold uppercase">
+                                  Shop Tire &amp; Light <br /> Mechanical
+                                </span>
+                                <p className="font-sans font-normal normal-case text-xs text-stone-400 mt-3 leading-snug pr-10">
+                                  In-shop mounting, balancing, and light
+                                  maintenance.
+                                </p>
+                              </div>
                             </Link>
 
                             {/* Item 3: Scheduled Mobile Installation */}
                             <Link
                               href="/services"
-                              className="group/link flex items-center gap-4 px-5 py-5.5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors"
+                              className="group/link flex items-center gap-7.5 px-5 py-5.5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors"
                             >
-                              <span className="text-stone-950 group-hover/link:text-[#110f0d] transition-colors duration-200 flex-shrink-0 pb-2">
+                              <span className="text-stone-950 group-hover/link:text-[#110f0d] transition-colors duration-200 flex-shrink-0 -mt-9 translate-x-1">
                                 <TireAndClock />
                               </span>
-                              <span>
-                                Scheduled Mobile
-                                <br />
-                                Fleet Installation
-                              </span>
+
+                              {/* Content Wrapper for Vertical Stacking */}
+                              <div className="flex flex-col">
+                                <span className="leading-tight font-bold uppercase">
+                                  Scheduled Mobile Fleet <br /> Installation
+                                </span>
+                                <p className="font-sans font-normal normal-case text-xs text-stone-400 mt-3 leading-snug">
+                                  On-site planned service for farms, equipment,
+                                  and jobsites.
+                                </p>
+                              </div>
                             </Link>
                           </div>
                         </motion.div>
@@ -481,7 +500,7 @@ export default function Navbar() {
               animate="open"
               exit="closed"
               variants={menuVariants}
-              className="fixed top-0 left-0 bottom-0 z-50 w-[80vw] sm:w-[90vw] bg-stone-950 border-r border-stone-800 shadow-2xl flex flex-col justify-between"
+              className="fixed top-0 left-0 bottom-0 z-50 w-[80vw] sm:w-[90vw] bg-stone-950 border-r border-red-900 shadow-2xl flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-start mb-5 h-20 lg:h-30 bg-white/90 pl-6 sm:pl-12 pr-8">
@@ -530,59 +549,77 @@ export default function Navbar() {
                           className="overflow-hidden"
                         >
                           <div className="flex flex-col mt-2 bg-stone-900 text-base md:text-lg text-stone-300 uppercase">
-                            {/* Item 1: Tire Distribution & Fleet Sales */}
+                            {/* Item 1: Fleet & Distribution */}
                             <Link
                               href="/services"
                               onClick={() => handleToggleMenu(false)}
                               className="group/mobile-link flex items-center justify-between py-5 pl-8 sm:pl-16 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left"
                             >
-                              <div className="max-[500px]:ml-0 ml-7 flex items-center gap-9">
-                                <span className="text-stone-200 group-hover/mobile-link:text-red-700 transition-colors duration-200 shrink-0">
+                              <div className="max-[500px]:ml-0 ml-7 flex items-center gap-6">
+                                <span className="text-red-800 group-hover/mobile-link:text-red-700 transition-colors duration-200 shrink-0 -mt-5 sm:-mt-6">
                                   <Truck2 />
                                 </span>
-                                <span>
-                                  Tire Distribution &amp; <br /> Fleet Sales
-                                </span>
+                                <div className="flex flex-col">
+                                  <span className="leading-tight sm:text-lg">
+                                    Fleet &amp; Distribution
+                                  </span>
+                                  <p className="font-sans font-normal normal-case text-xs sm:text-sm text-stone-400 mt-1 sm:mt-1.5 leading-snug sm:leading-5.5 max-w-[15rem] sm:max-w-[19rem]">
+                                    Commercial fleet supply, tires, and
+                                    scheduled delivery.
+                                  </p>
+                                </div>
                               </div>
-                              <span className="mt-0.5 mr-6 shrink-0">
+                              <span className="mr-10.5 mt-0.5 shrink-0 hidden md:block">
                                 <Chevrons className="text-stone-600" />
                               </span>
                             </Link>
 
-                            {/* Item 2: Shop Tire & Light Mechanical */}
+                            {/* Item 2: Shop Services */}
                             <Link
                               href="/services"
                               onClick={() => handleToggleMenu(false)}
                               className="group/mobile-link flex items-center justify-between py-5 pl-8 sm:pl-16 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left"
                             >
-                              <div className="max-[500px]:ml-0 ml-9 flex items-center gap-8 md:gap-10">
-                                <span className="text-stone-300 group-hover/mobile-link:text-red-700 transition-colors duration-200 shrink-0">
+                              <div className="max-[500px]:ml-0 ml-7 flex items-center gap-8.5">
+                                <span className="text-red-800 group-hover/mobile-link:text-red-700 transition-colors duration-200 shrink-0 -mt-2 translate-x-2">
                                   <TireServiceIcon />
                                 </span>
-                                <span>
-                                  Shop Tire &amp; <br /> Light Mechanical
-                                </span>
+                                <div className="flex flex-col">
+                                  <span className="leading-tight sm:text-lg">
+                                    Shop Services
+                                  </span>
+                                  <p className="font-sans font-normal normal-case text-xs sm:text-sm text-stone-400 mt-1 sm:mt-1.5 leading-snug sm:leading-5.5 max-w-[15rem] sm:max-w-[18rem]">
+                                    In-shop mounting, balancing, and light
+                                    maintenance.
+                                  </p>
+                                </div>
                               </div>
-                              <span className="mt-0.5 mr-6 shrink-0">
+                              <span className="mr-10.5 mt-0.5 shrink-0 hidden md:block">
                                 <Chevrons className="text-stone-600" />
                               </span>
                             </Link>
 
-                            {/* Item 3: Scheduled Mobile Fleet Installation */}
+                            {/* Item 3: Mobile Services */}
                             <Link
                               href="/services"
                               onClick={() => handleToggleMenu(false)}
                               className="group/mobile-link flex items-center justify-between py-5 pl-8 sm:pl-16 pr-4 font-display hover:text-white transition-colors text-left"
                             >
-                              <div className="max-[500px]:ml-0 ml-8.5 flex items-center gap-8">
-                                <span className="text-stone-900 transition-colors duration-200 shrink-0 -translate-y-1">
+                              <div className="max-[500px]:ml-0 ml-7 flex items-center gap-7.5 md:gap-8">
+                                <span className="text-stone-900 transition-colors duration-200 shrink-0 translate-x-1.5 sm:-mt-5">
                                   <TireAndClock />
                                 </span>
-                                <span>
-                                  Scheduled Mobile <br /> Fleet Installation
-                                </span>
+                                <div className="flex flex-col">
+                                  <span className="leading-tight sm:text-lg">
+                                    Mobile Services
+                                  </span>
+                                  <p className="font-sans font-normal normal-case text-xs sm:text-sm text-stone-400 mt-1 sm:mt-1.5 leading-snug sm:leading-5.5 max-w-[15rem] sm:max-w-[20rem]">
+                                    On-site planned service for farms,
+                                    equipment, and jobsites.
+                                  </p>
+                                </div>
                               </div>
-                              <span className="mt-0.5 mr-6 shrink-0">
+                              <span className="mr-10.5 mt-0.5 shrink-0 hidden md:block">
                                 <Chevrons className="text-stone-600" />
                               </span>
                             </Link>
@@ -624,14 +661,14 @@ export default function Navbar() {
                           exit={{ height: 0, opacity: 0 }}
                           className="overflow-hidden"
                         >
-                          <div className="flex flex-col bg-stone-900 text-base md:text-lg text-stone-300 uppercase">
+                          <div className="flex flex-col bg-stone-900 text-base sm:text-lg text-stone-300 uppercase">
                             <Link
                               href="/about"
                               onClick={() => handleToggleMenu(false)}
-                              className="flex items-center justify-between py-5 pl-10 sm:pl-20 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left"
+                              className="flex leading-tight items-center justify-between py-5 pl-10 sm:pl-35 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left"
                             >
                               <span>How It Works</span>
-                              <span className="mt-0.5 mr-6 shrink-0">
+                              <span className="mt-0.5 mr-9 shrink-0 hidden sm:block">
                                 <Chevrons className="text-stone-600" />
                               </span>
                             </Link>
@@ -639,10 +676,10 @@ export default function Navbar() {
                             <Link
                               href="/about#fleet"
                               onClick={() => handleToggleMenu(false)}
-                              className="flex items-center justify-between py-5 pl-10 sm:pl-20 pr-4 font-display hover:text-white transition-colors text-left border-b border-stone-800"
+                              className="flex items-center justify-between py-5 pl-10 sm:pl-35 pr-4 font-display hover:text-white transition-colors text-left border-b border-stone-800"
                             >
                               <span>Service Area</span>
-                              <span className="mt-0.5 mr-6 shrink-0">
+                              <span className="mt-0.5 mr-9 shrink-0 hidden sm:block">
                                 <Chevrons className="text-stone-600" />
                               </span>
                             </Link>
@@ -650,10 +687,10 @@ export default function Navbar() {
                             <Link
                               href="/about#fleet"
                               onClick={() => handleToggleMenu(false)}
-                              className="flex items-center justify-between py-5 pl-10 sm:pl-20 pr-4 font-display hover:text-white transition-colors text-left"
+                              className="flex items-center justify-between py-5 pl-10 sm:pl-35 pr-4 font-display hover:text-white transition-colors text-left"
                             >
                               <span>About 7th Gear</span>
-                              <span className="mt-0.5 mr-6 shrink-0">
+                              <span className="mt-0.5 mr-9 shrink-0 hidden sm:block">
                                 <Chevrons className="text-stone-600" />
                               </span>
                             </Link>

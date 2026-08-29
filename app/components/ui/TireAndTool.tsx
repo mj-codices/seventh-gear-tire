@@ -16,7 +16,7 @@ export default function TireServiceIcon({
       height="40"
       preserveAspectRatio="xMidYMid meet"
       version="1.0"
-      className={`h-12 md:h-12 lg:h-10 transition-colors duration-200 ${className}`.trim()}
+      className={`h-10 sm:h-11 md:h-12 lg:h-10 transition-colors duration-200 ${className}`.trim()}
       {...props}
     >
       <defs>

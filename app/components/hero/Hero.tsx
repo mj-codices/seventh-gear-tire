@@ -46,15 +46,15 @@ export default function Hero() {
         </p>
 
         {/* CTA Container */}
-        <div className="pt-4 pl-3 md:pl-2 pr-15 max-w-sm">
+        <div className="pt-4 pl-2 md:pl-2 pr-15 max-w-sm">
           {/* MOBILE ONLY: Single CTA Button to Trigger Drawer */}
           <button
             onClick={() => setIsDrawerOpen(true)}
-            className="lg:hidden w-full h-14 bg-transparent text-white font-extrabold rounded-md uppercase tracking-wide text-sm transition duration-300 shadow-lg active:scale-[0.99] cursor-pointer flex items-center justify-center gap-6 border-2 border-white/90"
+            className="lg:hidden w-full h-14 bg-red-800/80 text-white font-extrabold rounded-md uppercase tracking-wide text-base transition duration-300 shadow-lg active:scale-[0.99] cursor-pointer flex items-center justify-center gap-6 border-2 border-red-900 border-opacity-80"
           >
             <span>Select Service</span>
             <span className="rotate-270 -mb-0.5">
-              <Chevrons className="text-white/90" />
+              <Chevrons className="text-white/90 w-4.5 h-4.5" />
             </span>
           </button>
 

@@ -30,7 +30,7 @@ export default function Hero() {
       {/* Content Stack */}
       <div className="relative z-10 w-full max-w-2xl space-y-5 lg:space-y-0 mb-10 max-[380px]:mt-20 mt-30">
         <h1 className="font-display text-[50px] lg:text-7xl font-extrabold tracking-wider text-white/80">
-          <span className="block text-red-700 leading-12 lg:leading-22 brightness-110">
+          <span className="block text-red-700 leading-12 lg:leading-22">
             Commercial Tires.
           </span>
 
@@ -52,7 +52,7 @@ export default function Hero() {
             onClick={() => setIsDrawerOpen(true)}
             className="lg:hidden w-full h-14 bg-red-800/80 text-white font-extrabold rounded-md uppercase tracking-wide text-base transition duration-300 shadow-lg active:scale-[0.99] cursor-pointer flex items-center justify-center gap-6 border-2 border-red-900 border-opacity-80"
           >
-            <span>Select Service</span>
+            <span>Start Request</span>
             <span className="rotate-270 -mb-0.5">
               <Chevrons className="text-white/90 w-4.5 h-4.5" />
             </span>

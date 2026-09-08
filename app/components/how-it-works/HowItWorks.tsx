@@ -39,17 +39,17 @@ export const HowItWorks: React.FC = () => {
         <h2 className="text-base uppercase tracking-[.3rem] text-stone-400 sm:text-4xl">
           How It Works
         </h2>
-        <p className="mt-5 font-display text-[25px] text-white/90 leading-8">
+        <h3 className="mt-5 font-display text-[25px] text-white/90 leading-8">
           Three simple steps to direct tire delivery, shop appointments, or
           mobile installation.
-        </p>
+        </h3>
       </div>
 
       {/* Timeline Wrapper */}
       <div className="relative flex flex-col md:flex-row items-start justify-between gap-12 md:gap-4">
         {/* Mobile Vertical Red Connecting Line (Ends at 3rd bubble center) */}
         <div
-          className="absolute left-[23px] top-6 h-[calc(100%-150px)] w-[2px] bg-red-900/90 md:hidden"
+          className="absolute left-[23px] top-6 h-[calc(100%-170px)] w-[2px] bg-red-900/90 md:hidden"
           aria-hidden="true"
         />
 
@@ -77,7 +77,7 @@ export const HowItWorks: React.FC = () => {
 
               {/* Text / Blurb Content with Icon */}
               <div className="ml-6 md:ml-0 md:mt-6 md:text-center flex-1">
-                <Icon className="mt-2 mb-2 w-6 h-6 text-stone-500 flex-shrink-0" />
+                <Icon className="mt-2 mb-2 w-6 h-6 text-olive-700 flex-shrink-0" />
                 <h3 className="text-lg font-semibold text-white tracking-wide">
                   {step.title}.
                 </h3>

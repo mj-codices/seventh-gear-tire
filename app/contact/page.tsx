@@ -160,10 +160,10 @@ export default function ContactPage() {
         width={1920}
         height={500}
         priority
-        className="absolute top-0 inset-x-0 w-full h-[500px] object-cover object-[49%_center] z-0 opacity-70"
+        className="absolute top-0 inset-x-0 w-full h-[500px] object-cover object-[49%_center] z-0 opacity-70  w-auto"
         unoptimized
       />
-
+   
       {/* Overlay */}
       <div
         className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-stone-950/20 via-stone-950/70 to-stone-950 pointer-events-none z-0"

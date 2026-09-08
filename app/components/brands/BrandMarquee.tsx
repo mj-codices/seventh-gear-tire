@@ -4,27 +4,28 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Chevrons from "../ui/Chevrons";
 
-// Sample tire brands to populate the loop
-const brands = [
-  { name: "FALKEN", style: "font-sans tracking-widest font-black" },
-  { name: "SAMSON", style: "font-serif tracking-wider font-extrabold italic" },
-  { name: "MICHELIN", style: "font-sans tracking-tight font-black uppercase" },
-  { name: "GOODYEAR", style: "font-sans tracking-wide font-extrabold italic" },
-  { name: "TOYO", style: "font-sans tracking-widest font-bold" },
+const categories = [
+  "Commercial Truck & Trailer",
+  "Scheduled Mobile Installation",
+  "Agricultural & Heavy Equipment",
+  "Shop Tire & Light Mechanical",
+  "Light Commercial & Hotshot Rigs",
+  "Direct Fleet Supply & Sourcing",
+  "Off-Road & OTR Applications",
 ];
 
 export default function BrandMarquee() {
   return (
     // Bottom Layer: The deeper base background
     <div className="relative w-full bg-stone-900 pb-15 sm:pb-25 pt-1 overflow-hidden z-0">
-      {/* 1. Added a wrapper with a horizontal fade mask */}
+      {/* 1. Wrapper with a horizontal fade mask */}
       <div
         className="w-full overflow-hidden"
         style={{
           maskImage:
-            "linear-gradient(to right, transparent, white 20%, white 80%, transparent)",
+            "linear-gradient(to right, transparent, white 15%, white 85%, transparent)",
           WebkitMaskImage:
-            "linear-gradient(to right, transparent, white 20%, white 80%, transparent)",
+            "linear-gradient(to right, transparent, white 15%, white 85%, transparent)",
         }}
       >
         <motion.div
@@ -32,118 +33,132 @@ export default function BrandMarquee() {
           animate={{ x: [0, "-50%"] }}
           transition={{
             ease: "linear",
-            duration: 25,
+            duration: 55,
             repeat: Infinity,
           }}
         >
           {/* First Loop Pass */}
-          <div className="flex items-center gap-20 sm:gap-25 md:gap-30 pr-20 sm:pr-30 md:pr-30 flex-shrink-0">
-            {brands.map((brand, idx) => (
-              <span
+          <div className="flex items-center gap-12 sm:gap-16 flex-shrink-0 mr-12 sm:mr-16">
+            {categories.map((category, idx) => (
+              <div
                 key={`track1-${idx}`}
-                className={`${brand.style} text-3xl sm:text-[38px] text-stone-500 select-none`}
+                className="flex items-center gap-12 sm:gap-16"
               >
-                {brand.name}
-              </span>
+                <span className="font-display tracking-widest uppercase text-2xl font-bold text-stone-400/90 select-none">
+                  {category}
+                </span>
+                <span
+                  className="w-2 h-2 rounded-full bg-red-800 flex-shrink-0"
+                  aria-hidden="true"
+                />
+              </div>
             ))}
           </div>
 
-          {/* Second Loop Pass */}
+          {/* Second Loop Pass (Identical copy for seamless seamless looping) */}
           <div
-            className="flex items-center gap-20 sm:gap-25 md:gap-30 pr-20 sm:pr-30 md:pr-30 flex-shrink-0"
+            className="flex items-center gap-12 sm:gap-16 flex-shrink-0 mr-12 sm:mr-16"
             aria-hidden="true"
           >
-            {brands.map((brand, idx) => (
-              <span
+            {categories.map((category, idx) => (
+              <div
                 key={`track2-${idx}`}
-                className={`${brand.style} text-3xl sm:text-[38px] text-stone-500`}
+                className="flex items-center gap-12 sm:gap-16"
               >
-                {brand.name}
-              </span>
+                <span className="font-display tracking-widest uppercase text-2xl font-bold text-stone-400/90 select-none">
+                  {category}
+                </span>
+                <span className="w-2 h-2 rounded-full bg-red-800 flex-shrink-0" />
+              </div>
             ))}
           </div>
         </motion.div>
       </div>
 
-      <div className="relative mx-auto mt-13 sm:mt-25 md:mt-20 w-[calc(100%-4.5rem)] sm:w-[calc(100%-7rem)] md:w-[calc(100%-9rem)] rounded-2xl bg-stone-950 px-6 pt-3 md:pt-15 pb-12 sm:pb-20 md:pb-20 border-1 border-stone-700/50 drop-shadow-xl lg:drop-shadow-3xl">
-        {/* Inner Card Container (added overflow-hidden for rounded corner clipping) */}
-        <div className="relative mx-auto mt-13 sm:mt-25 md:mt-5 w-[calc(100%-4rem)] sm:w-[calc(100%-6rem)] md:w-[calc(100%-4rem)] rounded-2xl bg-stone-950 px-6 pt-9 sm:pt-15 md:pt-18 pb-12 sm:pb-20 md:pb-15 drop-shadow-xl lg:drop-shadow-3xl overflow-hidden">
+      {/* Outer Card Wrapper */}
+      <div className="relative mx-auto mt-13 sm:mt-25 md:mt-20 w-[calc(100%-4.5rem)] sm:w-[calc(100%-7rem)] md:w-[calc(100%-9rem)] rounded-2xl bg-stone-950 px-6 pt-3 md:pt-15 pb-6 sm:pb-20 md:pb-20 border border-stone-700/50 drop-shadow-xl lg:drop-shadow-3xl">
+        {/* Inner Card Container */}
+        <div className="relative mx-auto mt-7.5 sm:mt-25 md:mt-5 w-[calc(100%-0.5rem)] sm:w-[calc(100%-6rem)] md:w-[calc(100%-4rem)] rounded-2xl bg-stone-950 px-6 pt-9 sm:pt-15 md:pt-18 pb-12 sm:pb-20 md:pb-15 drop-shadow-xl lg:drop-shadow-3xl overflow-hidden">
           {/* Background Image Layer */}
           <div className="absolute inset-0 pointer-events-none z-0">
             <Image
               src="/marquee.jpeg"
               alt=""
               fill
-              className="object-cover object-[center_50%] opacity-20 mix-blend-luminosity" // Swapped object-center to object-bottom
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+              className="object-cover object-[center_50%] opacity-20 mix-blend-luminosity"
               priority={false}
               loading="eager"
             />
-            {/* Gradient Overlay to ensure readable contrast on top of the image */}
+            {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-stone-800/10" />
           </div>
 
-          {/* Content Wrapper (placed z-10 above background image) */}
+          {/* Content Wrapper */}
           <div className="relative z-10">
             {/* Header Block */}
             <div className="hidden sm:flex flex-col items-center text-center max-w-3xl mx-auto">
               <h2 className="font-display text-3xl sm:text-[37px] md:text-[40px] font-bold text-white/80 leading-12 tracking-wider">
-                Cut lead times. Save rotation.{" "}
-                <br className="hidden sm:inline" />
                 <span className="bg-gradient-to-r from-stone-200 via-stone-400 to-stone-500 bg-clip-text text-transparent">
-                  Rapid hub dispatch and zero staging delay.
+                  Streamlined sourcing, realistic availability, and coordinated
+                  scheduling.{" "}
                 </span>
               </h2>
 
               <p className="px-6 mt-6 text-base sm:text-lg text-stone-400 max-w-2xl font-normal leading-9 mx-auto">
-                We support factory spec fitments across all major commercial
-                platforms. By maintaining direct Tier-1 supply partnerships, we
-                cut lead times down to minutes, getting your asset back in
-                rotation immediately.
+                7th Gear Tire Works sources commercial and specialty tires
+                throguh established distrubution channels. Available brands and
+                models vary by size, application, supplier inventory, customer
+                preference, and lead time. Our team will present suitable
+                options and confirm final availablity with each quote.
               </p>
             </div>
 
             {/* Feature Grid Divider */}
-            {/* Feature Grid Divider */}
             <div className="mx-auto border-2 w-full max-w-[300px] h-[3px] border-red-800 my-10 sm:mb-18 sm:mt-10 hidden sm:block" />
 
             {/* Feature Grid */}
+            {/* Feature Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {/* Card 1 */}
               <div className="p-5 sm:p-6 rounded-xl bg-stone-900/50 border border-stone-800/60 backdrop-blur-sm">
-                <p className="max-[400px]:text-xl text-2xl font-semibold text-stone-100 font-mono">
-                  100%
+                <p className="max-[400px]:text-[18px] text-2xl font-semibold text-olive-700 font-display tracking-wider">
+                  Spec
                 </p>
-                <p className="text-sm font-medium text-stone-300 mt-1">
-                  OEM Spec Match
+                <p className="text-sm font-extrabold text-stone-400 mt-1">
+                  Verified Fitment
                 </p>
-                <p className="text-xs text-stone-500 mt-2">
-                  Guaranteed fitment standards straight from factory engineering
-                  guidelines.
+                <p className="text-xs text-stone-500 mt-2 leading-relaxed">
+                  Application-matched tread options aligned with factory weight
+                  ratings and load specs.
                 </p>
               </div>
 
+              {/* Card 2 */}
               <div className="p-5 sm:p-6 rounded-xl bg-stone-900/50 border border-stone-800/60 backdrop-blur-sm">
-                <p className="max-[400px]:text-xl text-2xl font-semibold text-stone-100 font-mono">
-                  Regional
+                <p className="max-[400px]:text-[18px] text-2xl font-semibold text-olive-700 font-display tracking-wider">
+                 Flex
                 </p>
-                <p className="text-sm font-medium text-stone-300 mt-1">
-                  Fleet Dispatch
+                <p className="text-sm font-extrabold text-stone-400 mt-1">
+                  Coordinated Dispatch
                 </p>
-                <p className="text-xs text-stone-500 mt-2">
-                  Rapid deployment units routed directly to active operational
-                  hubs.
+                <p className="text-xs text-stone-500 mt-2 leading-relaxed">
+                  Scheduled deployment and route routing aligned directly with
+                  active fleet timelines.
                 </p>
               </div>
 
+              {/* Card 3 */}
               <div className="p-5 sm:p-6 rounded-xl bg-stone-900/50 border border-stone-800/60 backdrop-blur-sm">
-                <p className="max-[400px]:text-xl text-2xl font-semibold text-stone-100 font-mono">
-                  Direct
+                <p className="max-[400px]:text-[18px] text-2xl font-semibold text-olive-700 font-display tracking-wider">
+                  Multi
                 </p>
-                <p className="text-sm font-medium text-stone-300 mt-1">
-                  Tier-1 Supply
+                <p className="text-sm font-extrabold text-stone-400 mt-1">
+                  Channel Sourcing
                 </p>
-                <p className="text-xs text-stone-500 mt-2">
-                  Immediate inventory access directly backed by top manufacturer
-                  partners.
+                <p className="text-xs text-stone-500 mt-2 leading-relaxed">
+                  Sourced through regional distributor networks with real-time
+                  stock and lead-time confirmation.
                 </p>
               </div>
 
@@ -152,8 +167,8 @@ export default function BrandMarquee() {
                 <div className="group h-full w-full p-5 sm:p-6 rounded-xl bg-stone-900/50 hover:bg-stone-900/70 border border-stone-800/60 hover:border-stone-800 backdrop-blur-sm transition-all duration-300 cursor-pointer flex flex-col items-center justify-center text-center">
                   <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors max-[400px]:text-sm text-base sm:text-lg">
                     Spec your <br className="hidden md:inline" />
-                    <span className="inline-flex items-center gap-1.5">
-                      fleet
+                    <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+                      <span>fleet</span>
                       <span className="transform translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-500 ease-in-out text-amber-400">
                         <Chevrons />
                       </span>
@@ -163,10 +178,6 @@ export default function BrandMarquee() {
               </Link>
             </div>
           </div>
-        </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 border-stone-800">
-          {/* Optional bottom items */}
         </div>
       </div>
     </div>

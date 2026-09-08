@@ -11,6 +11,7 @@ export default function Footer() {
             <Image
               src="/logo-alt.png"
               alt="company logo"
+              loading="eager"
               width={326}
               height={326}
               className="w-[300px] sm:w-[500px] md:w-[600px] sm:h-auto object-contain"

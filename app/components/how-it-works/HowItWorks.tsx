@@ -34,12 +34,12 @@ const steps: Step[] = [
 
 export const HowItWorks: React.FC = () => {
   return (
-    <section className="w-full py-12 px-10 max-w-6xl mx-auto">
+    <section className="w-full py-14 px-10 sm:px-17 max-w-6xl mx-auto">
       <div className="text-left mb-12">
-        <h2 className="text-base uppercase tracking-[.3rem] text-stone-400 sm:text-4xl">
+        <h2 className="text-base uppercase tracking-[.3rem] text-stone-400 md:text-4xl">
           How It Works
         </h2>
-        <h3 className="mt-5 font-display text-[25px] text-white/90 leading-8">
+        <h3 className="mt-5 font-display text-[25px] text-white/90 leading-8 max-w-xs">
           Three simple steps to direct tire delivery, shop appointments, or
           mobile installation.
         </h3>
@@ -77,7 +77,7 @@ export const HowItWorks: React.FC = () => {
 
               {/* Text / Blurb Content with Icon */}
               <div className="ml-6 md:ml-0 md:mt-6 md:text-center flex-1">
-                <Icon className="mt-2 mb-2 w-6 h-6 text-olive-700 flex-shrink-0" />
+                <Icon className="mt-2 mb-2 w-6 h-6 text-olive-500 flex-shrink-0" />
                 <h3 className="text-lg font-semibold text-white tracking-wide">
                   {step.title}.
                 </h3>

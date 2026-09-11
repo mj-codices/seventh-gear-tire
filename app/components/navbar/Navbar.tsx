@@ -500,7 +500,7 @@ export default function Navbar() {
               animate="open"
               exit="closed"
               variants={menuVariants}
-              className="fixed top-0 left-0 bottom-0 z-50 w-[80vw] sm:w-[90vw] bg-stone-950 border-r border-red-900 shadow-2xl flex flex-col justify-between"
+              className="fixed top-0 left-0 bottom-0 z-50 w-[80vw] sm:w-[90vw] bg-stone-950 border-r border-stone-800 shadow-2xl flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-start mb-5 h-20 lg:h-30 bg-white/90 pl-6 sm:pl-12 pr-8">

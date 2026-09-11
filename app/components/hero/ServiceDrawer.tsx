@@ -80,7 +80,7 @@ export default function ServiceDrawer({ isOpen, onClose }: ServiceDrawerProps) {
             onDragEnd={(_, info) => {
               if (info.offset.y > 100) onClose();
             }}
-            className="fixed bottom-0 left-0 right-0 z-50 pt-6 bg-stone-950 border-t rounded-t-lg border-stone-700 shadow-2xl lg:hidden max-h-[85vh] overflow-y-auto"
+            className="fixed bottom-0 left-0 right-0 z-50 pt-6 bg-stone-950 border-t rounded-t-lg border-stone-800 shadow-2xl lg:hidden max-h-[85vh] overflow-y-auto"
           >
             {/* Grab Handle for Drag-to-Dismiss */}
             <div className="w-12 h-1.5 bg-stone-800 rounded-full mx-auto mb-5" />

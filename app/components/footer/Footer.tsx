@@ -14,16 +14,20 @@ export default function Footer() {
               loading="eager"
               width={326}
               height={326}
-              className="w-[300px] sm:w-[500px] md:w-[600px] sm:h-auto object-contain"
+              className="w-[300px] sm:w-[500px] lg:w-[600px] sm:h-auto object-contain"
             />
           </div>
         </div>
 
-        <div className="max-w-5xl w-full mx-auto mt-5 md:mt-10 pt-8 border-t border-stone-900 text-xs md:text-base text-stone-400 font-sans">
-          <p className="text-center">
-            © 2026 7th Gear Tire Works. All rights reserved.
-          </p>
-          {/* <p className="tracking-tight">Design by MW</p> */}
+        {/* FULL-WIDTH BORDER WRAPPER */}
+        <div className="w-full border-t border-stone-900 mt-5 md:mt-10 pt-8">
+          {/* INNER CONSTRAINED CONTENT */}
+          <div className="max-w-5xl w-full mx-auto px-4 text-xs md:text-base text-stone-400 font-sans">
+            <p className="text-center">
+              © 2026 7th Gear Tire Works. All rights reserved.
+            </p>
+            {/* <p className="tracking-tight">Design by MW</p> */}
+          </div>
         </div>
       </footer>
     </div>

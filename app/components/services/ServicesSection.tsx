@@ -4,23 +4,23 @@ import Image from "next/image";
 
 export default function Services() {
   return (
-    <section className="relative border-t border-stone-900 bg-stone-950 px-10.5 sm:px-18 md:px-15 lg:px-20 xl:px-33 pt-15 md:pt-30 pb-20 md:pb-20 xl:pb-35 space-y-10 md:space-y-15 z-10 drop-shadow-xl lg:drop-shadow-4xl">
+    <section className="relative border-t border-stone-900 bg-stone-950 px-10.5 sm:px-18 md:px-20 lg:px-0 lg:pl-24 lg:pr-10 xl:px-33 pt-15 md:pt-30 pb-20 md:pb-30 xl:pb-35 space-y-10 md:space-y-15 z-10 drop-shadow-xl lg:drop-shadow-4xl">
       {/* Section Header */}
       <div>
-        <h2 className="text-base uppercase tracking-[.3rem] text-stone-400 md:text-4xl">
+        <h2 className="text-base md:text-[27px] uppercase tracking-[.3rem] text-stone-400 ">
           Services
         </h2>
-        <p className="mt-5 font-display text-[25px] md:text-[40px] lg:text-[50px] text-white/90 leading-8 pb-2 md:pb-6 lg:pb-12 max-w-xs md:max-w-lg lg:max-w-2xl xl:max-w-3xl">
+        <p className="mt-5 font-display text-[25px] text-white/90 leading-8 lg:leading-10 pb-2 md:pb-5 max-w-xs">
           Uptime solutions engineered for your fleet.
         </p>
       </div>
 
       {/* Services Stack */}
-      <div className="flex flex-col space-y-12 lg:space-y-0 lg:grid lg:grid-cols-[auto_1fr] lg:gap-x-16 xl:gap-x-20 lg:items-start">
+      <div className="flex flex-col space-y-12 lg:space-y-0 lg:grid lg:grid-cols-[auto_1fr] lg:gap-x-18 xl:gap-x-30 lg:items-start">
         {/* LEFT COLUMN: Image Wrapper */}
         <div className="relative flex flex-col w-full max-w-xs md:max-w-lg lg:max-w-[520px] mr-3.5 pr-3 pb-3 lg:mr-0 lg:pr-0">
           {/* Inner Layer */}
-          <div className="w-full max-w-xs md:max-w-xl max-[400px]:h-50 h-60 md:h-84 lg:aspect-[5/4] rounded-xl overflow-hidden mb-2 relative after:absolute after:inset-0 after:bg-[radial-gradient(circle,rgba(0,0,0,0)_40%,rgba(0,0,0,0.7)_100%)] after:pointer-events-none after:z-10">
+          <div className="w-full max-w-xs md:max-w-md max-[400px]:h-50 h-60 md:h-84 lg:aspect-[5/4] rounded-xl overflow-hidden mb-2 relative after:absolute after:inset-0 after:bg-[radial-gradient(circle,rgba(0,0,0,0)_40%,rgba(0,0,0,0.7)_100%)] after:pointer-events-none after:z-10">
             <Image
               src="/services.jpeg"
               alt="Working on tire"
@@ -32,7 +32,7 @@ export default function Services() {
 
           {/* 3. The Top-Right SVG */}
           <svg
-            className="absolute -top-7.5 md:-top-12.5 -right-4 md:-right-6 lg:h-31 lg:w-31 lg:-right-8 lg:-top-8 w-30 h-30 md:w-45 md:h-45 text-stone-500/60 pointer-events-none"
+            className="absolute -top-7.5 md:-top-12.5 -right-4 md:right-6 lg:-right-11 lg:-top-12 w-30 h-30 md:w-45 md:h-45 text-stone-500/60 pointer-events-none"
             viewBox="0 0 100 100"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -82,15 +82,15 @@ export default function Services() {
 
         {/* RIGHT COLUMN: The Services Content Stack */}
 
-        <div className="flex flex-col space-y-10 lg:space-y-12 lg:justify-center lg:h-full">
+        <div className="flex flex-col space-y-10 md:space-y-12 lg:space-y-8 lg:justify-center lg:h-full">
           {/* Service Division 1: Distribution */}
           <Link href="/services/distribution" className="group block">
-            <div className="space-y-1 md:space-y-6">
-              <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-10 text-white/75 overflow-hidden">
+            <div className="space-y-1 md:space-y-6 lg:space-y-2">
+              <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/75 overflow-hidden lg:mr-5">
                 <span>Tire Distribution &amp; Fleet Sales</span>
                 <span
                   aria-hidden="true"
-                  className="absolute inset-0 text-white flex items-center whitespace-nowrap [clip-path:polygon(0_0,0_0,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] transition-[clip-path] duration-400 ease-in-out pointer-events-none select-none"
+                  className="absolute inset-0 block w-full text-white [clip-path:polygon(0_0,0_0,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] transition-[clip-path] duration-400 ease-in-out pointer-events-none select-none"
                 >
                   Tire Distribution &amp; Fleet Sales
                 </span>
@@ -103,7 +103,7 @@ export default function Services() {
               </p>
             </div>
 
-            <div className="ml-0.5 mt-4">
+            <div className="ml-0.5 mt-8 lg:mt-6">
               <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors duration-300 md:text-lg leading-8">
                 Explore Fleet Supply &amp;{" "}
                 <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
@@ -124,12 +124,12 @@ export default function Services() {
 
           {/* Service Division 2: Shop Service */}
           <Link href="/services/shop" className="group block">
-            <div className="space-y-1 md:space-y-6">
-              <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-8 text-white/75 overflow-hidden">
+            <div className="space-y-1 md:space-y-6 lg:space-y-2">
+              <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/75 overflow-hidden lg:mr-5">
                 <span>Shop Tire &amp; Light Mechanical Service</span>
                 <span
                   aria-hidden="true"
-                  className="absolute inset-0 text-white flex items-center whitespace-nowrap [clip-path:polygon(0_0,0_0,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] transition-[clip-path] duration-400 ease-in-out pointer-events-none select-none"
+                  className="absolute inset-0 block w-full text-white [clip-path:polygon(0_0,0_0,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] transition-[clip-path] duration-400 ease-in-out pointer-events-none select-none"
                 >
                   Shop Tire &amp; Light Mechanical Service
                 </span>
@@ -141,7 +141,7 @@ export default function Services() {
                 maintenance like oil, filters, and fluid services.
               </p>
             </div>
-            <div className="ml-0.5 mt-4">
+            <div className="ml-0.5 mt-8 lg:mt-6">
               <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors duration-300 md:text-lg leading-8">
                 View Shop Services <br /> &amp;{" "}
                 <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
@@ -162,12 +162,12 @@ export default function Services() {
 
           {/* Service Division 3: Mobile Service */}
           <Link href="/services/mobile" className="group block">
-            <div className="space-y-1 md:space-y-6">
-              <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-8 text-white/75 overflow-hidden">
+            <div className="space-y-1 md:space-y-6 lg:space-y-2">
+              <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/75 overflow-hidden lg:mr-5">
                 <span>Scheduled Mobile Fleet Installation</span>
                 <span
                   aria-hidden="true"
-                  className="absolute inset-0 text-white flex items-center whitespace-nowrap [clip-path:polygon(0_0,0_0,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] transition-[clip-path] duration-400 ease-in-out pointer-events-none select-none"
+                  className="absolute inset-0 block w-full text-white [clip-path:polygon(0_0,0_0,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] transition-[clip-path] duration-400 ease-in-out pointer-events-none select-none"
                 >
                   Scheduled Mobile Fleet Installation
                 </span>
@@ -180,7 +180,7 @@ export default function Services() {
               </p>
             </div>
 
-            <div className="ml-0.5 mt-4 flex items-center gap-1.5">
+            <div className="ml-0.5 mt-8 lg:mt-6 flex items-center gap-1.5">
               <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors duration-300 md:text-lg">
                 View On-site Capabilities
               </p>

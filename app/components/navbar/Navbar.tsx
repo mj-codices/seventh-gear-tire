@@ -344,7 +344,7 @@ export default function Navbar() {
                   {/* LINK 2: WHO WE ARE */}
                   <div
                     ref={aboutDropdownRef}
-                    className="relative flex items-center h-full"
+                    className="relative flex items-center h-full lg:mr-4"
                     onMouseEnter={() => {
                       if (window.matchMedia("(hover: hover)").matches) {
                         setIsAboutHovered(true);
@@ -437,14 +437,14 @@ export default function Navbar() {
             {isMounted && isServiceRoute ? (
               <Link
                 href="/"
-                className="inline-block bg-transparent text-white font-display text-sm font-bold uppercase tracking-widest px-5 py-3 sm:px-6 sm:py-3.5 rounded border-2 border-stone-700 hover:border-red-800 hover:bg-red-800 transition-all duration-300 shadow-md whitespace-nowrap mt-3 -ml-40"
+                className="inline-block bg-transparent text-white font-display text-sm font-bold uppercase tracking-widest px-5 py-3 sm:px-6 sm:py-3.5 rounded border-2 border-stone-700 hover:border-red-900 hover:bg-red-900 transition-all duration-300 shadow-md whitespace-nowrap mt-3 -ml-40"
               >
                 Back To Home
               </Link>
             ) : (
               <Link
                 href="/contact"
-                className="hidden lg:inline-block bg-transparent text-white font-display text-sm font-bold uppercase tracking-widest px-6 py-3.5 ml-5 rounded border-2 border-red-800 hover:bg-red-800 active:bg-red-900 transition-all duration-300 shadow-md hover:shadow-red-900/20 whitespace-nowrap"
+                className="hidden lg:inline-block bg-transparent text-white font-display text-sm font-bold uppercase tracking-widest px-6 py-3.5 ml-5 rounded border-2 border-red-900 hover:bg-red-900 active:bg-red-900 transition-all duration-300 shadow-md hover:shadow-red-900/20 whitespace-nowrap"
               >
                 Request a Quote
               </Link>

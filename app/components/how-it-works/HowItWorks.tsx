@@ -34,19 +34,19 @@ const steps: Step[] = [
 
 export const HowItWorks: React.FC = () => {
   return (
-    <section className="w-full py-14 px-10 sm:px-17 max-w-6xl mx-auto">
-      <div className="text-left mb-12">
-        <h2 className="text-base uppercase tracking-[.3rem] text-stone-400 md:text-4xl">
+    <section className="w-full py-14 md:py-20 px-10 sm:px-17 md:px-20 lg:px-24 xl:px-33">
+      <div className="text-left mb-12 md:mb-17">
+        <h2 className="text-base md:text-[27px] uppercase tracking-[.3rem] text-stone-400">
           How It Works
         </h2>
-        <h3 className="mt-5 font-display text-[25px] text-white/90 leading-8 max-w-xs">
+        <h3 className="mt-5 font-display text-[25px] text-white/90 leading-8 lg:leading-10 max-w-xs md:max-w-md">
           Three simple steps to direct tire delivery, shop appointments, or
           mobile installation.
         </h3>
       </div>
 
       {/* Timeline Wrapper */}
-      <div className="relative flex flex-col md:flex-row items-start justify-between gap-12 md:gap-4">
+      <div className="relative flex flex-col md:flex-row items-start justify-between gap-12 md:gap-6 w-full">
         {/* Mobile Vertical Red Connecting Line (Ends at 3rd bubble center) */}
         <div
           className="absolute left-[23px] top-6 h-[calc(100%-170px)] w-[2px] bg-red-900/90 md:hidden"
@@ -60,12 +60,14 @@ export const HowItWorks: React.FC = () => {
           return (
             <div
               key={step.id}
-              className="relative flex flex-row md:flex-col items-start md:items-center flex-1 z-10 w-full"
+              /* Changed md:items-center to md:items-start to left-align components */
+              className="relative flex flex-row md:flex-col items-start flex-1 z-10 w-full"
             >
               {/* Desktop Horizontal Red Connecting Line */}
               {!isLast && (
                 <div
-                  className="hidden md:block absolute top-[24px] left-[calc(50%+24px)] w-[calc(100%-24px)] h-[2px] bg-red-600 -z-10"
+                  /* Anchors at center of 48px badge (24px) and fills full step width */
+                  className="hidden md:block absolute top-[24px] left-[24px] w-full h-[2px] bg-red-600 -z-10"
                   aria-hidden="true"
                 />
               )}
@@ -76,18 +78,19 @@ export const HowItWorks: React.FC = () => {
               </div>
 
               {/* Text / Blurb Content with Icon */}
-              <div className="ml-6 md:ml-0 md:mt-6 md:text-center flex-1">
-                <Icon className="mt-2 mb-2 w-6 h-6 text-olive-500 flex-shrink-0" />
+              {/* Changed md:items-center/md:text-center to left-aligned rules */}
+              <div className="ml-6 md:ml-0 md:mt-8 md:text-left flex-1 w-full flex flex-col md:items-start">
+                <Icon className="mt-2 mb-2 w-6 h-6 md:w-8 md:h-8 text-olive-500 flex-shrink-0" />
                 <h3 className="text-lg font-semibold text-white tracking-wide">
                   {step.title}.
                 </h3>
-                <p className="mt-3 text-sm text-neutral-400 leading-relaxed max-w-xs md:mx-auto">
+                <p className="mt-3 text-sm text-neutral-400 leading-relaxed max-w-xs md:max-w-none md:pr-4">
                   {step.description}
                 </p>
 
                 {/* Subtle Action Link for Step 1 */}
                 {step.id === 1 && (
-                  <div className="">
+                  <div className="mt-2">
                     <button className="inline-flex items-center text-sm text-neutral-400 underline decoration-dotted decoration-stone-500 underline-offset-5 hover:text-white hover:decoration-stone-300 transition-colors">
                       <span>Book a service here.</span>
                     </button>

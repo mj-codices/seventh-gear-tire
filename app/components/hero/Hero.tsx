@@ -13,7 +13,7 @@ export default function Hero() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
-    <section className="relative h-svh w-full flex flex-col justify-center p-8 sm:p-14 md:p-16 lg:p-20 xl:p-30 bg-stone-900 overflow-hidden">
+    <section className="relative h-svh w-full flex flex-col justify-center p-8 sm:p-14 md:p-16 lg:p-19 xl:p-30 bg-stone-900 overflow-hidden">
       {/* Background Video with Overlay */}
       <div className="absolute inset-0 z-0 hero-video-container">
         <video
@@ -62,7 +62,7 @@ export default function Hero() {
           <div className="hidden lg:flex flex-row items-center gap-3 w-full max-w-xl pl-1">
             {/* Button 1: Fleet & Distribution */}
              <Link href="/contact?service=fleet">
-              <button className="group relative w-full max-w-sm py-5 px-22 bg-transparent border-2 border-white text-white font-bold rounded-md uppercase font-extrabold tracking-tight text-xs sm:text-sm transition duration-300 hover:bg-red-800 hover:border-red-800 cursor-pointer overflow-hidden">
+              <button className="group relative w-full max-w-sm py-5 px-22 bg-transparent border-2 border-white text-white font-bold rounded-md uppercase font-extrabold tracking-tight text-xs sm:text-sm transition duration-300 hover:bg-red-900 hover:border-red-900 cursor-pointer overflow-hidden">
                 {/* Default Idle Text */}
                 <span className="absolute inset-0 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-full">
                   Fleet & Distribution
@@ -77,7 +77,7 @@ export default function Hero() {
 
             {/* Button 2: Shop Services */}
             <Link href="/contact?service=shop" className="">
-              <button className="group relative w-full py-5 px-20 bg-transparent border-2 border-white text-white font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm transition duration-300 hover:bg-red-800 hover:border-red-800 cursor-pointer overflow-hidden">
+              <button className="group relative w-full py-5 px-20 bg-transparent border-2 border-white text-white font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm transition duration-300 hover:bg-red-900 hover:border-red-900 cursor-pointer overflow-hidden">
                 <span className="absolute inset-0 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-full">
                   Shop Services
                 </span>
@@ -90,7 +90,7 @@ export default function Hero() {
 
             {/* Button 3: Mobile Services */}
             <Link href="/contact?service=mobile" className="">
-              <button className="group relative w-full py-5 px-21 bg-transparent border-2 border-white text-white font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm transition duration-300 hover:bg-red-800 hover:border-red-800 cursor-pointer overflow-hidden">
+              <button className="group relative w-full py-5 px-21 bg-transparent border-2 border-white text-white font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm transition duration-300 hover:bg-red-900 hover:border-red-900 cursor-pointer overflow-hidden">
                 <span className="absolute inset-0 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-full">
                   Mobile Services
                 </span>

@@ -61,16 +61,17 @@ export default function ServiceArea() {
   const [activeZone, setActiveZone] = useState<string | null>("primary");
 
   return (
-    <section className="relative w-full bg-stone-950 py-15 overflow-hidden">
+    <section className="relative w-full bg-stone-950 py-15 md:pt-25 md:pb-15 overflow-hidden">
       {/* Background ambient accents */}
 
-      <div className="container relative mx-auto px-10.5 sm:px-13 lg:px-8 max-w-7xl">
+      {/* Changed mx-auto max-w-7xl to w-full xl:px-33 to keep margins static on large screens */}
+      <div className="relative w-full px-10.5 sm:px-17 md:px-21 lg:px-24 xl:px-33">
         {/* Section Header */}
-        <div className="max-w-xs mb-8">
-          <h2 className="text-base uppercase tracking-[.3rem] text-stone-400 md:text-4xl">
+        <div className="max-w-xs mb-8 md:mb-12">
+          <h2 className="text-base md:text-[27px] uppercase tracking-[.3rem] text-stone-400">
             Coverage
           </h2>
-          <h3 className="mt-5 font-display text-[25px] leading-8 text-white/90">
+          <h3 className="mt-5 font-display text-[25px] leading-8 lg:leading-10 text-white/90">
             Serving the Greater Abilene Area.
           </h3>
         </div>
@@ -83,10 +84,10 @@ export default function ServiceArea() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-7 bg-stone-900/20 rounded-2xl p-2.5 lg:p-4 border border-stone-900 flex flex-col group max-w-md"
+            className="lg:col-span-7 bg-stone-900/20 rounded-2xl p-2.5 lg:p-4 border border-stone-900 flex flex-col group max-w-md md:max-w-lg lg:max-w-2xl"
           >
             {/* INNER MAP CONTAINER */}
-            <div className="relative w-full h-full min-h-[250px] lg:min-h-[480px] rounded-xl overflow-hidden flex flex-col justify-between">
+            <div className="relative w-full h-full min-h-[250px] md:min-h-[350px] lg:min-h-[500px] rounded-xl overflow-hidden flex flex-col justify-between">
               {/* Full-bleed background image */}
               <Image
                 src="/map.jpg"
@@ -94,7 +95,7 @@ export default function ServiceArea() {
                 fill
                 loading="eager"
                 sizes="(max-width: 1024px) 100vw, 58vw"
-                className="object-cover object-center z-0 transition-transform duration-500 group-hover:scale-105"
+                className="object-cover object-center z-0"
               />
               {/* Dark overlay gradient to maintain text contrast */}
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/30 to-stone-950/60 z-10 pointer-events-none" />
@@ -107,14 +108,14 @@ export default function ServiceArea() {
           </motion.div>
 
           {/* REGIONAL DATA & CARD SELECTOR (RIGHT) */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            <p className="mt-10 lg:mt-0 ml-2 text-[22px] text-white/90 font-display">
+          <div className="lg:col-span-5 flex flex-col justify-center lg:ml-8 xl:pr-10">
+            <p className="mt-10 md:mt-15 lg:-mt-30 ml-2 text-[23px] text-white/90 font-display">
               Where your fleet works, we deliver.
             </p>
 
             {/* Property Types Split Bullet List */}
-            <div className="ml-6 mt-6 font-sans">
-              <ul className="flex flex-col gap-y-4 font-bold text-xs md:text-base text-white/90">
+            <div className="ml-3 lg:ml-6 mt-6 font-sans">
+              <ul className="flex flex-col gap-y-4 md:gap-y-6 font-bold text-xs md:text-base text-white/90">
                 <li className="flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-red-700 shrink-0" />
                   <span>Fleet yards &amp; vehicle staging facilities</span>
@@ -141,9 +142,9 @@ export default function ServiceArea() {
         </div>
 
         {/* SERVICE AREA DISCLAIMER CARD (BOTTOM) */}
-        <div className="mt-8 border-t border-stone-900 pt-8 flex flex-col gap-6 font-sans text-xs text-stone-500">
-          <div className="flex items-start gap-3">
-            <Info className="w-4 h-4 text-olive-500 flex-shrink-0 mt-0.5" />
+        <div className="mt-8 md:mt-12 border-t border-stone-900 pt-8 md:pt-12 flex flex-col gap-6 font-sans text-xs md:text-sm lg:text-base text-stone-500 mr-15">
+          <div className="flex items-start gap-3 md:gap-6 max-w-2xl">
+            <Info className="w-4 h-4 md:w-6 md:h-6  text-olive-500 flex-shrink-0 mt-0.5" />
             <p>
               <span className="font-semibold text-stone-300">
                 Scheduled Service Scope:
@@ -154,8 +155,8 @@ export default function ServiceArea() {
             </p>
           </div>
 
-          <div className="flex items-start gap-3    ">
-            <Info className="w-4 h-4 text-olive-500 flex-shrink-0 mt-0.5" />
+          <div className="flex items-start gap-3 md:gap-6 max-w-2xl">
+            <Info className="w-4 h-4 md:w-6 md:h-6 text-olive-500 flex-shrink-0 mt-0.5" />
             <p>
               <span className="font-semibold text-stone-300">
                 Travel Fees & Rates:

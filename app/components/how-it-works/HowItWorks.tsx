@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { FileText, Calculator, Wrench } from "lucide-react";
 
 interface Step {
@@ -91,9 +92,14 @@ export const HowItWorks: React.FC = () => {
                 {/* Subtle Action Link for Step 1 */}
                 {step.id === 1 && (
                   <div className="mt-2">
-                    <button className="inline-flex items-center text-sm text-neutral-400 underline decoration-dotted decoration-stone-500 underline-offset-5 hover:text-white hover:decoration-stone-300 transition-colors">
-                      <span>Book a service here.</span>
-                    </button>
+                    <Link href="/contact">
+                      <button
+                        type="button"
+                        className="inline-flex items-center text-sm text-neutral-400 underline decoration-dotted decoration-stone-500 underline-offset-5 hover:text-white hover:decoration-stone-300 transition-colors cursor-pointer"
+                      >
+                        <span>Book a service here.</span>
+                      </button>
+                    </Link>
                   </div>
                 )}
               </div>

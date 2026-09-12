@@ -12,7 +12,7 @@ export default function ComingSoonServices() {
   };
 
   return (
-    <div className="min-h-[80vh] w-full flex items-center justify-center relative overflow-hidden bg-stone-900 pt-18">
+    <div className="min-h-[60vh] w-full flex items-center justify-center relative overflow-hidden bg-stone-900 mt-25">
       <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-900/40 to-transparent" />
       {/* Main Glassmorphic Container Card */}
       <motion.div

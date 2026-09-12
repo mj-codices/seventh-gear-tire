@@ -54,6 +54,7 @@ export function Step4ContactLocation({
             className="w-full px-4 py-3 bg-stone-950/50 border border-stone-800/80 rounded-lg text-sm text-stone-200 placeholder:text-stone-600 font-medium tracking-wide focus:outline-none focus:border-red-700 focus:bg-stone-950 focus:ring-1 focus:ring-red-600 transition-all duration-150"
           />
         </div>
+
         {/* Phone Input */}
         <div className="space-y-3 sm:col-span-1 sm:-mt-2">
           <label
@@ -73,7 +74,6 @@ export function Step4ContactLocation({
             pattern="[\+]?[0-9\s\-\(\)]+"
             title="Please enter a valid phone number using only numbers, spaces, dashes, or parentheses."
             onInput={(e) => {
-              // Strips out any character that is NOT a digit, space, dash, parenthesis, or plus sign
               e.currentTarget.value = e.currentTarget.value.replace(
                 /[^0-9\s\-\(\)\+]/g,
                 "",
@@ -83,6 +83,7 @@ export function Step4ContactLocation({
             className="w-full px-4 py-3 bg-stone-950/50 border border-stone-800/80 rounded-lg text-sm text-stone-200 placeholder:text-stone-600 font-medium tracking-wide focus:outline-none focus:border-red-700 focus:bg-stone-950 focus:ring-1 focus:ring-red-600 transition-all duration-150 font-mono"
           />
         </div>
+
         {/* Location Input with Map/GPS button */}
         <div className="space-y-3 sm:col-span-2">
           <div>
@@ -146,6 +147,62 @@ export function Step4ContactLocation({
             </button>
           </div>
         </div>
+
+        {/* SERVICE URGENCY / TIMING SELECTOR */}
+        <div className="space-y-3 sm:col-span-2 mt-2">
+          <label
+            htmlFor="service_urgency"
+            className="text-xs uppercase font-display font-bold text-white/60 tracking-wider block"
+          >
+            Service Urgency / Requested Timing{" "}
+            <span className="inline-block relative top-[4px] text-red-500 font-normal text-lg">
+              *
+            </span>
+          </label>
+
+          <div className="relative flex items-center">
+            <select
+              id="service_urgency"
+              name="service_urgency"
+              defaultValue=""
+              required
+              className="w-full appearance-none pl-4 pr-10 py-3 bg-stone-950/50 border border-stone-800/80 rounded-lg text-sm text-stone-200 font-medium tracking-wide focus:outline-none focus:border-red-700 focus:bg-stone-950 focus:ring-1 focus:ring-red-600 transition-all duration-150 cursor-pointer invalid:text-stone-600"
+            >
+              <option
+                value=""
+                disabled
+                hidden
+                className="bg-stone-950 text-stone-200"
+              >
+                -- Select Service Timeline / Urgency --
+              </option>
+              <option value="today" className="bg-stone-950 text-stone-200">
+                Today (Within 2–4 Hours)
+              </option>
+              <option value="scheduled" className="bg-stone-950 text-stone-200">
+                Scheduled Maintenance / Next Available
+              </option>
+            </select>
+
+            {/* Custom Styled Chevron */}
+            <div className="pointer-events-none absolute right-3 flex items-center text-stone-500">
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
         {/* Company / Fleet Name */}
         <div className="space-y-4 sm:col-span-2 mt-2">
           <div className="flex items-center justify-between">
@@ -164,6 +221,7 @@ export function Step4ContactLocation({
             className="w-full px-4 py-3 bg-stone-950/50 border border-stone-800/80 rounded-lg text-sm text-stone-200 placeholder:text-stone-600 font-medium tracking-wide focus:outline-none focus:border-red-700 focus:bg-stone-950 focus:ring-1 focus:ring-red-600 transition-all duration-150"
           />
         </div>
+
         {/* Special Instructions */}
         <div className="space-y-4.5 sm:col-span-2 mt-2">
           <div className="flex items-center justify-between">
@@ -186,6 +244,28 @@ export function Step4ContactLocation({
 
       {/* Dispatch Notice & Action Button */}
       <div className="pt-4 space-y-6">
+        {/* OPERATIONAL & MOBILE SERVICE DISCLAIMERS */}
+        <div>
+          <div className="p-3 bg-stone-950/60 border border-stone-800/60 rounded-lg text-[11px] text-stone-500 leading-relaxed font-sans space-y-1.5">
+            <p>
+              <strong className="text-stone-400 font-medium">
+                Scheduled Mobile Scope:
+              </strong>{" "}
+              Mobile services are scheduled on-site installations across our
+              regional coverage area and do not constitute emergency highway
+              roadside response.
+            </p>
+            <p>
+              <strong className="text-stone-400 font-medium">
+                Service Conditions & Rates:
+              </strong>{" "}
+              Service is subject to inventory availability, safe site working
+              conditions, vehicle condition, and travel-zone fees. Final rates
+              and availability are fully confirmed by 7th Gear Tire Works prior
+              to dispatch.
+            </p>
+          </div>
+        </div>
         <div className="p-3 bg-stone-900/80 border border-stone-800 rounded-lg flex items-start gap-3">
           <svg
             className="w-7 h-7 text-red-700 shrink-0 mt-0.5"
@@ -205,14 +285,14 @@ export function Step4ContactLocation({
               Immediate Callback:
             </strong>{" "}
             Submitting this form alerts dispatch. Expect a quick call to confirm
-            exact ETA and inventory before rolling out.
+            exact ETA, inventory, and final pricing before rolling out.
           </p>
         </div>
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-4 px-6 bg-red-800 active:bg-red-900 active:scale-[0.97] text-white font-display font-bold text-sm sm:text-base uppercase tracking-wider rounded-lg shadow-lg shadow-red-950/30 flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 disabled:active:bg-red-800"
+          className="w-full py-4 px-6 bg-red-900 active:bg-red-900 active:scale-[0.97] text-white font-display font-bold text-sm sm:text-base uppercase tracking-wider rounded-lg shadow-lg shadow-red-950/30 flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 disabled:active:bg-red-800"
         >
           <span>
             {isSubmitting ? "Submitting Request..." : submitButtonText}

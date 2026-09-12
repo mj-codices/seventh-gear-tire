@@ -36,6 +36,10 @@ interface ContactFormProps {
   selectedTireType: string;
   setSelectedTireType: Dispatch<SetStateAction<string>>;
 
+  // QUANTITY PROPS
+  tireQuantity?: string;
+  setTireQuantity?: Dispatch<SetStateAction<string>>;
+
   // PHOTO PROPS
   photoFile?: File | null;
   handlePhotoChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -46,10 +50,6 @@ interface ContactFormProps {
   isGpsCaptured: boolean;
   setIsGpsCaptured: Dispatch<SetStateAction<boolean>>;
   handleGetLocation: () => void;
-
-  onsiteOptions: OptionItem[];
-  vehicleTypes: VehicleOption[];
-  tireTypeOptions: OptionItem[];
 
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   isSubmitting: boolean;
@@ -69,6 +69,8 @@ export function ContactForm({
   setTireSize,
   selectedTireType,
   setSelectedTireType,
+  tireQuantity,
+  setTireQuantity,
   photoFile,
   handlePhotoChange,
   locationValue,
@@ -77,9 +79,6 @@ export function ContactForm({
   isGpsCaptured,
   setIsGpsCaptured,
   handleGetLocation,
-  onsiteOptions,
-  vehicleTypes,
-  tireTypeOptions,
   handleSubmit,
   isSubmitting,
   isSubmitted,
@@ -90,19 +89,19 @@ export function ContactForm({
   const [honeypot, setHoneypot] = useState("");
 
   // 2. WRAP SUBMIT TO CHECK HONEYPOT BEFORE INVOKING PARENT'S handleSubmit
-const onFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+  const onFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  const formData = new FormData(e.currentTarget);
-  const botField = formData.get("website_url") as string;
+    const formData = new FormData(e.currentTarget);
+    const botField = formData.get("website_url") as string;
 
-  if (botField || honeypot) {
-    console.warn("🤖 Bot submission detected and blocked via Honeypot.");
-    return;
-  }
+    if (botField || honeypot) {
+      console.warn("🤖 Bot submission detected and blocked via Honeypot.");
+      return;
+    }
 
-  await handleSubmit(e);
-};
+    await handleSubmit(e);
+  };
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -162,52 +161,51 @@ const onFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
                   setSelectedService={setSelectedService}
                 />
 
-                {/* STEP 2: EXTENDED CLICK LIST */}
-                {selectedService === "onsite_service" && (
+                {/* STEP 2: Renders dynamically based on selectedService */}
+                {Boolean(selectedService) && (
                   <Step2OnsiteDetails
+                    selectedService={selectedService}
                     selectedOnsiteOption={selectedOnsiteOption}
                     setSelectedOnsiteOption={setSelectedOnsiteOption}
                     selectedVehicleType={selectedVehicleType}
                     setSelectedVehicleType={setSelectedVehicleType}
-                    onsiteOptions={onsiteOptions}
-                    vehicleTypes={vehicleTypes}
                   />
                 )}
 
                 {/* STEP 3 & STEP 4 */}
                 <AnimatePresence>
-                  {selectedService === "onsite_service" &&
-                    selectedOnsiteOption !== "" && (
-                      <motion.div
-                        key="steps-3-and-4"
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        className="space-y-10 mt-8"
-                      >
-                        {/* PASSED DOWN TO STEP 3 TIRE INFO */}
-                        <Step3TireInfo
-                          tireSize={tireSize}
-                          setTireSize={setTireSize}
-                          selectedTireType={selectedTireType}
-                          setSelectedTireType={setSelectedTireType}
-                          tireTypeOptions={tireTypeOptions}
-                          photoFile={photoFile}
-                          handlePhotoChange={handlePhotoChange}
-                        />
+                  {Boolean(selectedService) && selectedOnsiteOption !== "" && (
+                    <motion.div
+                      key="steps-3-and-4"
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      className="space-y-10 mt-8"
+                    >
+                      <Step3TireInfo
+                        selectedService={selectedService}
+                        tireSize={tireSize}
+                        setTireSize={setTireSize}
+                        selectedTireType={selectedTireType}
+                        setSelectedTireType={setSelectedTireType}
+                        tireQuantity={tireQuantity}
+                        setTireQuantity={setTireQuantity}
+                        photoFile={photoFile}
+                        handlePhotoChange={handlePhotoChange}
+                      />
 
-                        <Step4ContactLocation
-                          locationValue={locationValue}
-                          setLocationValue={setLocationValue}
-                          isGpsCaptured={isGpsCaptured}
-                          setIsGpsCaptured={setIsGpsCaptured}
-                          isLocating={isLocating}
-                          handleGetLocation={handleGetLocation}
-                          isSubmitting={isSubmitting}
-                        />
-                      </motion.div>
-                    )}
+                      <Step4ContactLocation
+                        locationValue={locationValue}
+                        setLocationValue={setLocationValue}
+                        isGpsCaptured={isGpsCaptured}
+                        setIsGpsCaptured={setIsGpsCaptured}
+                        isLocating={isLocating}
+                        handleGetLocation={handleGetLocation}
+                        isSubmitting={isSubmitting}
+                      />
+                    </motion.div>
+                  )}
                 </AnimatePresence>
               </div>
             </motion.form>

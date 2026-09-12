@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
-import { useState, FormEvent, ChangeEvent } from "react"; // 👈 1. Added ChangeEvent import
+import { useSearchParams } from "next/navigation";
+import { useState, FormEvent, ChangeEvent, useEffect, Suspense } from "react";
 import { ContactForm } from "../components/contact/ContactForm";
 import {
   ONSITE_OPTIONS,
@@ -8,16 +9,61 @@ import {
   TIRE_TYPE_OPTIONS,
 } from "../config/contactOptions";
 
-export default function ContactPage() {
-  // Step 1 & 2 States
-  const [selectedService, setSelectedService] = useState<string>("");
-  const [selectedOnsiteOption, setSelectedOnsiteOption] = useState<string>("");
+function ContactPageContent() {
+  const searchParams = useSearchParams();
+  const serviceParam = searchParams.get("service");
+  const onsiteParam = searchParams.get("onsite");
+
+  // Helper to convert query string into Step 1 internal ID
+const getInitialService = (param: string | null) => {
+  if (!param) return "";
+  switch (param.toLowerCase()) {
+    case "curation_sourcing":
+    case "fleet":
+    case "distribution":
+      return "curation_sourcing";
+    case "shop_service":
+    case "shop":
+      return "shop_service"; // ✅ Fixed: Return shop_service
+    case "onsite_service":
+    case "mobile":
+      return "onsite_service";
+    default:
+      return param;
+  }
+};
+
+  // Helper to validate and convert query string into Step 2 internal ID
+  const getInitialOnsite = (param: string | null) => {
+    if (!param) return "";
+    const isValid = ONSITE_OPTIONS.some((option) => option.id === param);
+    return isValid ? param : "";
+  };
+
+  // Step 1 & Step 2 States initialized directly from URL params
+  const [selectedService, setSelectedService] = useState<string>(() =>
+    getInitialService(serviceParam),
+  );
+  const [selectedOnsiteOption, setSelectedOnsiteOption] = useState<string>(() =>
+    getInitialOnsite(onsiteParam),
+  );
   const [selectedVehicleType, setSelectedVehicleType] = useState<string>("");
+
+  // Sync state if user switches links/params without re-mounting
+  useEffect(() => {
+    if (serviceParam) {
+      setSelectedService(getInitialService(serviceParam));
+    }
+    if (onsiteParam) {
+      setSelectedOnsiteOption(getInitialOnsite(onsiteParam));
+    }
+  }, [serviceParam, onsiteParam]);
 
   // Step 3 States
   const [tireSize, setTireSize] = useState<string>("");
   const [selectedTireType, setSelectedTireType] = useState<string>("");
-  const [photoFile, setPhotoFile] = useState<File | null>(null); // 👈 2. ADDED PHOTO STATE
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [tireQuantity, setTireQuantity] = useState("1");
 
   // Location States
   const [locationValue, setLocationValue] = useState<string>("");
@@ -29,7 +75,6 @@ export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [submittedName, setSubmittedName] = useState<string>("");
 
-  // 👈 3. ADDED PHOTO CHANGE HANDLER
   const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     setPhotoFile(file);
@@ -65,6 +110,7 @@ export default function ContactPage() {
       vehicleType: selectedVehicleType,
       tireInfo: {
         size: tireSize || "Not specified",
+        quantity: tireQuantity,
         position: selectedTireType || "Not specified",
         photoFileName: photoFile ? photoFile.name : "No photo attached",
         photoSizeMB: photoFile
@@ -102,7 +148,7 @@ export default function ContactPage() {
     setSelectedVehicleType("");
     setTireSize("");
     setSelectedTireType("");
-    setPhotoFile(null); // 👈 4. RESET PHOTO ON FORM RESET
+    setPhotoFile(null);
     setLocationValue("");
     setIsGpsCaptured(false);
     setSubmittedName("");
@@ -160,10 +206,11 @@ export default function ContactPage() {
         width={1920}
         height={500}
         priority
-        className="absolute top-0 inset-x-0 w-full h-[500px] object-cover object-[49%_center] z-0 opacity-70  w-auto"
+        style={{ height: "auto" }}
+        className="absolute top-0 inset-x-0 w-full max-h-[500px] object-cover object-[49%_center] z-0 opacity-70"
         unoptimized
       />
-   
+
       {/* Overlay */}
       <div
         className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-stone-950/20 via-stone-950/70 to-stone-950 pointer-events-none z-0"
@@ -208,9 +255,6 @@ export default function ContactPage() {
           isGpsCaptured={isGpsCaptured}
           setIsGpsCaptured={setIsGpsCaptured}
           handleGetLocation={handleGetLocation}
-          onsiteOptions={ONSITE_OPTIONS}
-          vehicleTypes={VEHICLE_TYPES}
-          tireTypeOptions={TIRE_TYPE_OPTIONS}
           handleSubmit={handleSubmit}
           isSubmitting={isSubmitting}
           isSubmitted={isSubmitted}
@@ -218,8 +262,19 @@ export default function ContactPage() {
           handleResetForm={handleResetForm}
           photoFile={photoFile}
           handlePhotoChange={handlePhotoChange}
+          tireQuantity={tireQuantity}
+          setTireQuantity={setTireQuantity}
         />
       </div>
     </section>
+  );
+}
+
+// Default export wrapped in Suspense boundary for Next.js App Router
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-stone-950" />}>
+      <ContactPageContent />
+    </Suspense>
   );
 }

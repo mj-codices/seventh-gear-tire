@@ -270,7 +270,7 @@ export default function Navbar() {
                             href="/services/tires"
                             className="group/link flex items-center gap-8 px-3 py-5.5 text-sm text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors border-b border-stone-800"
                           >
-                            <span className="text-stone-500 group-hover/link:text-red-700 transition-colors duration-200 flex-shrink-0 -mt-10">
+                            <span className="text-stone-500 group-hover/link:text-red-800 transition-colors duration-200 flex-shrink-0 -mt-10">
                               <Truck2 />
                             </span>
 
@@ -291,7 +291,7 @@ export default function Navbar() {
                             href="/services/shop"
                             className="group/link flex items-center gap-[2.3rem] px-5 py-5.5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors border-b border-stone-800"
                           >
-                            <span className="text-stone-500 group-hover/link:text-red-700 transition-colors duration-200 flex-shrink-0 -mt-7 translate-x-1.5">
+                            <span className="text-stone-500 group-hover/link:text-red-800 transition-colors duration-200 flex-shrink-0 -mt-7 translate-x-1.5">
                               <TireServiceIcon />
                               
                             </span>
@@ -539,7 +539,7 @@ export default function Navbar() {
                               className="group/mobile-link flex items-center justify-between py-5 pl-8 sm:pl-16 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left"
                             >
                               <div className="max-[500px]:ml-0 ml-7 flex items-center gap-6">
-                                <span className="text-red-800 group-hover/mobile-link:text-red-700 transition-colors duration-200 shrink-0 -mt-5 sm:-mt-6">
+                                <span className="text-red-900 group-hover/mobile-link:text-red-800 transition-colors duration-200 shrink-0 -mt-5 sm:-mt-6">
                                   <Truck2 />
                                 </span>
                                 <div className="flex flex-col">
@@ -564,7 +564,7 @@ export default function Navbar() {
                               className="group/mobile-link flex items-center justify-between py-5 pl-8 sm:pl-16 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left"
                             >
                               <div className="max-[500px]:ml-0 ml-7 flex items-center gap-8.5">
-                                <span className="text-red-800 group-hover/mobile-link:text-red-700 transition-colors duration-200 shrink-0 -mt-2 translate-x-2">
+                                <span className="text-red-900 group-hover/mobile-link:text-red-700 transition-colors duration-200 shrink-0 -mt-2 translate-x-2">
                                   <TireServiceIcon />
                                 </span>
                                 <div className="flex flex-col">

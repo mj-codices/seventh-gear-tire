@@ -19,7 +19,7 @@ const services = [
     title: "Tire Distribution & Fleet Sales",
     href: "/contact?service=fleet",
     icon: (
-      <NavTruck className="w-14 h-14 sm:w-20 sm:h-20 md:h-20 sm:w-20 -mt-9.5 -ml-1 text-red-800/90" />
+      <NavTruck className="w-14 h-14 sm:w-20 sm:h-20 md:h-20 sm:w-20 -mt-9.5 -ml-1 text-red-900" />
     ),
     desc: "Commercial fleet supply, tires, and scheduled delivery.",
   },
@@ -27,7 +27,7 @@ const services = [
     title: "Shop Tire & Light Mechanical",
     href: "/contact?service=shop",
     icon: (
-      <TireServiceIcon className="w-12 h-12 sm:w-18 sm:h-18 md:w-18 md:h-18 -mt-7 ml-1 text-red-800/90" />
+      <TireServiceIcon className="w-12 h-12 sm:w-18 sm:h-18 md:w-18 md:h-18 -mt-7 ml-1 text-red-900" />
     ),
     desc: "In-shop mounting, balancing, and light maintenance.",
   },
@@ -35,7 +35,7 @@ const services = [
     title: "Scheduled Mobile Fleet Installation",
     href: "/contact?service=mobile",
     icon: (
-      <TireAndClock className="w-13 h-13 sm:w-19 sm:h-19 -mt-10 [&_.icon-face]:!fill-red-800/90 [&_.icon-bg-accent]:!fill-stone-900" />
+      <TireAndClock className="w-13 h-13 sm:w-19 sm:h-19 -mt-10 [&_.icon-face]:!fill-red-900 [&_.icon-bg-accent]:!fill-stone-900" />
     ),
     desc: "On-site planned service for farms, equipment, and jobsites.",
   },

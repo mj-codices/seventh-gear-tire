@@ -29,7 +29,7 @@ export default function Hero() {
       {/* Content Stack */}
       <div className="relative z-10 w-full max-w-2xl space-y-5 lg:space-y-0 mb-10 max-[380px]:mt-20 mt-30">
         <h1 className="font-display text-[50px] lg:text-7xl font-extrabold tracking-wider text-white/80">
-          <span className="block text-red-700 leading-12 lg:leading-22">
+          <span className="block text-red-800 leading-12 lg:leading-22">
             Commercial Tires.
           </span>
 

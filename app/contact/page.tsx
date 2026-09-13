@@ -15,23 +15,23 @@ function ContactPageContent() {
   const onsiteParam = searchParams.get("onsite");
 
   // Helper to convert query string into Step 1 internal ID
-const getInitialService = (param: string | null) => {
-  if (!param) return "";
-  switch (param.toLowerCase()) {
-    case "curation_sourcing":
-    case "fleet":
-    case "distribution":
-      return "curation_sourcing";
-    case "shop_service":
-    case "shop":
-      return "shop_service"; // ✅ Fixed: Return shop_service
-    case "onsite_service":
-    case "mobile":
-      return "onsite_service";
-    default:
-      return param;
-  }
-};
+  const getInitialService = (param: string | null) => {
+    if (!param) return "";
+    switch (param.toLowerCase()) {
+      case "curation_sourcing":
+      case "fleet":
+      case "distribution":
+        return "curation_sourcing";
+      case "shop_service":
+      case "shop":
+        return "shop_service"; // ✅ Fixed: Return shop_service
+      case "onsite_service":
+      case "mobile":
+        return "onsite_service";
+      default:
+        return param;
+    }
+  };
 
   // Helper to validate and convert query string into Step 2 internal ID
   const getInitialOnsite = (param: string | null) => {
@@ -199,23 +199,22 @@ const getInitialService = (param: string | null) => {
 
   return (
     <section className="relative min-h-screen bg-stone-950 text-stone-100 pt-32 sm:pt-40 md:pt-50 px-9 lg:pt-45 pb-10">
-      {/* Background Image */}
-      <Image
-        src="/contact_main.png"
-        alt="Commercial tire service on Texas highway"
-        width={1920}
-        height={500}
-        priority
-        style={{ height: "auto" }}
-        className="absolute top-0 inset-x-0 w-full max-h-[500px] object-cover object-[49%_center] z-0 opacity-70"
-        unoptimized
-      />
-
-      {/* Overlay */}
-      <div
-        className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-stone-950/20 via-stone-950/70 to-stone-950 pointer-events-none z-0"
-        aria-hidden="true"
-      />
+      {/* Background Image and Gradient Container */}
+      <div className="absolute top-0 inset-x-0 h-[500px] pointer-events-none overflow-hidden z-0">
+        <Image
+          src="/contact_main.png"
+          alt="Commercial tire service on Texas highway"
+          fill
+          priority
+          className="w-full h-full object-cover object-[49%_center] opacity-70"
+          unoptimized
+        />
+        {/* Overlay synced inside the exact same container */}
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-stone-950/20 via-stone-950/70 to-stone-950"
+          aria-hidden="true"
+        />
+      </div>
 
       {/* Main Container */}
       <div className="relative z-10 space-y-18 lg:space-y-25">

@@ -14,7 +14,7 @@ export default function FinalCTA() {
         </h2>
 
         {/* Informational Blurb */}
-        <p className="mt-4 md:mt-8 text-sm md:text-base lg:text-lg text-stone-400 leading-relaxed lg:leading-8 max-w-2xl lg:max-w-3xl mx-10 sm:mx-40">
+        <p className="mt-4 md:mt-8 text-sm md:text-base lg:text-lg text-stone-400 leading-relaxed lg:leading-8 max-w-2xl lg:max-w-3xl mx-4 sm:mx-40">
           Send us your tire size, equipment information, quantity, preferred
           service location, and timing. We will confirm available options and
           provide a clear quote before the order or appointment is finalized.
@@ -26,7 +26,7 @@ export default function FinalCTA() {
           <div className="block lg:hidden">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-6 px-8 py-4 bg-red-900 text-white font-extrabold uppercase tracking-wider text-base rounded-md transition-colors border-2 border-red-900 border-opacity-80"
+              className="group inline-flex items-center gap-5 px-7 py-4 bg-red-800/80 text-white font-extrabold uppercase tracking-wider text-base rounded-md transition-colors border-2 border-red-900 border-opacity-80"
             >
               <span>Request Quote</span>
               <span className="mt-0.5" aria-hidden="true">

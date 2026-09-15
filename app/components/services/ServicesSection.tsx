@@ -84,7 +84,7 @@ export default function Services() {
 
         <div className="flex flex-col space-y-10 md:space-y-12 lg:space-y-8 lg:justify-center lg:h-full">
           {/* Service Division 1: Distribution */}
-          <Link href="/services" className="group block">
+          <Link href="/services/tires" className="group block">
             <div className="space-y-1 md:space-y-6 lg:space-y-2">
               <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/75 overflow-hidden lg:mr-5">
                 <span>Tire Distribution &amp; Fleet Sales</span>
@@ -123,7 +123,7 @@ export default function Services() {
           />
 
           {/* Service Division 2: Shop Service */}
-          <Link href="/services" className="group block">
+          <Link href="/services/shop" className="group block">
             <div className="space-y-1 md:space-y-6 lg:space-y-2">
               <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/75 overflow-hidden lg:mr-5">
                 <span>Shop Tire &amp; Light Mechanical Service</span>
@@ -161,7 +161,7 @@ export default function Services() {
           />
 
           {/* Service Division 3: Mobile Service */}
-          <Link href="/services" className="group block">
+          <Link href="/services/mobile" className="group block">
             <div className="space-y-1 md:space-y-6 lg:space-y-2">
               <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/75 overflow-hidden lg:mr-5">
                 <span>Scheduled Mobile Fleet Installation</span>

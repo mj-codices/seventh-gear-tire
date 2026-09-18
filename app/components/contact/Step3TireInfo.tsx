@@ -1,13 +1,52 @@
 "use client";
 
-import { Dispatch, SetStateAction, ChangeEvent } from "react";
+import { Dispatch, SetStateAction, ChangeEvent, useState } from "react";
 
 export interface OptionItem {
   id: string;
   title: string;
 }
 
-// Dynamic configuration per service division according to Section 5 & 8 of guidelines
+// Categorized common commercial, fleet, medium duty, and heavy equipment sizes
+export const COMMON_TIRE_SIZES = [
+  {
+    category: "Semi / Heavy Fleet (Standard & Low-Profile)",
+    options: [
+      { value: "11R22.5", label: "11R22.5 — Standard Highway Fleet (Most Common)" },
+      { value: "11R24.5", label: "11R24.5 — Heavy Haul / Texas Regional" },
+      { value: "295/75R22.5", label: "295/75R22.5 — Low-Profile Fleet Standard" },
+      { value: "285/75R24.5", label: "285/75R24.5 — Low-Profile 24.5" },
+      { value: "255/70R22.5", label: "255/70R22.5 — Drop-Deck / Lowboy Trailer" },
+      { value: "315/80R22.5", label: "315/80R22.5 — Heavy Dump / Vocational" },
+      { value: "385/65R22.5", label: "385/65R22.5 — Wide Base / Floatation" },
+      { value: "425/65R22.5", label: "425/65R22.5 — Super Single / Heavy Floatation" },
+    ],
+  },
+  {
+    category: "Medium Duty / Delivery & Work Trucks",
+    options: [
+      { value: "225/70R19.5", label: "225/70R19.5 — F-450/550, Ram 4500/5500, Step Vans" },
+      { value: "245/70R19.5", label: "245/70R19.5 — Medium Box Trucks" },
+      { value: "265/70R19.5", label: "265/70R19.5 — Regional Medium Duty" },
+      { value: "235/80R16", label: "235/80R16 — Dually Pickups & Goosenecks" },
+      { value: "235/85R16", label: "235/85R16 — Commercial LT / Equipment Trailer" },
+      { value: "275/70R18", label: "275/70R18 — HD Work Trucks (F-250/350, 2500/3500)" },
+    ],
+  },
+  {
+    category: "Ag, Off-Road & Construction Equipment",
+    options: [
+      { value: "10-16.5", label: "10-16.5 — Skid Steer / Construction" },
+      { value: "12-16.5", label: "12-16.5 — Heavy Skid Steer" },
+      { value: "17.5-25", label: "17.5-25 — Wheel Loader / Motor Grader" },
+      { value: "20.5-25", label: "20.5-25 — Heavy Loader / Earthmover" },
+      { value: "18.4-38", label: "18.4-38 — Rear Ag Tractor" },
+      { value: "480/80R42", label: "480/80R42 — Row Crop Ag Tractor" },
+    ],
+  },
+];
+
+// Dynamic configuration per service division
 export const SERVICE_TIRE_CONFIG: Record<
   string,
   {
@@ -27,8 +66,8 @@ export const SERVICE_TIRE_CONFIG: Record<
     ],
     brandOptions: [
       { value: "any", label: "Best Value / Sourced Availability" },
-      { value: "tier1", label: "Tier 1 Premium (Michelin, Bridgestone, etc.)" },
-      { value: "tier2", label: "Tier 2 Mid-Grade / Commercial Quality" },
+      { value: "tier1", label: "Tier 1 Premium (Michelin, Bridgestone, Goodyear)" },
+      { value: "tier2", label: "Tier 2 Commercial Quality (Falken, Sumitomo, etc.)" },
       { value: "budget", label: "Economy / Budget Supply" },
     ],
   },
@@ -93,9 +132,26 @@ export function Step3TireInfo({
   photoFile,
   handlePhotoChange,
 }: Step3TireInfoProps) {
-  // Get dynamic config based on chosen service
   const activeConfig =
     SERVICE_TIRE_CONFIG[selectedService] || SERVICE_TIRE_CONFIG.onsite_service;
+
+  // Local state to track quick dropdown selection
+  const [selectedQuickSize, setSelectedQuickSize] = useState<string>(
+    tireSize && !COMMON_TIRE_SIZES.some((g) => g.options.some((o) => o.value === tireSize))
+      ? "custom"
+      : tireSize || ""
+  );
+
+  const handleDropdownChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setSelectedQuickSize(value);
+
+    if (value !== "custom") {
+      setTireSize(value);
+    } else {
+      setTireSize(""); // Reset so they can type custom entry
+    }
+  };
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-top-2 duration-300">
@@ -105,29 +161,67 @@ export function Step3TireInfo({
         </h3>
       </div>
 
-      {/* Row 1: Size & Quantity */}
+      {/* Row 1: Size Dropdown Quick-Select + Custom Text Field & Quantity */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="sm:col-span-2 space-y-2">
-          <label
-            htmlFor="tire_size"
-            className="block text-xs uppercase font-display font-bold text-white/60 tracking-wider"
-          >
-            Tire Size <span className="text-stone-400 font-normal">(e.g., 295/75R22.5 or 275/65R18)</span>
-          </label>
-          <input
-            type="text"
-            id="tire_size"
-            name="tire_size"
-            value={tireSize}
-            onChange={(e) => setTireSize(e.target.value)}
-            placeholder="e.g. 295/75R22.5"
-            className="w-full px-4 py-3 bg-stone-950/40 border border-stone-800/70 rounded-lg text-sm sm:text-base text-stone-200 placeholder-stone-600 focus:outline-none focus:border-red-700 focus:bg-stone-950/90 focus:ring-1 focus:ring-red-600 transition-all duration-150"
-          />
+        <div className="sm:col-span-2 space-y-3">
+          {/* Quick Select Dropdown */}
+          <div className="space-y-1.5">
+            <label
+              htmlFor="quick_tire_size"
+              className="block text-xs uppercase font-display font-bold text-white/60 tracking-wider"
+            >
+              Select Standard Commercial / Fleet Size
+            </label>
+            <select
+              id="quick_tire_size"
+              value={selectedQuickSize}
+              onChange={handleDropdownChange}
+              className="w-full appearance-none px-4 py-3 bg-stone-950/40 border border-stone-800/70 rounded-lg text-sm sm:text-base text-stone-200 font-medium cursor-pointer focus:outline-none focus:border-red-700 focus:bg-stone-950/90 focus:ring-1 focus:ring-red-600 transition-all duration-150"
+            >
+              <option value="" className="bg-stone-950 text-stone-400">
+                -- Choose a Common Size (Optional) --
+              </option>
+              {COMMON_TIRE_SIZES.map((group) => (
+                <optgroup key={group.category} label={group.category} className="bg-stone-900 text-red-400 font-bold">
+                  {group.options.map((option) => (
+                    <option key={option.value} value={option.value} className="bg-stone-950 text-stone-200 font-normal">
+                      {option.label}
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
+              <option value="custom" className="bg-stone-900 text-stone-300 font-bold">
+                Other / Custom Size (Type Below)
+              </option>
+            </select>
+          </div>
+
+          {/* Text Input Field */}
+          <div className="space-y-1.5">
+            <label
+              htmlFor="tire_size"
+              className="block text-xs uppercase font-display font-bold text-white/60 tracking-wider"
+            >
+              Exact Tire Size <span className="text-stone-400 font-normal">(Auto-filled or manual entry)</span>
+            </label>
+            <input
+              type="text"
+              id="tire_size"
+              name="tire_size"
+              value={tireSize}
+              onChange={(e) => {
+                setTireSize(e.target.value);
+                setSelectedQuickSize("custom");
+              }}
+              placeholder="e.g. 295/75R22.5 or 12-16.5"
+              className="w-full px-4 py-3 bg-stone-950/40 border border-stone-800/70 rounded-lg text-sm sm:text-base text-stone-200 placeholder-stone-600 focus:outline-none focus:border-red-700 focus:bg-stone-950/90 focus:ring-1 focus:ring-red-600 transition-all duration-150"
+            />
+          </div>
         </div>
 
         {/* Quantity Field */}
         {setTireQuantity && (
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label
               htmlFor="tire_quantity"
               className="block text-xs uppercase font-display font-bold text-white/60 tracking-wider"
@@ -174,7 +268,7 @@ export function Step3TireInfo({
         </div>
       </div>
 
-      {/* Row 3: Brand / Tier Preference (Flexible Language per Section 8 Guidelines) */}
+      {/* Row 3: Brand / Tier Preference */}
       {setPreferredBrand && (
         <div className="space-y-2 pt-1">
           <label

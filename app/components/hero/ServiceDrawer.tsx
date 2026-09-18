@@ -1,4 +1,3 @@
-// components/ui/ServiceDrawer.tsx
 "use client";
 
 import { useEffect } from "react";
@@ -18,6 +17,7 @@ const services = [
   {
     title: "Tire Distribution & Fleet Sales",
     href: "/contact?service=fleet",
+    disabled: false,
     icon: (
       <NavTruck className="w-14 h-14 sm:w-20 sm:h-20 md:h-20 sm:w-20 -mt-9.5 -ml-1 text-red-900" />
     ),
@@ -26,16 +26,18 @@ const services = [
   {
     title: "Shop Tire & Light Mechanical",
     href: "/contact?service=shop",
+    disabled: true,
     icon: (
-      <TireServiceIcon className="w-12 h-12 sm:w-18 sm:h-18 md:w-18 md:h-18 -mt-7 ml-1 text-red-900" />
+      <TireServiceIcon className="w-12 h-12 sm:w-18 sm:h-18 md:w-18 md:h-18 -mt-7 ml-1 text-stone-600" />
     ),
     desc: "In-shop mounting, balancing, and light maintenance.",
   },
   {
     title: "Scheduled Mobile Fleet Installation",
     href: "/contact?service=mobile",
+    disabled: true,
     icon: (
-      <TireAndClock className="w-13 h-13 sm:w-19 sm:h-19 -mt-10 [&_.icon-face]:!fill-red-900 [&_.icon-bg-accent]:!fill-stone-900" />
+      <TireAndClock className="w-13 h-13 sm:w-19 sm:h-19 -mt-10 [&_.icon-face]:!fill-stone-600 [&_.icon-bg-accent]:!fill-[#151311]" />
     ),
     desc: "On-site planned service for farms, equipment, and jobsites.",
   },
@@ -100,34 +102,65 @@ export default function ServiceDrawer({ isOpen, onClose }: ServiceDrawerProps) {
 
             {/* Vertical Stacked Cards */}
             <div className="divide-y divide-stone-800">
-              {services.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  onClick={onClose}
-                  className="group/link flex items-center justify-between p-6 sm:p-8 sm:pl-20 md:pl-30 bg-stone-900 border-b border-stone-800 hover:bg-stone-800/50 active:scale-[0.98] transition-all"
-                >
-                  {/* Left Content Block: Icon + Text */}
-                  <div className="flex items-center gap-4 sm:gap-7">
-                    <div className="py-3 pr-3 bg-stone-900 rounded-lg flex items-center justify-center shrink-0">
-                      {item.icon}
+              {services.map((item) => {
+                const CardContent = (
+                  <>
+                    {/* Left Content Block: Icon + Text */}
+                    <div className="flex items-center gap-4 sm:gap-7">
+                      <div className="py-3 pr-3 bg-stone-900/10 rounded-lg flex items-center justify-center shrink-0">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h3
+                          className={`text-base sm:text-lg font-bold uppercase font-display leading-6.5 tracking-wide max-w-[18rem] md:max-w-[20rem] transition-colors ${
+                            item.disabled
+                              ? "text-stone-500"
+                              : "text-white/90 group-hover/link:text-white"
+                          }`}
+                        >
+                          {item.title}
+                        </h3>
+                        <p
+                          className={`text-sm sm:text-base mt-2.5 sm:mt-3 leading-snug sm:leading-7 max-w-[18rem] md:max-w-[22rem] ${
+                            item.disabled ? "text-stone-600" : "text-stone-400"
+                          }`}
+                        >
+                          {item.desc}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-base sm:text-lg font-bold text-white/90 uppercase font-display leading-6.5 tracking-wide max-w-[18rem] md:max-w-[20rem] group-hover/link:text-white transition-colors">
-                        {item.title}
-                      </h3>
-                      <p className="text-sm sm:text-base text-stone-400 mt-2.5 sm:mt-3 leading-snug sm:leading-7 max-w-[18rem] md:max-w-[22rem]">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
 
-                  {/* Right Trailing Chevron */}
-                  <span className="mr-6 sm:mr-10.5 mt-0.5 shrink-0 hidden md:block">
-                    <Chevrons className="text-stone-600 group-hover/link:text-stone-300 transition-colors duration-200" />
-                  </span>
-                </Link>
-              ))}
+                    {/* Right Trailing Chevron */}
+                    {!item.disabled && (
+                      <span className="mr-6 sm:mr-10.5 mt-0.5 shrink-0 hidden md:block">
+                        <Chevrons className="text-stone-600 group-hover/link:text-stone-300 transition-colors duration-200" />
+                      </span>
+                    )}
+                  </>
+                );
+
+                if (item.disabled) {
+                  return (
+                    <div
+                      key={item.title}
+                      className="flex items-center justify-between p-6 sm:p-8 sm:pl-20 md:pl-30 bg-stone-900/50 border-b border-stone-800 opacity-40 pointer-events-none select-none"
+                    >
+                      {CardContent}
+                    </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    onClick={onClose}
+                    className="group/link flex items-center justify-between p-6 sm:p-8 sm:pl-20 md:pl-30 bg-stone-900 border-b border-stone-800 hover:bg-stone-800/50 active:scale-[0.98] transition-all"
+                  >
+                    {CardContent}
+                  </Link>
+                );
+              })}
             </div>
           </motion.div>
         </>

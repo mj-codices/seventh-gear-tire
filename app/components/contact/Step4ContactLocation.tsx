@@ -247,14 +247,14 @@ export function Step4ContactLocation({
         {/* OPERATIONAL & MOBILE SERVICE DISCLAIMERS */}
         <div>
           <div className="p-3 bg-stone-950/60 border border-stone-800/60 rounded-lg text-[11px] text-stone-500 leading-relaxed font-sans space-y-1.5">
-            <p>
+            {/* <p>
               <strong className="text-stone-400 font-medium">
                 Scheduled Mobile Scope:
               </strong>{" "}
               Mobile services are scheduled on-site installations across our
               regional coverage area and do not constitute emergency highway
               roadside response.
-            </p>
+            </p> */}
             <p>
               <strong className="text-stone-400 font-medium">
                 Service Conditions & Rates:

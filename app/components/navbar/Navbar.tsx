@@ -287,47 +287,40 @@ export default function Navbar() {
                           </Link>
 
                           {/* Item 2: In-Shop Service */}
-                          <Link
-                            href="/services/shop"
-                            className="group/link flex items-center gap-[2.3rem] px-5 py-5.5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors border-b border-stone-800"
-                          >
-                            <span className="text-stone-500 group-hover/link:text-red-800 transition-colors duration-200 flex-shrink-0 -mt-7 translate-x-1.5">
+                          <div className="flex items-center gap-[2.3rem] px-5 py-5.5 text-sm font-bold text-stone-600 border-b border-stone-800 cursor-not-allowed select-none opacity-60">
+                            <span className="text-stone-600 flex-shrink-0 -mt-7 translate-x-1.5">
                               <TireServiceIcon />
-                              
                             </span>
 
                             {/* Content Wrapper for Vertical Stacking */}
                             <div className="flex flex-col">
-                              <span className="leading-tight font-bold uppercase">
+                              <span className="leading-tight font-bold uppercase text-stone-500">
                                 Shop Tire &amp; Light <br /> Mechanical
                               </span>
-                              <p className="font-sans font-normal normal-case text-xs text-stone-400 mt-3 leading-snug pr-10">
+                              <p className="font-sans font-normal normal-case text-xs text-stone-600 mt-3 leading-snug pr-10">
                                 In-shop mounting, balancing, and light
                                 maintenance.
                               </p>
                             </div>
-                          </Link>
+                          </div>
 
                           {/* Item 3: Scheduled Mobile Installation */}
-                          <Link
-                            href="/services/mobile"
-                            className="group/link flex items-center gap-7.5 px-5 py-5.5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors"
-                          >
+                          <div className="flex items-center gap-7.5 px-5 py-5.5 text-sm font-bold cursor-not-allowed select-none opacity-60">
                             <span className="text-stone-950 group-hover/link:text-[#110f0d] transition-colors duration-200 flex-shrink-0 -mt-9 translate-x-1">
                               <TireAndClock />
                             </span>
 
                             {/* Content Wrapper for Vertical Stacking */}
                             <div className="flex flex-col">
-                              <span className="leading-tight font-bold uppercase">
+                              <span className="leading-tight font-bold uppercase text-stone-500">
                                 Scheduled Mobile Fleet <br /> Installation
                               </span>
-                              <p className="font-sans font-normal normal-case text-xs text-stone-400 mt-3 leading-snug">
+                              <p className="font-sans font-normal normal-case text-xs text-stone-600 mt-3 leading-snug">
                                 On-site planned service for farms, equipment,
                                 and jobsites.
                               </p>
                             </div>
-                          </Link>
+                          </div>
                         </div>
                       </motion.div>
                     )}
@@ -387,34 +380,34 @@ export default function Navbar() {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className="absolute top-[calc(100%-9px)] left-0 w-60 pt-15 z-50"
                       >
-                        <div className="w-full bg-stone-950 border-b-[.1rem] border-l-[.1rem] border-r-[.1rem] border-t border-stone-800 rounded-b-lg shadow-2xl overflow-hidden">
-                          <Link
-                            href="/about#works"
-                            className="group/link flex items-center justify-between px-6 py-5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors border-b border-stone-800"
+                        <div className="cursor-not-allowed w-full bg-stone-950 border-b-[.1rem] border-l-[.1rem] border-r-[.1rem] border-t border-stone-800 rounded-b-lg shadow-2xl overflow-hidden">
+                          <div
+                            // href="/about#works"
+                            className="group/link flex items-center justify-between px-6 py-5 text-sm font-bold text-stone-500 transition-colors border-b border-stone-800"
                           >
                             <span>How It Works</span>
                             {/* <span className="text-stone-500 group-hover/link:text-red-700 transition-colors">
                                 <Chevrons />
                               </span> */}
-                          </Link>
-                          <Link
-                            href="/about#service"
-                            className="group/link flex items-center justify-between px-6 py-5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors border-b border-stone-800"
+                          </div>
+                          <div
+                            // href="/about#service"
+                            className="group/link flex items-center justify-between px-6 py-5 text-sm font-bold text-stone-500 transition-colors border-b border-stone-800"
                           >
                             <span>Service Area</span>
                             {/* <span className="text-stone-500 group-hover/link:text-red-700 transition-colors">
                                 <Chevrons />
                               </span> */}
-                          </Link>
-                          <Link
-                            href="/about"
-                            className="group/link flex items-center justify-between px-6 py-5 text-sm font-bold text-stone-300 hover:bg-stone-900/30 hover:text-white transition-colors "
+                          </div>
+                          <div
+                            // href="/about"
+                            className="group/link flex items-center justify-between px-6 py-5 text-sm font-bold text-stone-500 transition-colors "
                           >
                             <span>About 7th Gear</span>
                             {/* <span className="text-stone-500 group-hover/link:text-red-700 transition-colors">
                                 <Chevrons />
                               </span> */}
-                          </Link>
+                          </div>
                         </div>
                       </motion.div>
                     )}
@@ -558,11 +551,7 @@ export default function Navbar() {
                             </Link>
 
                             {/* Item 2: Shop Services */}
-                            <Link
-                              href="/services/shop"
-                              onClick={() => handleToggleMenu(false)}
-                              className="group/mobile-link flex items-center justify-between py-5 pl-8 sm:pl-16 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left"
-                            >
+                            <div className="select-none pointer-events-none group/mobile-link flex items-center opacity-40 justify-between py-5 pl-8 sm:pl-16 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left">
                               <div className="max-[500px]:ml-0 ml-7 flex items-center gap-8.5">
                                 <span className="text-red-900 group-hover/mobile-link:text-red-700 transition-colors duration-200 shrink-0 -mt-2 translate-x-2">
                                   <TireServiceIcon />
@@ -580,13 +569,13 @@ export default function Navbar() {
                               <span className="mr-10.5 mt-0.5 shrink-0 hidden md:block">
                                 <Chevrons className="text-stone-600" />
                               </span>
-                            </Link>
+                            </div>
 
                             {/* Item 3: Mobile Services */}
-                            <Link
-                              href="/services/mobile"
-                              onClick={() => handleToggleMenu(false)}
-                              className="group/mobile-link flex items-center justify-between py-5 pl-8 sm:pl-16 pr-4 font-display hover:text-white transition-colors text-left"
+                            <div
+                              // href="/services/mobile"
+                              // onClick={() => handleToggleMenu(false)}
+                              className="select-none pointer-events-none group/mobile-link flex items-center justify-between opacity-40 py-5 pl-8 sm:pl-16 pr-4 font-display hover:text-white transition-colors text-left"
                             >
                               <div className="max-[500px]:ml-0 ml-7 flex items-center gap-7.5 md:gap-8">
                                 <span className="text-stone-900 transition-colors duration-200 shrink-0 translate-x-1.5 sm:-mt-5">
@@ -605,7 +594,7 @@ export default function Navbar() {
                               <span className="mr-10.5 mt-0.5 shrink-0 hidden md:block">
                                 <Chevrons className="text-stone-600" />
                               </span>
-                            </Link>
+                            </div>
                           </div>
                         </motion.div>
                       )}
@@ -644,39 +633,27 @@ export default function Navbar() {
                           exit={{ height: 0, opacity: 0 }}
                           className="overflow-hidden"
                         >
-                          <div className="flex flex-col bg-stone-900 text-base sm:text-lg text-stone-300 uppercase">
-                            <Link
-                              href="/about"
-                              onClick={() => handleToggleMenu(false)}
-                              className="flex leading-tight items-center justify-between py-5 pl-10 sm:pl-35 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left"
-                            >
+                          <div className="flex flex-col bg-stone-900 text-base sm:text-lg text-stone-500 uppercase pointer-events-none select-none">
+                            <div className="flex leading-tight items-center justify-between py-5 pl-10 sm:pl-35 pr-4 border-b border-stone-800 font-display text-stone-500 text-left opacity-60 cursor-not-allowed">
                               <span>How It Works</span>
                               <span className="mt-0.5 mr-9 shrink-0 hidden sm:block">
-                                <Chevrons className="text-stone-600" />
+                                <Chevrons className="text-stone-700" />
                               </span>
-                            </Link>
+                            </div>
 
-                            <Link
-                              href="/about#fleet"
-                              onClick={() => handleToggleMenu(false)}
-                              className="flex items-center justify-between py-5 pl-10 sm:pl-35 pr-4 font-display hover:text-white transition-colors text-left border-b border-stone-800"
-                            >
+                            <div className="flex items-center justify-between py-5 pl-10 sm:pl-35 pr-4 font-display text-stone-500 text-left border-b border-stone-800 opacity-60 cursor-not-allowed">
                               <span>Service Area</span>
                               <span className="mt-0.5 mr-9 shrink-0 hidden sm:block">
-                                <Chevrons className="text-stone-600" />
+                                <Chevrons className="text-stone-700" />
                               </span>
-                            </Link>
+                            </div>
 
-                            <Link
-                              href="/about#fleet"
-                              onClick={() => handleToggleMenu(false)}
-                              className="flex items-center justify-between py-5 pl-10 sm:pl-35 pr-4 font-display hover:text-white transition-colors text-left"
-                            >
+                            <div className="flex items-center justify-between py-5 pl-10 sm:pl-35 pr-4 font-display text-stone-500 text-left opacity-60 cursor-not-allowed">
                               <span>About 7th Gear</span>
                               <span className="mt-0.5 mr-9 shrink-0 hidden sm:block">
-                                <Chevrons className="text-stone-600" />
+                                <Chevrons className="text-stone-700" />
                               </span>
-                            </Link>
+                            </div>
                           </div>
                         </motion.div>
                       )}

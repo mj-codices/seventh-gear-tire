@@ -59,7 +59,7 @@ export default function Hero() {
 
           {/* TABLET / DESKTOP ONLY: 3 Side-by-Side Horizontal Buttons */}
           <div className="hidden lg:flex flex-row items-center gap-3 w-full max-w-xl pl-1">
-            {/* Button 1: Fleet & Sourcing */}
+            {/* Button 1: Fleet & Sourcing (Active) */}
             <Link href="/contact?service=curation_sourcing&onsite">
               <button className="group relative w-full max-w-sm py-5 px-22 bg-transparent border-2 border-white text-white rounded-md uppercase font-extrabold tracking-tight text-xs sm:text-sm transition duration-300 hover:bg-red-900 hover:border-red-900 cursor-pointer overflow-hidden">
                 {/* Default Idle Text */}
@@ -74,31 +74,31 @@ export default function Hero() {
               </button>
             </Link>
 
-            {/* Button 2: Shop Services */}
-            <Link href="/contact?service=shop_service&onsite">
-              <button className="group relative w-full py-5 px-20 bg-transparent border-2 border-white text-white font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm transition duration-300 hover:bg-red-900 hover:border-red-900 cursor-pointer overflow-hidden">
-                <span className="absolute inset-0 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-full">
+            {/* Button 2: Shop Services (Disabled / Nullified) */}
+            <div className="select-none opacity-40">
+              <button
+                tabIndex={-1}
+                aria-disabled="true"
+                className="cursor-not-allowed relative w-full py-5 px-20 bg-transparent border-2 border-white/50 text-white/50 font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm overflow-hidden"
+              >
+                <span className="absolute inset-0 flex items-center justify-center">
                   Shop Services
                 </span>
-                <span className="absolute inset-0 flex items-center justify-center gap-1.5 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-                  <span>Schedule Now</span>
-                  <TireServiceIcon className="lg:w-8 lg:h-8" />
-                </span>
               </button>
-            </Link>
+            </div>
 
-            {/* Button 3: Onsite Repair */}
-            <Link href="/contact?service=onsite_service">
-              <button className="group relative w-full py-5 px-21 bg-transparent border-2 border-white text-white font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm transition duration-300 hover:bg-red-900 hover:border-red-900 cursor-pointer overflow-hidden">
-                <span className="absolute inset-0 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-full">
+            {/* Button 3: Onsite Repair (Disabled / Nullified) */}
+            <div className="select-none opacity-40">
+              <button
+                tabIndex={-1}
+                aria-disabled="true"
+                className="cursor-not-allowed relative w-full py-5 px-21 bg-transparent border-2 border-white/50 text-white/50 font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm overflow-hidden"
+              >
+                <span className="absolute inset-0 flex items-center justify-center">
                   Mobile Repair
                 </span>
-                <span className="absolute inset-0 flex items-center justify-center gap-1.5 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-                  <span>Schedule Now</span>
-                  <TireAndClock className="lg:w-9 lg:h-9 [&_.icon-face]:!fill-white [&_.icon-bg-accent]:!fill-red-900 mb-1" />
-                </span>
               </button>
-            </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -123,36 +123,38 @@ export default function Services() {
           />
 
           {/* Service Division 2: Shop Service */}
-          <Link href="/services/shop" className="group block">
-            <div className="space-y-1 md:space-y-6 lg:space-y-2">
-              <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/75 overflow-hidden lg:mr-5">
+          <div 
+          // href="/services/shop" 
+          className="group block">
+            <div className="space-y-1 md:space-y-6 lg:space-y-2 select-none cursor-not-allowed">
+              <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/45 overflow-hidden lg:mr-5">
                 <span>Shop Tire &amp; Light Mechanical Service</span>
-                <span
+                {/* <span
                   aria-hidden="true"
                   className="absolute inset-0 block w-full text-white [clip-path:polygon(0_0,0_0,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] transition-[clip-path] duration-400 ease-in-out pointer-events-none select-none"
                 >
                   Shop Tire &amp; Light Mechanical Service
-                </span>
+                </span> */}
               </h3>
 
-              <p className="text-base md:text-lg lg:text-xl text-stone-400 max-w-md md:max-w-lg lg:max-w-2xl leading-7.5 lg:leading-10">
+              <p className="text-base md:text-lg lg:text-xl text-stone-500 max-w-md md:max-w-lg lg:max-w-2xl leading-7.5 lg:leading-10">
                 Professional tire mounting, inspection, approved repairs, and
                 torque procedures at our shop, alongside routine preventive
                 maintenance like oil, filters, and fluid services.
               </p>
             </div>
             <div className="ml-0.5 mt-8 lg:mt-6">
-              <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors duration-300 md:text-lg leading-8">
+              <p className="font-display tracking-wider uppercase text-stone-400 transition-colors duration-300 md:text-lg leading-8">
                 View Shop Services <br /> &amp;{" "}
                 <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
                   <span>Menu</span>
-                  <span className="transform translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-500 ease-in-out">
+                  <span className="transform translate-y-0.5 transition-transform duration-500 ease-in-out">
                     <Chevrons />
                   </span>
                 </span>
               </p>
             </div>
-          </Link>
+          </div>
 
           {/* THE STRUCTURAL DIVIDER */}
           <div
@@ -161,19 +163,21 @@ export default function Services() {
           />
 
           {/* Service Division 3: Mobile Service */}
-          <Link href="/services/mobile" className="group block">
-            <div className="space-y-1 md:space-y-6 lg:space-y-2">
-              <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/75 overflow-hidden lg:mr-5">
+          <div 
+          // href="/services/mobile" 
+          className="group block">
+            <div className="space-y-1 md:space-y-6 lg:space-y-2 select-none cursor-not-allowed">
+              <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/45 overflow-hidden lg:mr-5">
                 <span>Scheduled Mobile Fleet Installation</span>
-                <span
+                {/* <span
                   aria-hidden="true"
                   className="absolute inset-0 block w-full text-white [clip-path:polygon(0_0,0_0,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] transition-[clip-path] duration-400 ease-in-out pointer-events-none select-none"
                 >
                   Scheduled Mobile Fleet Installation
-                </span>
+                </span> */}
               </h3>
 
-              <p className="text-base md:text-lg lg:text-xl text-stone-400 max-w-md md:max-w-lg lg:max-w-2xl leading-7.5 lg:leading-10">
+              <p className="text-base md:text-lg lg:text-xl text-stone-500 max-w-md md:max-w-lg lg:max-w-2xl leading-7.5 lg:leading-10">
                 Planned on-site tire mounting and installation dispatched to
                 fleet yards, terminals, construction sites, and commercial
                 locations across the greater Abilene area.
@@ -181,14 +185,14 @@ export default function Services() {
             </div>
 
             <div className="ml-0.5 mt-8 lg:mt-6 flex items-center gap-1.5">
-              <p className="font-display tracking-wider uppercase text-stone-200 group-hover:text-white transition-colors duration-300 md:text-lg">
+              <p className="font-display tracking-wider uppercase text-stone-400 transition-colors duration-300 md:text-lg">
                 View On-site Capabilities
               </p>
-              <span className="transform translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-500 ease-in-out">
+              <span className="transform translate-y-0.5  transition-transform duration-500 ease-in-out">
                 <Chevrons />
               </span>
             </div>
-          </Link>
+          </div>
         </div>
       </div>
     </section>

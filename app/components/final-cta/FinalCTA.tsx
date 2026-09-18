@@ -37,7 +37,7 @@ export default function FinalCTA() {
 
           {/* 2. DESKTOP CTA (Hidden on mobile/tablet, visible on lg+) */}
           <div className="hidden lg:flex flex-row items-center justify-center gap-3 w-full max-w-5xl">
-            {/* Button 1: Fleet & Distribution */}
+            {/* Button 1: Fleet & Distribution (Active) */}
             <Link href="/contact?service=fleet" className="flex-1 max-w-[200px]">
               <button className="group relative w-full h-13 bg-transparent border-2 border-white text-white font-extrabold rounded-md uppercase tracking-tight lg:text-sm transition duration-300 hover:bg-red-900 hover:border-red-900 cursor-pointer overflow-hidden">
                 {/* Default Idle Text */}
@@ -52,31 +52,29 @@ export default function FinalCTA() {
               </button>
             </Link>
 
-            {/* Button 2: Shop Services */}
-            <Link href="/contact?service=shop" className="flex-1 max-w-[200px]">
-              <button className="group relative w-full h-13 bg-transparent border-2 border-white text-white font-extrabold rounded-md uppercase tracking-tight lg:text-sm transition duration-300 hover:bg-red-900 hover:border-red-900 cursor-pointer overflow-hidden">
-                <span className="absolute inset-0 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-full px-2">
+            {/* Button 2: Shop Services (Disabled) */}
+            <div className="flex-1 max-w-[200px]">
+              <button
+                disabled
+                className="relative w-full h-13 bg-transparent border-2 border-white/40 text-white/40 font-extrabold rounded-md uppercase tracking-tight lg:text-sm opacity-50 overflow-hidden select-none cursor-not-allowed"
+              >
+                <span className="absolute inset-0 flex items-center justify-center px-2">
                   Shop Services
                 </span>
-                <span className="absolute inset-0 flex items-center justify-center gap-1.5 translate-y-full transition-transform duration-300 group-hover:translate-y-0 px-2">
-                  <span>Schedule Now</span>
-                  <TireServiceIcon className="w-10 h-10 flex-shrink-0" />
-                </span>
               </button>
-            </Link>
+            </div>
 
-            {/* Button 3: Mobile Services */}
-            <Link href="/contact?service=mobile" className="flex-1 max-w-[200px]">
-              <button className="group relative w-full h-13 bg-transparent border-2 border-white text-white font-extrabold rounded-md uppercase tracking-tight lg:text-sm transition duration-300 hover:bg-red-900 hover:border-red-900 cursor-pointer overflow-hidden">
-                <span className="absolute inset-0 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-full px-2">
+            {/* Button 3: Mobile Services (Disabled) */}
+            <div className="flex-1 max-w-[200px]">
+              <button
+                disabled
+                className="relative w-full h-13 bg-transparent border-2 border-white/40 text-white/40 font-extrabold rounded-md uppercase tracking-tight lg:text-sm opacity-50 overflow-hidden select-none cursor-not-allowed"
+              >
+                <span className="absolute inset-0 flex items-center justify-center px-2">
                   Mobile Services
                 </span>
-                <span className="absolute inset-0 flex items-center justify-center gap-1.5 translate-y-full transition-transform duration-300 group-hover:translate-y-0 px-2">
-                  <span>Schedule Now</span>
-                  <TireAndClock className="w-10 h-10 flex-shrink-0 [&_.icon-face]:!fill-white [&_.icon-bg-accent]:!fill-red-900 mb-0.5" />
-                </span>
               </button>
-            </Link>
+            </div>
           </div>
         </div>
       </div>

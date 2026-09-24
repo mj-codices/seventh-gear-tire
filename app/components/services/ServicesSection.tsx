@@ -85,7 +85,7 @@ export default function Services() {
         <div className="flex flex-col space-y-10 md:space-y-12 lg:space-y-8 lg:justify-center lg:h-full">
           {/* Service Division 1: Distribution */}
           <Link href="/services/tires" className="group block">
-            <div className="space-y-1 md:space-y-6 lg:space-y-2">
+            <div className="space-y-1 md:space-y-6 lg:space-y-2 lg:-mt-20">
               <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/75 overflow-hidden lg:mr-5">
                 <span>Tire Distribution &amp; Fleet Sales</span>
                 <span
@@ -117,24 +117,24 @@ export default function Services() {
           </Link>
 
           {/* THE STRUCTURAL DIVIDER */}
-          <div
+          {/* <div
             className="border-t border-stone-900 w-full"
             aria-hidden="true"
-          />
+          /> */}
 
           {/* Service Division 2: Shop Service */}
-          <div 
-          // href="/services/shop" 
+          {/* <div 
+          href="/services/shop" 
           className="group block">
             <div className="space-y-1 md:space-y-6 lg:space-y-2 select-none cursor-not-allowed">
               <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/45 overflow-hidden lg:mr-5">
                 <span>Shop Tire &amp; Light Mechanical Service</span>
-                {/* <span
+                <span
                   aria-hidden="true"
                   className="absolute inset-0 block w-full text-white [clip-path:polygon(0_0,0_0,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] transition-[clip-path] duration-400 ease-in-out pointer-events-none select-none"
                 >
                   Shop Tire &amp; Light Mechanical Service
-                </span> */}
+                </span>
               </h3>
 
               <p className="text-base md:text-lg lg:text-xl text-stone-500 max-w-md md:max-w-lg lg:max-w-2xl leading-7.5 lg:leading-10">
@@ -154,27 +154,27 @@ export default function Services() {
                 </span>
               </p>
             </div>
-          </div>
+          </div> */}
 
           {/* THE STRUCTURAL DIVIDER */}
-          <div
+          {/* <div
             className="border-t border-stone-900 w-full"
             aria-hidden="true"
-          />
+          /> */}
 
           {/* Service Division 3: Mobile Service */}
-          <div 
-          // href="/services/mobile" 
+          {/* <div 
+          href="/services/mobile" 
           className="group block">
             <div className="space-y-1 md:space-y-6 lg:space-y-2 select-none cursor-not-allowed">
               <h3 className="relative inline-block text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight leading-11 text-white/45 overflow-hidden lg:mr-5">
                 <span>Scheduled Mobile Fleet Installation</span>
-                {/* <span
+                <span
                   aria-hidden="true"
                   className="absolute inset-0 block w-full text-white [clip-path:polygon(0_0,0_0,0_100%,0_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] transition-[clip-path] duration-400 ease-in-out pointer-events-none select-none"
                 >
                   Scheduled Mobile Fleet Installation
-                </span> */}
+                </span>
               </h3>
 
               <p className="text-base md:text-lg lg:text-xl text-stone-500 max-w-md md:max-w-lg lg:max-w-2xl leading-7.5 lg:leading-10">
@@ -192,7 +192,7 @@ export default function Services() {
                 <Chevrons />
               </span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

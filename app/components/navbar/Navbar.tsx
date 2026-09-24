@@ -5,6 +5,7 @@ import Chevrons from "../ui/Chevrons";
 import Truck2 from "../ui/NavTruck";
 import TireAndClock from "../ui/TireAndClock";
 import TireServiceIcon from "../ui/TireAndTool";
+import ComingSoonBadge from "../ui/ComingSoonBadge";
 
 import { useState, useEffect, useRef } from "react";
 import {
@@ -287,39 +288,45 @@ export default function Navbar() {
                           </Link>
 
                           {/* Item 2: In-Shop Service */}
-                          <div className="flex items-center gap-[2.3rem] px-5 py-5.5 text-sm font-bold text-stone-600 border-b border-stone-800 cursor-not-allowed select-none opacity-60">
-                            <span className="text-stone-600 flex-shrink-0 -mt-7 translate-x-1.5">
-                              <TireServiceIcon />
-                            </span>
-
-                            {/* Content Wrapper for Vertical Stacking */}
-                            <div className="flex flex-col">
-                              <span className="leading-tight font-bold uppercase text-stone-500">
-                                Shop Tire &amp; Light <br /> Mechanical
+                          <div className="relative border-b border-stone-800 cursor-not-allowed select-none">
+                            <div className="flex items-center gap-[2.3rem] px-5 py-5.5 text-sm font-bold text-stone-600 opacity-60">
+                              <span className="text-stone-600 flex-shrink-0 -mt-7 translate-x-1.5">
+                                <TireServiceIcon />
                               </span>
-                              <p className="font-sans font-normal normal-case text-xs text-stone-600 mt-3 leading-snug pr-10">
-                                In-shop mounting, balancing, and light
-                                maintenance.
-                              </p>
+
+                              {/* Content Wrapper for Vertical Stacking */}
+                              <div className="flex flex-col">
+                                <span className="leading-tight font-bold uppercase text-stone-500">
+                                  Shop Tire &amp; Light <br /> Mechanical
+                                </span>
+                                <p className="font-sans font-normal normal-case text-xs text-stone-600 mt-3 leading-snug pr-10">
+                                  In-shop mounting, balancing, and light
+                                  maintenance.
+                                </p>
+                              </div>
                             </div>
+                            <ComingSoonBadge className="top-3 right-3" />
                           </div>
 
                           {/* Item 3: Scheduled Mobile Installation */}
-                          <div className="flex items-center gap-7.5 px-5 py-5.5 text-sm font-bold cursor-not-allowed select-none opacity-60">
-                            <span className="text-stone-950 group-hover/link:text-[#110f0d] transition-colors duration-200 flex-shrink-0 -mt-9 translate-x-1">
-                              <TireAndClock />
-                            </span>
-
-                            {/* Content Wrapper for Vertical Stacking */}
-                            <div className="flex flex-col">
-                              <span className="leading-tight font-bold uppercase text-stone-500">
-                                Scheduled Mobile Fleet <br /> Installation
+                          <div className="relative cursor-not-allowed select-none">
+                            <div className="flex items-center gap-7.5 px-5 py-5.5 text-sm font-bold opacity-60">
+                              <span className="text-stone-950 group-hover/link:text-[#110f0d] transition-colors duration-200 flex-shrink-0 -mt-9 translate-x-1">
+                                <TireAndClock />
                               </span>
-                              <p className="font-sans font-normal normal-case text-xs text-stone-600 mt-3 leading-snug">
-                                On-site planned service for farms, equipment,
-                                and jobsites.
-                              </p>
+
+                              {/* Content Wrapper for Vertical Stacking */}
+                              <div className="flex flex-col">
+                                <span className="leading-tight font-bold uppercase text-stone-500">
+                                  Scheduled Mobile Fleet <br /> Installation
+                                </span>
+                                <p className="font-sans font-normal normal-case text-xs text-stone-600 mt-3 leading-snug">
+                                  On-site planned service for farms, equipment,
+                                  and jobsites.
+                                </p>
+                              </div>
                             </div>
+                            <ComingSoonBadge className="top-3 right-3" />
                           </div>
                         </div>
                       </motion.div>
@@ -551,49 +558,51 @@ export default function Navbar() {
                             </Link>
 
                             {/* Item 2: Shop Services */}
-                            <div className="select-none pointer-events-none group/mobile-link flex items-center opacity-40 justify-between py-5 pl-8 sm:pl-16 pr-4 border-b border-stone-800 font-display hover:text-white transition-colors text-left">
-                              <div className="max-[500px]:ml-0 ml-7 flex items-center gap-8.5">
-                                <span className="text-red-900 group-hover/mobile-link:text-red-700 transition-colors duration-200 shrink-0 -mt-2 translate-x-2">
-                                  <TireServiceIcon />
-                                </span>
-                                <div className="flex flex-col">
-                                  <span className="leading-tight sm:text-lg">
-                                    Shop Services
+                            <div className="relative select-none pointer-events-none border-b border-stone-800">
+                              <div className="group/mobile-link flex items-center opacity-40 justify-between py-5 pl-8 sm:pl-16 pr-4 font-display hover:text-white transition-colors text-left">
+                                <div className="max-[500px]:ml-0 ml-7 flex items-center gap-8.5">
+                                  <span className="text-red-900 group-hover/mobile-link:text-red-700 transition-colors duration-200 shrink-0 -mt-2 translate-x-2">
+                                    <TireServiceIcon />
                                   </span>
-                                  <p className="font-sans font-normal normal-case text-xs sm:text-sm text-stone-400 mt-1 sm:mt-1.5 leading-snug sm:leading-5.5 max-w-[15rem] sm:max-w-[18rem]">
-                                    In-shop mounting, balancing, and light
-                                    maintenance.
-                                  </p>
+                                  <div className="flex flex-col">
+                                    <span className="leading-tight sm:text-lg">
+                                      Shop Services
+                                    </span>
+                                    <p className="font-sans font-normal normal-case text-xs sm:text-sm text-stone-400 mt-1 sm:mt-1.5 leading-snug sm:leading-5.5 max-w-[15rem] sm:max-w-[18rem]">
+                                      In-shop mounting, balancing, and light
+                                      maintenance.
+                                    </p>
+                                  </div>
                                 </div>
+                                <span className="mr-10.5 mt-0.5 shrink-0 hidden md:block">
+                                  <Chevrons className="text-stone-600" />
+                                </span>
                               </div>
-                              <span className="mr-10.5 mt-0.5 shrink-0 hidden md:block">
-                                <Chevrons className="text-stone-600" />
-                              </span>
+                              <ComingSoonBadge className="top-1/2 -translate-y-1/2 right-3 sm:right-6" />
                             </div>
 
                             {/* Item 3: Mobile Services */}
-                            <div
-                              // href="/services/mobile"
-                              // onClick={() => handleToggleMenu(false)}
-                              className="select-none pointer-events-none group/mobile-link flex items-center justify-between opacity-40 py-5 pl-8 sm:pl-16 pr-4 font-display hover:text-white transition-colors text-left"
-                            >
-                              <div className="max-[500px]:ml-0 ml-7 flex items-center gap-7.5 md:gap-8">
-                                <span className="text-stone-900 transition-colors duration-200 shrink-0 translate-x-1.5 sm:-mt-5">
-                                  <TireAndClock />
-                                </span>
-                                <div className="flex flex-col">
-                                  <span className="leading-tight sm:text-lg">
-                                    Mobile Services
+                            <div className="relative select-none pointer-events-none">
+                              <div className="group/mobile-link flex items-center justify-between opacity-40 py-5 pl-8 sm:pl-16 pr-4 font-display hover:text-white transition-colors text-left">
+                                <div className="max-[500px]:ml-0 ml-7 flex items-center gap-7.5 md:gap-8">
+                                  <span className="text-stone-900 transition-colors duration-200 shrink-0 translate-x-1.5 sm:-mt-5">
+                                    <TireAndClock />
                                   </span>
-                                  <p className="font-sans font-normal normal-case text-xs sm:text-sm text-stone-400 mt-1 sm:mt-1.5 leading-snug sm:leading-5.5 max-w-[15rem] sm:max-w-[20rem]">
-                                    On-site planned service for farms,
-                                    equipment, and jobsites.
-                                  </p>
+                                  <div className="flex flex-col">
+                                    <span className="leading-tight sm:text-lg">
+                                      Mobile Services
+                                    </span>
+                                    <p className="font-sans font-normal normal-case text-xs sm:text-sm text-stone-400 mt-1 sm:mt-1.5 leading-snug sm:leading-5.5 max-w-[15rem] sm:max-w-[20rem]">
+                                      On-site planned service for farms,
+                                      equipment, and jobsites.
+                                    </p>
+                                  </div>
                                 </div>
+                                <span className="mr-10.5 mt-0.5 shrink-0 hidden md:block">
+                                  <Chevrons className="text-stone-600" />
+                                </span>
                               </div>
-                              <span className="mr-10.5 mt-0.5 shrink-0 hidden md:block">
-                                <Chevrons className="text-stone-600" />
-                              </span>
+                              <ComingSoonBadge className="top-1/2 -translate-y-1/2 right-3 sm:right-6" />
                             </div>
                           </div>
                         </motion.div>

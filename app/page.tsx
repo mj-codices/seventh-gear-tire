@@ -1,15 +1,19 @@
-import Hero from "./components/Hero/Hero";
-import Services from "./components/Services/Services";
-import BrandMarquee from "./components/Brands/BrandMarquee";
-import Footer from "./components/Footer/Footer";
+import Hero from "./components/hero/Hero";
+import Services from "./components/services/ServicesSection";
+import BrandMarquee from "./components/brands/BrandMarquee";
+import HowItWorks from "./components/how-it-works/HowItWorks";
+import ServiceArea from "./components/service-area/ServiceArea";
+import FinalCTA from "./components/final-cta/FinalCTA";
 
 export default function Home() {
   return (
     <section>
       <Hero />
+      <HowItWorks />
       <Services />
       <BrandMarquee />
-      <Footer />
+      <ServiceArea />
+      <FinalCTA />
     </section>
   );
 }

@@ -3,6 +3,7 @@ import Chevrons from "../ui/Chevrons";
 import TireAndClock from "../ui/TireAndClock";
 import TireServiceIcon from "../ui/TireAndTool";
 import NavTruck from "../ui/NavTruck";
+import ComingSoonBadge from "../ui/ComingSoonBadge";
 
 export default function FinalCTA() {
   return (
@@ -53,7 +54,7 @@ export default function FinalCTA() {
             </Link>
 
             {/* Button 2: Shop Services (Disabled) */}
-            <div className="flex-1 max-w-[200px]">
+            <div className="relative flex-1 max-w-[200px]">
               <button
                 disabled
                 className="relative w-full h-13 bg-transparent border-2 border-white/40 text-white/40 font-extrabold rounded-md uppercase tracking-tight lg:text-sm opacity-50 overflow-hidden select-none cursor-not-allowed"
@@ -62,10 +63,11 @@ export default function FinalCTA() {
                   Shop Services
                 </span>
               </button>
+              <ComingSoonBadge className="-top-3 -right-3" />
             </div>
 
             {/* Button 3: Mobile Services (Disabled) */}
-            <div className="flex-1 max-w-[200px]">
+            <div className="relative flex-1 max-w-[200px]">
               <button
                 disabled
                 className="relative w-full h-13 bg-transparent border-2 border-white/40 text-white/40 font-extrabold rounded-md uppercase tracking-tight lg:text-sm opacity-50 overflow-hidden select-none cursor-not-allowed"
@@ -74,6 +76,7 @@ export default function FinalCTA() {
                   Mobile Services
                 </span>
               </button>
+              <ComingSoonBadge className="-top-3 -right-3" />
             </div>
           </div>
         </div>

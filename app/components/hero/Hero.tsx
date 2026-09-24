@@ -7,6 +7,7 @@ import TireServiceIcon from "../ui/TireAndTool";
 import TireAndClock from "../ui/TireAndClock";
 import ServiceDrawer from "./ServiceDrawer";
 import Chevrons from "../ui/Chevrons";
+import ComingSoonBadge from "../ui/ComingSoonBadge";
 
 export default function Hero() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -75,29 +76,31 @@ export default function Hero() {
             </Link>
 
             {/* Button 2: Shop Services (Disabled / Nullified) */}
-            <div className="select-none opacity-40">
+            <div className="relative select-none">
               <button
                 tabIndex={-1}
                 aria-disabled="true"
-                className="cursor-not-allowed relative w-full py-5 px-20 bg-transparent border-2 border-white/50 text-white/50 font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm overflow-hidden"
+                className="cursor-not-allowed relative w-full py-5 px-20 bg-transparent border-2 border-white/50 text-white/50 font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm overflow-hidden opacity-40"
               >
                 <span className="absolute inset-0 flex items-center justify-center">
                   Shop Services
                 </span>
               </button>
+              <ComingSoonBadge className="-top-3 -right-3" />
             </div>
 
             {/* Button 3: Onsite Repair (Disabled / Nullified) */}
-            <div className="select-none opacity-40">
+            <div className="relative select-none">
               <button
                 tabIndex={-1}
                 aria-disabled="true"
-                className="cursor-not-allowed relative w-full py-5 px-21 bg-transparent border-2 border-white/50 text-white/50 font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm overflow-hidden"
+                className="cursor-not-allowed relative w-full py-5 px-21 bg-transparent border-2 border-white/50 text-white/50 font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm overflow-hidden opacity-40"
               >
                 <span className="absolute inset-0 flex items-center justify-center">
                   Mobile Repair
                 </span>
               </button>
+              <ComingSoonBadge className="-top-3 -right-3" />
             </div>
           </div>
         </div>

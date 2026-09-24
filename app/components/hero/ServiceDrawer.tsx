@@ -7,6 +7,7 @@ import NavTruck from "../ui/NavTruck";
 import TireAndClock from "../ui/TireAndClock";
 import TireServiceIcon from "../ui/TireAndTool";
 import Chevrons from "../ui/Chevrons";
+import ComingSoonBadge from "../ui/ComingSoonBadge";
 
 interface ServiceDrawerProps {
   isOpen: boolean;
@@ -143,9 +144,12 @@ export default function ServiceDrawer({ isOpen, onClose }: ServiceDrawerProps) {
                   return (
                     <div
                       key={item.title}
-                      className="flex items-center justify-between p-6 sm:p-8 sm:pl-20 md:pl-30 bg-stone-900/50 border-b border-stone-800 opacity-40 pointer-events-none select-none"
+                      className="relative p-6 sm:p-8 sm:pl-20 md:pl-30 bg-stone-900/50 border-b border-stone-800 pointer-events-none select-none"
                     >
-                      {CardContent}
+                      <div className="flex items-center justify-between opacity-40">
+                        {CardContent}
+                      </div>
+                      <ComingSoonBadge className="top-1/2 -translate-y-1/2 right-3 sm:right-6" />
                     </div>
                   );
                 }

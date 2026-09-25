@@ -57,26 +57,26 @@ export default function FinalCTA() {
             <div className="relative flex-1 max-w-[200px]">
               <button
                 disabled
-                className="relative w-full h-13 bg-transparent border-2 border-white/40 text-white/40 font-extrabold rounded-md uppercase tracking-tight lg:text-sm opacity-50 overflow-hidden select-none cursor-not-allowed"
+                className="relative w-full h-14 bg-transparent outline outline-2 outline-white/10 -outline-offset-2  text-white/20 font-extrabold rounded-md uppercase tracking-tight lg:text-sm overflow-hidden select-none cursor-not-allowed"
               >
                 <span className="absolute inset-0 flex items-center justify-center px-2">
                   Shop Services
                 </span>
+              <ComingSoonBadge className="px-5 top-2.5 -right-2 opacity-60 rotate-[28deg]" />
               </button>
-              <ComingSoonBadge className="-top-3 -right-3" />
             </div>
 
             {/* Button 3: Mobile Services (Disabled) */}
             <div className="relative flex-1 max-w-[200px]">
               <button
                 disabled
-                className="relative w-full h-13 bg-transparent border-2 border-white/40 text-white/40 font-extrabold rounded-md uppercase tracking-tight lg:text-sm opacity-50 overflow-hidden select-none cursor-not-allowed"
+                className="relative w-full h-14 bg-transparent outline outline-2 outline-white/10 -outline-offset-2 text-white/20 font-extrabold rounded-md uppercase tracking-tight lg:text-sm overflow-hidden select-none cursor-not-allowed"
               >
                 <span className="absolute inset-0 flex items-center justify-center px-2">
                   Mobile Services
                 </span>
+              <ComingSoonBadge className="px-5 top-2.5 -right-2 opacity-60 rotate-[28deg]" />
               </button>
-              <ComingSoonBadge className="-top-3 -right-3" />
             </div>
           </div>
         </div>

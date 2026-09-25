@@ -40,9 +40,9 @@ export default function Hero() {
         </h1>
 
         <p className="pl-1.5 text-stone-300 leading-5.5 lg:leading-9 lg:text-xl lg:py-6 tracking-[.05rem] max-w-lg">
-          Purchase tires directly, visit our shop for professional installation
-          and light maintenance, or schedule planned on-site service for your
-          fleet, farm, equipment, or job site.
+          Source commercial tires directly for your business, shop, or
+          operation. Get competitive pricing, rapid fulfillment, and reliable
+          delivery scaled to fit your fleet, farm, equipment, or job site.
         </p>
 
         {/* CTA Container */}
@@ -80,13 +80,16 @@ export default function Hero() {
               <button
                 tabIndex={-1}
                 aria-disabled="true"
-                className="cursor-not-allowed relative w-full py-5 px-20 bg-transparent border-2 border-white/50 text-white/50 font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm overflow-hidden opacity-40"
+                className="cursor-not-allowed relative w-full py-5.5 px-20 bg-transparent outline outline-2 outline-white/20 -outline-offset-2 text-white/50 font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm overflow-hidden"
               >
-                <span className="absolute inset-0 flex items-center justify-center">
+                {/* Text gets its own muted opacity */}
+                <span className="absolute inset-0 flex items-center justify-center opacity-40">
                   Shop Services
                 </span>
+
+                {/* Badge stays full opacity (100%) */}
+                <ComingSoonBadge className="px-5 top-2.5 -right-2 opacity-70 rotate-[28deg]" />
               </button>
-              <ComingSoonBadge className="-top-3 -right-3" />
             </div>
 
             {/* Button 3: Onsite Repair (Disabled / Nullified) */}
@@ -94,13 +97,13 @@ export default function Hero() {
               <button
                 tabIndex={-1}
                 aria-disabled="true"
-                className="cursor-not-allowed relative w-full py-5 px-21 bg-transparent border-2 border-white/50 text-white/50 font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm overflow-hidden opacity-40"
+                className="cursor-not-allowed relative w-full py-5.5 px-21 bg-transparent outline outline-2 outline-white/20 -outline-offset-2 text-white/20 font-extrabold rounded-md uppercase tracking-tight text-xs sm:text-sm overflow-hidden"
               >
                 <span className="absolute inset-0 flex items-center justify-center">
                   Mobile Repair
                 </span>
+                <ComingSoonBadge className="px-5 top-2.5 -right-2 opacity-70 rotate-[28deg]" />
               </button>
-              <ComingSoonBadge className="-top-3 -right-3" />
             </div>
           </div>
         </div>

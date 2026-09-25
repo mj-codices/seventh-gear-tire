@@ -96,14 +96,14 @@ export default function Tires() {
         {/* Background Image Container with Left Vignette */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/tires_route.png"
+            src="/tires_route.jpeg"
             alt="Commercial tire distribution background"
             fill
             priority
             sizes="100vw"
+            unoptimized={process.env.NODE_ENV === "development"}
             className="object-cover object-center"
           />
-          {/* Dark Left Vignette: Preserves solid darkness under the text column */}
           <div className="absolute inset-0 bg-gradient-to-r from-stone-900 via-stone-900/85 to-transparent pointer-events-none z-10" />
         </div>
         <h1 className="text-4xl sm:text-5xl leading-13 sm:leading-snug max-w-[280px] sm:max-w-[400px] md:max-w-[450px] lg:max-w-[600px] z-30">
@@ -239,7 +239,7 @@ export default function Tires() {
       {/* Purchasing & Logistics Section with Horizontal Scroll & Pagination */}
       <section className="w-full bg-stone-900/30 py-10 sm:py-15 overflow-hidden">
         {/* Standard max-w-7xl centered container throughout */}
-        <div className="max-w-7xl mx-auto px-17 sm:px-23 md:px-30 lg:px-28 xl:px-0 xl:ml-20">
+        <div className="max-w-7xl mx-auto px-15 sm:px-23 md:px-30 lg:px-28 xl:px-0 xl:ml-20">
           {/* Section Header with synced left gutter */}
           <div className="flex items-center pb-2 mb-4 sm:mb-8 md:mb-10 pl-0 lg:pl-0 xl:pl-3">
             <h2 className="text-[18px] sm:text-[25px] font-sans text-stone-400 tracking-wide uppercase leading-8 sm:leading-11 max-w-[300px] sm:max-w-[350px]">
@@ -253,7 +253,7 @@ export default function Tires() {
               ref={scrollRef}
               onScroll={handleScroll}
               className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-6 sm:gap-14 lg:gap-16 
-             pl-12 sm:pl-15 md:pl-22 lg:pl-21 xl:pl-[max(3.5rem,calc((100vw-80rem)/2+0.25rem))] 
+             pl-9 sm:pl-15 md:pl-22 lg:pl-21 xl:pl-[max(3.5rem,calc((100vw-80rem)/2+0.25rem))] 
              pb-4 scroll-pl-12 sm:scroll-pl-15 md:scroll-pl-22 lg:scroll-pl-21 xl:scroll-pl-[max(3.5rem,calc((100vw-80rem)/2+3.75rem))] 
              after:content-[''] after:w-10 after:flex-shrink-0"
             >

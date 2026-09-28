@@ -69,10 +69,13 @@ function ContactPageContent() {
   }, [serviceParam, onsiteParam]);
 
   useEffect(() => {
+    // Scope the reCAPTCHA badge's visibility to this route via a body class
+    // instead of deleting its DOM node — the badge script only ever loads
+    // once per session, so removing the node left nothing to recreate it
+    // on client-side navigation back to /contact.
+    document.body.classList.add("contact-route");
     return () => {
-      // Remove injected Google badge elements when navigating away from /contact
-      const badges = document.querySelectorAll(".grecaptcha-badge");
-      badges.forEach((badge) => badge.remove());
+      document.body.classList.remove("contact-route");
     };
   }, []);
 

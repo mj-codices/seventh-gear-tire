@@ -7,6 +7,7 @@ import {
   ChangeEvent,
   useState,
 } from "react";
+import Script from "next/script";
 import { Step1ServiceType } from "./Step1ServiceType";
 import { Step2OnsiteDetails } from "./Step2OnsiteDetails";
 import { Step3TireInfo } from "./Step3TireInfo";
@@ -104,114 +105,122 @@ export function ContactForm({
   };
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <motion.section
-        id="contact-form-section"
-        layout={isSubmitted ? true : false}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="p-6 sm:p-8 bg-stone-900/60 border border-stone-800 rounded-2xl overflow-hidden scroll-mt-28"
-      >
-        <AnimatePresence mode="wait">
-          {isSubmitted ? (
-            <motion.div
-              key="success-card"
-              initial={{ opacity: 0, scale: 0.96, y: 8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: -8 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-            >
-              <SubmissionSuccess
-                locationValue={locationValue}
-                serviceType={selectedOnsiteOption || selectedService}
-                vehicleType={selectedVehicleType}
-                tireSize={tireSize}
-                onReset={handleResetForm}
-              />
-            </motion.div>
-          ) : (
-            <motion.form
-              key="contact-form"
-              onSubmit={onFormSubmit}
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0, scale: 0.97, y: -6 }}
-              transition={{ duration: 0.2, ease: "easeIn" }}
-              className="justify-center"
-            >
-              {/* HIDDEN HONEYPOT INPUT FOR SPAM PROTECTION */}
-              <div
-                aria-hidden="true"
-                className="opacity-100 absolute -z-10 pointer-events-none h-0 w-0 overflow-hidden"
+    <>
+      <Script
+        src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+        strategy="afterInteractive"
+      />
+
+      <div className="max-w-3xl mx-auto">
+        <motion.section
+          id="contact-form-section"
+          layout={isSubmitted ? true : false}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="p-6 sm:p-8 bg-stone-900/60 border border-stone-800 rounded-2xl overflow-hidden scroll-mt-28"
+        >
+          <AnimatePresence mode="wait">
+            {isSubmitted ? (
+              <motion.div
+                key="success-card"
+                initial={{ opacity: 0, scale: 0.96, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: -8 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
               >
-                <label htmlFor="website_url">Do not fill this field</label>
-                <input
-                  type="text"
-                  id="website_url"
-                  name="website_url"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  value={honeypot}
-                  onChange={(e) => setHoneypot(e.target.value)}
+                <SubmissionSuccess
+                  locationValue={locationValue}
+                  serviceType={selectedOnsiteOption || selectedService}
+                  vehicleType={selectedVehicleType}
+                  tireSize={tireSize}
+                  onReset={handleResetForm}
                 />
-              </div>
-
-              <div className="space-y-8">
-                {/* STEP 1: SERVICE TYPE SELECTION */}
-                <Step1ServiceType
-                  selectedService={selectedService}
-                  setSelectedService={setSelectedService}
-                />
-
-                {/* STEP 2: Renders dynamically based on selectedService */}
-                {Boolean(selectedService) && (
-                  <Step2OnsiteDetails
-                    selectedService={selectedService}
-                    selectedOnsiteOption={selectedOnsiteOption}
-                    setSelectedOnsiteOption={setSelectedOnsiteOption}
-                    selectedVehicleType={selectedVehicleType}
-                    setSelectedVehicleType={setSelectedVehicleType}
+              </motion.div>
+            ) : (
+              <motion.form
+                key="contact-form"
+                onSubmit={onFormSubmit}
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0, scale: 0.97, y: -6 }}
+                transition={{ duration: 0.2, ease: "easeIn" }}
+                className="justify-center"
+              >
+                {/* HIDDEN HONEYPOT INPUT FOR SPAM PROTECTION */}
+                <div
+                  aria-hidden="true"
+                  className="opacity-100 absolute -z-10 pointer-events-none h-0 w-0 overflow-hidden"
+                >
+                  <label htmlFor="website_url">Do not fill this field</label>
+                  <input
+                    type="text"
+                    id="website_url"
+                    name="website_url"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
                   />
-                )}
+                </div>
 
-                {/* STEP 3 & STEP 4 */}
-                <AnimatePresence>
-                  {Boolean(selectedService) && selectedOnsiteOption !== "" && (
-                    <motion.div
-                      key="steps-3-and-4"
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
-                      className="space-y-10 mt-8"
-                    >
-                      <Step3TireInfo
-                        selectedService={selectedService}
-                        tireSize={tireSize}
-                        setTireSize={setTireSize}
-                        selectedTireType={selectedTireType}
-                        setSelectedTireType={setSelectedTireType}
-                        tireQuantity={tireQuantity}
-                        setTireQuantity={setTireQuantity}
-                        photoFile={photoFile}
-                        handlePhotoChange={handlePhotoChange}
-                      />
+                <div className="space-y-8">
+                  {/* STEP 1: SERVICE TYPE SELECTION */}
+                  <Step1ServiceType
+                    selectedService={selectedService}
+                    setSelectedService={setSelectedService}
+                  />
 
-                      <Step4ContactLocation
-                        locationValue={locationValue}
-                        setLocationValue={setLocationValue}
-                        isGpsCaptured={isGpsCaptured}
-                        setIsGpsCaptured={setIsGpsCaptured}
-                        isLocating={isLocating}
-                        handleGetLocation={handleGetLocation}
-                        isSubmitting={isSubmitting}
-                      />
-                    </motion.div>
+                  {/* STEP 2: Renders dynamically based on selectedService */}
+                  {Boolean(selectedService) && (
+                    <Step2OnsiteDetails
+                      selectedService={selectedService}
+                      selectedOnsiteOption={selectedOnsiteOption}
+                      setSelectedOnsiteOption={setSelectedOnsiteOption}
+                      selectedVehicleType={selectedVehicleType}
+                      setSelectedVehicleType={setSelectedVehicleType}
+                    />
                   )}
-                </AnimatePresence>
-              </div>
-            </motion.form>
-          )}
-        </AnimatePresence>
-      </motion.section>
-    </div>
+
+                  {/* STEP 3 & STEP 4 */}
+                  <AnimatePresence>
+                    {Boolean(selectedService) &&
+                      selectedOnsiteOption !== "" && (
+                        <motion.div
+                          key="steps-3-and-4"
+                          initial={{ opacity: 0, y: 12 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.4, ease: "easeOut" }}
+                          className="space-y-10 mt-8"
+                        >
+                          <Step3TireInfo
+                            selectedService={selectedService}
+                            tireSize={tireSize}
+                            setTireSize={setTireSize}
+                            selectedTireType={selectedTireType}
+                            setSelectedTireType={setSelectedTireType}
+                            tireQuantity={tireQuantity}
+                            setTireQuantity={setTireQuantity}
+                            photoFile={photoFile}
+                            handlePhotoChange={handlePhotoChange}
+                          />
+
+                          <Step4ContactLocation
+                            locationValue={locationValue}
+                            setLocationValue={setLocationValue}
+                            isGpsCaptured={isGpsCaptured}
+                            setIsGpsCaptured={setIsGpsCaptured}
+                            isLocating={isLocating}
+                            handleGetLocation={handleGetLocation}
+                            isSubmitting={isSubmitting}
+                          />
+                        </motion.div>
+                      )}
+                  </AnimatePresence>
+                </div>
+              </motion.form>
+            )}
+          </AnimatePresence>
+        </motion.section>
+      </div>
+    </>
   );
 }

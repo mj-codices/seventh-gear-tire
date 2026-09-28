@@ -7,7 +7,6 @@ import {
   ChangeEvent,
   useState,
 } from "react";
-import Script from "next/script";
 import { Step1ServiceType } from "./Step1ServiceType";
 import { Step2OnsiteDetails } from "./Step2OnsiteDetails";
 import { Step3TireInfo } from "./Step3TireInfo";
@@ -106,11 +105,6 @@ export function ContactForm({
 
   return (
     <>
-      <Script
-        src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-        strategy="afterInteractive"
-      />
-
       <div className="max-w-3xl mx-auto">
         <motion.section
           id="contact-form-section"

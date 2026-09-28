@@ -229,13 +229,6 @@ function ContactPageContent() {
       )}
 
       <section className="relative min-h-screen bg-stone-950 text-stone-100 pt-32 sm:pt-40 md:pt-50 px-9 lg:pt-45 pb-10">
-        {/* Error Alert Message Container */}
-        {errorMessage && (
-          <div className="max-w-3xl mx-auto mb-6 p-4 bg-red-950/80 border border-red-800 text-red-200 rounded-xl text-sm font-medium">
-            {errorMessage}
-          </div>
-        )}
-
         {/* Background Image and Gradient Container */}
         <div className="absolute top-0 inset-x-0 h-[500px] pointer-events-none overflow-hidden z-0">
           <Image
@@ -255,6 +248,13 @@ function ContactPageContent() {
 
         {/* Main Container */}
         <div className="relative z-10 space-y-18 lg:space-y-25">
+          {/* Error Alert Message Container */}
+          {errorMessage && (
+            <div className="max-w-3xl mx-auto p-4 bg-red-950/80 border border-red-800 text-red-200 rounded-xl text-sm font-medium">
+              {errorMessage}
+            </div>
+          )}
+
           <header className="max-w-3xl mx-auto">
             <div>
               <div>

@@ -2,7 +2,14 @@
 
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 
 export interface ContactFormData {
   // Step 1 Details
@@ -24,6 +31,24 @@ export interface ContactFormData {
 }
 
 export async function submitContactForm(data: ContactFormData) {
+  const { RESEND_API_KEY, RECAPTCHA_SECRET_KEY, CONTACT_NOTIFICATION_EMAIL } =
+    process.env;
+
+  // Fail fast with a clear server-side log if the server isn't configured yet,
+  // instead of letting `new Resend()` throw an uncaught error below.
+  if (!RESEND_API_KEY || !RECAPTCHA_SECRET_KEY || !CONTACT_NOTIFICATION_EMAIL) {
+    console.error("Contact form is missing required environment variables:", {
+      RESEND_API_KEY: Boolean(RESEND_API_KEY),
+      RECAPTCHA_SECRET_KEY: Boolean(RECAPTCHA_SECRET_KEY),
+      CONTACT_NOTIFICATION_EMAIL: Boolean(CONTACT_NOTIFICATION_EMAIL),
+    });
+    return {
+      success: false,
+      error:
+        "The contact form isn't fully set up yet. Please call us directly, or try again later.",
+    };
+  }
+
   try {
     // 1. Verify reCAPTCHA v3 Token with Google API
     const recaptchaRes = await fetch(
@@ -33,7 +58,7 @@ export async function submitContactForm(data: ContactFormData) {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${data.recaptchaToken}`,
+        body: `secret=${RECAPTCHA_SECRET_KEY}&response=${data.recaptchaToken}`,
       },
     );
 
@@ -43,37 +68,32 @@ export async function submitContactForm(data: ContactFormData) {
     if (!recaptchaJson.success || recaptchaJson.score < 0.5) {
       return {
         success: false,
-        error: "reCAPTCHA verification failed. Please try submitting again.",
+        error: "We couldn't verify your submission. Please try again.",
       };
     }
 
     // 2. Dispatch Email via Resend
-    const recipient = process.env.CONTACT_NOTIFICATION_EMAIL;
-    if (!recipient) {
-      throw new Error(
-        "Missing CONTACT_NOTIFICATION_EMAIL in environment variables.",
-      );
-    }
-
+    const resend = new Resend(RESEND_API_KEY);
     const emailResponse = await resend.emails.send({
       from: "Seventh Gear Tire Works <onboarding@resend.dev>", // Default Resend testing email
-      to: recipient,
-      subject: `New Commercial Tire Inquiry: ${data.fullName}`,
+      to: CONTACT_NOTIFICATION_EMAIL,
+      subject: `New Commercial Tire Inquiry: ${escapeHtml(data.fullName)}`,
       html: `
         <h2>New Commercial Tire Inquiry</h2>
-        <p><strong>Name:</strong> ${data.fullName}</p>
-        <p><strong>Email:</strong> ${data.email}</p>
-        <p><strong>Phone:</strong> ${data.phone}</p>
-        <p><strong>Company:</strong> ${data.companyName || "N/A"}</p>
-        <p><strong>Service Requested:</strong> ${data.serviceType || "N/A"}</p>
-        <p><strong>Fleet Size:</strong> ${data.fleetSize || "N/A"}</p>
-        <p><strong>Location/Yard:</strong> ${data.location || "N/A"}</p>
+        <p><strong>Name:</strong> ${escapeHtml(data.fullName)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
+        <p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>
+        <p><strong>Company:</strong> ${escapeHtml(data.companyName || "N/A")}</p>
+        <p><strong>Service Requested:</strong> ${escapeHtml(data.serviceType || "N/A")}</p>
+        <p><strong>Fleet Size:</strong> ${escapeHtml(data.fleetSize || "N/A")}</p>
+        <p><strong>Location/Yard:</strong> ${escapeHtml(data.location || "N/A")}</p>
         <p><strong>Message:</strong></p>
-        <p>${data.message || "No additional message provided."}</p>
+        <p>${escapeHtml(data.message || "No additional message provided.")}</p>
       `,
     });
 
     if (emailResponse.error) {
+      console.error("Resend error:", emailResponse.error);
       return { success: false, error: "Failed to send email notification." };
     }
 

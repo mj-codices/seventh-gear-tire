@@ -3,10 +3,14 @@
 import { useEffect } from "react";
 
 interface SubmissionSuccessProps {
+  name: string;
+  phone: string;
   serviceType: string;
   locationValue: string;
   vehicleType?: string;
   tireSize?: string;
+  urgency: string;
+  referenceNumber?: string;
   onReset: () => void;
 }
 
@@ -59,11 +63,34 @@ function formatVehicleLabel(vehicle: string): string {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
+// Helper for Urgency Labels
+function formatUrgencyLabel(urgency: string): string {
+  if (!urgency) return "Not Specified";
+
+  const urgencyMap: Record<string, string> = {
+    today: "Today (2–4 Hrs)",
+    scheduled: "Scheduled / Next Available",
+  };
+
+  const normalizedKey = urgency.toLowerCase().trim();
+  if (urgencyMap[normalizedKey]) {
+    return urgencyMap[normalizedKey];
+  }
+
+  return urgency
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
 export function SubmissionSuccess({
+  name,
+  phone,
   serviceType,
   locationValue,
   vehicleType,
   tireSize,
+  urgency,
+  referenceNumber,
   onReset,
 }: SubmissionSuccessProps) {
   useEffect(() => {
@@ -84,12 +111,13 @@ export function SubmissionSuccess({
   // Format labels before rendering
   const displayService = formatServiceLabel(serviceType);
   const displayVehicle = formatVehicleLabel(vehicleType || "");
+  const displayUrgency = formatUrgencyLabel(urgency);
 
   return (
     <div className="pt-2 space-y-6">
       {/* Success Badge / Header */}
       <div className="p-6 bg-stone-900/90 border border-stone-800 rounded-xl text-center space-y-4">
-        <div className="mx-auto w-12 h-12 md:w-15 md:h-15 rounded-full bg-stone-950/60 border border-stone-800 flex items-center justify-center text-red-700">
+        <div className="mx-auto w-12 h-12 md:w-15 md:h-15 rounded-full bg-stone-950/60 border border-stone-800 flex items-center justify-center text-olive-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -103,7 +131,20 @@ export function SubmissionSuccess({
           <h3 className="text-xl md:text-2xl font-display font-bold text-white/90 uppercase tracking-wider">
             Dispatch Request Received
           </h3>
+          {referenceNumber && (
+            <p className="text-[10px] md:text-xs font-mono text-stone-500 tracking-widest mt-1.5">
+              Reference #{referenceNumber}
+            </p>
+          )}
           <p className="text-[11px] md:text-[15px] text-stone-400 mt-4 font-sans leading-5 md:leading-7">
+            {name && phone && (
+              <>
+                We have you down as{" "}
+                <span className="text-stone-200 font-semibold">{name}</span>,
+                reachable at{" "}
+                <span className="text-stone-200 font-semibold">{phone}</span>.{" "}
+              </>
+            )}
             A dispatch specialist will call you shortly to discuss your request
             and provide an exact quote before sending out service.
           </p>
@@ -163,6 +204,19 @@ export function SubmissionSuccess({
           </span>
           <span className="ml-3 text-stone-200 font-bold truncate max-w-[200px] sm:max-w-[280px] uppercase tracking-tighter">
             {locationValue || "GPS Pin Attached"}
+          </span>
+        </li>
+
+        {/* Requested Timing Row (Always rendered) */}
+        <li className="flex items-center justify-between text-stone-400">
+          <span className="flex items-center gap-2.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-stone-500/90 shrink-0" />
+            <span className="font-mono tracking-tighter whitespace-nowrap">
+              Requested Timing:
+            </span>
+          </span>
+          <span className="ml-3 text-stone-200 font-bold uppercase tracking-tighter truncate">
+            {displayUrgency}
           </span>
         </li>
       </ul>

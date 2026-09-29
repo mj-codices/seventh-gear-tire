@@ -1,6 +1,7 @@
 "use server";
 
 import { Resend } from "resend";
+import { randomUUID } from "crypto";
 
 function escapeHtml(value: string): string {
   return value
@@ -9,6 +10,15 @@ function escapeHtml(value: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+// Turns internal option codes (e.g. "fleet_supply") into readable text for
+// the customer-facing email, without duplicating the curated label maps
+// that already live in SubmissionSuccess.tsx for the on-screen card.
+function humanize(value: string): string {
+  return value
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 export interface ContactFormData {
@@ -24,6 +34,7 @@ export interface ContactFormData {
 
   // Step 3 / 4 Details
   location?: string;
+  urgency?: string;
   message?: string;
 
   // Security
@@ -73,19 +84,26 @@ export async function submitContactForm(data: ContactFormData) {
     }
 
     // 2. Dispatch Email via Resend
+    // 48 bits of crypto-random hex — there's no database here to check
+    // against, so uniqueness comes from the size of the random space rather
+    // than a lookup. That's more than enough headroom for this form's volume.
+    const referenceNumber = `SGT-${randomUUID().replace(/-/g, "").slice(0, 12).toUpperCase()}`;
+
     const resend = new Resend(RESEND_API_KEY);
     const emailResponse = await resend.emails.send({
       from: "Seventh Gear Tire Works <onboarding@resend.dev>", // Default Resend testing email
       to: CONTACT_NOTIFICATION_EMAIL,
-      subject: `New Commercial Tire Inquiry: ${escapeHtml(data.fullName)}`,
+      subject: `New Commercial Tire Inquiry: ${escapeHtml(data.fullName)} [${referenceNumber}]`,
       html: `
         <h2>New Commercial Tire Inquiry</h2>
+        <p><strong>Reference #:</strong> ${referenceNumber}</p>
         <p><strong>Name:</strong> ${escapeHtml(data.fullName)}</p>
         <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
         <p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>
         <p><strong>Company:</strong> ${escapeHtml(data.companyName || "N/A")}</p>
         <p><strong>Service Requested:</strong> ${escapeHtml(data.serviceType || "N/A")}</p>
         <p><strong>Fleet Size:</strong> ${escapeHtml(data.fleetSize || "N/A")}</p>
+        <p><strong>Urgency:</strong> ${escapeHtml(data.urgency || "N/A")}</p>
         <p><strong>Location/Yard:</strong> ${escapeHtml(data.location || "N/A")}</p>
         <p><strong>Message:</strong></p>
         <p>${escapeHtml(data.message || "No additional message provided.")}</p>
@@ -97,7 +115,44 @@ export async function submitContactForm(data: ContactFormData) {
       return { success: false, error: "Failed to send email notification." };
     }
 
-    return { success: true };
+    // 3. Send a confirmation receipt to the customer. Best-effort: dispatch
+    // has already been notified above, so a failure here shouldn't block
+    // the submission or surface an error to the customer.
+    try {
+      const confirmationResponse = await resend.emails.send({
+        from: "Seventh Gear Tire Works <onboarding@resend.dev>", // Default Resend testing email
+        to: data.email,
+        subject: `We've got your request — Reference #${referenceNumber}`,
+        html: `
+          <h2>We've Got Your Request</h2>
+          <p>Hi ${escapeHtml(data.fullName)},</p>
+          <p>Thanks for reaching out to Seventh Gear Tire Works. A dispatch
+          specialist will call you at ${escapeHtml(data.phone)} shortly to
+          confirm details and provide an exact quote before sending out
+          service.</p>
+          <p><strong>Reference #:</strong> ${referenceNumber}</p>
+          <p><strong>Service Requested:</strong> ${escapeHtml(humanize(data.serviceType || "N/A"))}</p>
+          ${data.fleetSize ? `<p><strong>Vehicle Type:</strong> ${escapeHtml(humanize(data.fleetSize))}</p>` : ""}
+          <p><strong>Location/Yard:</strong> ${escapeHtml(data.location || "N/A")}</p>
+          <p><strong>Requested Timing:</strong> ${escapeHtml(humanize(data.urgency || "N/A"))}</p>
+          <p>If anything here doesn't look right, just reply to this email or give us a call.</p>
+        `,
+      });
+
+      if (confirmationResponse.error) {
+        console.error(
+          "Customer confirmation email error:",
+          confirmationResponse.error,
+        );
+      }
+    } catch (confirmationError) {
+      console.error(
+        "Failed to send customer confirmation email:",
+        confirmationError,
+      );
+    }
+
+    return { success: true, referenceNumber };
   } catch (error) {
     console.error("Form submission error:", error);
     return {

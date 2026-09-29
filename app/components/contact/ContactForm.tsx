@@ -55,6 +55,9 @@ interface ContactFormProps {
   isSubmitting: boolean;
   isSubmitted: boolean;
   submittedName: string;
+  submittedPhone: string;
+  submittedUrgency: string;
+  referenceNumber: string;
   handleResetForm: () => void;
 }
 
@@ -83,6 +86,9 @@ export function ContactForm({
   isSubmitting,
   isSubmitted,
   submittedName,
+  submittedPhone,
+  submittedUrgency,
+  referenceNumber,
   handleResetForm,
 }: ContactFormProps) {
   // 1. HONEYPOT STATE FOR BOT PROTECTION
@@ -122,10 +128,14 @@ export function ContactForm({
                 transition={{ duration: 0.35, ease: "easeOut" }}
               >
                 <SubmissionSuccess
+                  name={submittedName}
+                  phone={submittedPhone}
                   locationValue={locationValue}
                   serviceType={selectedOnsiteOption || selectedService}
                   vehicleType={selectedVehicleType}
                   tireSize={tireSize}
+                  urgency={submittedUrgency}
+                  referenceNumber={referenceNumber}
                   onReset={handleResetForm}
                 />
               </motion.div>

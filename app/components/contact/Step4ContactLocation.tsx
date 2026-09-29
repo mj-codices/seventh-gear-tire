@@ -84,6 +84,27 @@ export function Step4ContactLocation({
           />
         </div>
 
+        {/* Email Input */}
+        <div className="space-y-3 sm:col-span-2">
+          <label
+            htmlFor="contact_email"
+            className="text-xs uppercase font-display font-bold text-white/60 tracking-wider block"
+          >
+            Email Address{" "}
+            <span className="inline-block text-red-500 align-middle leading-none font-normal text-lg mt-0.5">
+              *
+            </span>
+          </label>
+          <input
+            type="email"
+            id="contact_email"
+            name="contact_email"
+            required
+            placeholder="e.g. dispatch@yourcompany.com"
+            className="w-full px-4 py-3 bg-stone-950/50 border border-stone-800/80 rounded-lg text-sm text-stone-200 placeholder:text-stone-600 font-medium tracking-wide focus:outline-none focus:border-red-700 focus:bg-stone-950 focus:ring-1 focus:ring-red-600 transition-all duration-150"
+          />
+        </div>
+
         {/* Location Input with Map/GPS button */}
         <div className="space-y-3 sm:col-span-2">
           <div>

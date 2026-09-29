@@ -94,6 +94,9 @@ function ContactPageContent() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [submittedName, setSubmittedName] = useState<string>("");
+  const [submittedPhone, setSubmittedPhone] = useState<string>("");
+  const [submittedUrgency, setSubmittedUrgency] = useState<string>("");
+  const [referenceNumber, setReferenceNumber] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -108,11 +111,18 @@ function ContactPageContent() {
     const formData = new FormData(e.currentTarget);
     const contactName = (formData.get("contact_name") as string) || "";
     const contactPhone = (formData.get("contact_phone") as string) || "";
+    const contactEmail = (formData.get("contact_email") as string) || "";
     const companyName = (formData.get("company_name") as string) || "";
+    const urgency = (formData.get("service_urgency") as string) || "";
     const specialInstructions =
       (formData.get("special_instructions") as string) || "";
 
-    if (!contactName.trim() || !contactPhone.trim() || !locationValue.trim()) {
+    if (
+      !contactName.trim() ||
+      !contactPhone.trim() ||
+      !contactEmail.trim() ||
+      !locationValue.trim()
+    ) {
       setErrorMessage("Please fill out all required fields.");
       return;
     }
@@ -140,16 +150,20 @@ function ContactPageContent() {
         serviceType: selectedOnsiteOption || selectedService,
         fleetSize: selectedVehicleType,
         fullName: contactName,
-        email: (formData.get("contact_email") as string) || "Not provided",
+        email: contactEmail,
         phone: contactPhone,
         companyName: companyName || "N/A",
         location: locationValue,
+        urgency,
         message: `Tire Size: ${tireSize || "N/A"} | Tire Type: ${selectedTireType || "N/A"} | Quantity: ${tireQuantity} | Instructions: ${specialInstructions || "None"}`,
         recaptchaToken: token,
       });
 
       if (result.success) {
         setSubmittedName(contactName);
+        setSubmittedPhone(contactPhone);
+        setSubmittedUrgency(urgency);
+        setReferenceNumber(result.referenceNumber || "");
         setIsSubmitted(true);
       } else {
         setErrorMessage(result.error || "Submission failed. Please try again.");
@@ -174,6 +188,9 @@ function ContactPageContent() {
     setLocationValue("");
     setIsGpsCaptured(false);
     setSubmittedName("");
+    setSubmittedPhone("");
+    setSubmittedUrgency("");
+    setReferenceNumber("");
     setErrorMessage("");
     setIsSubmitted(false);
   };
@@ -298,6 +315,9 @@ function ContactPageContent() {
             isSubmitting={isSubmitting}
             isSubmitted={isSubmitted}
             submittedName={submittedName}
+            submittedPhone={submittedPhone}
+            submittedUrgency={submittedUrgency}
+            referenceNumber={referenceNumber}
             handleResetForm={handleResetForm}
             photoFile={photoFile}
             handlePhotoChange={handlePhotoChange}

@@ -5,7 +5,9 @@ import Image from "next/image";
 
 export default function ServiceArea() {
   return (
-    <section className="relative w-full bg-stone-950 py-15 md:pt-25 md:pb-15 overflow-hidden">
+    <section 
+    id="service"
+    className="scroll-mt-20 relative w-full bg-stone-950 py-15 md:pt-25 md:pb-15 overflow-hidden">
       {/* Background ambient accents */}
 
       <div className="relative w-full px-10.5 sm:px-17 md:px-21 lg:px-24 xl:px-33">
@@ -85,7 +87,7 @@ export default function ServiceArea() {
         </div>
 
         {/* SERVICE AREA DISCLAIMER CARD (BOTTOM) */}
-        <div className="ml-1.5 mt-6 md:mt-12 border-t border-stone-900 pt-6 md:pt-12 flex flex-col gap-4 font-sans text-xs md:text-sm lg:text-base text-stone-500">
+        <div className="ml-1.5 mt-6 md:mt-12 border-t lg:border-none border-stone-900 pt-6 md:pt-12 flex flex-col gap-4 font-sans text-xs md:text-sm lg:text-base text-stone-500">
           <div className="flex items-start gap-3 md:gap-6 max-w-2xl">
             <Info className="w-4 h-4 md:w-6 md:h-6 text-olive-500 flex-shrink-0 mt-0.5" />
             <p>

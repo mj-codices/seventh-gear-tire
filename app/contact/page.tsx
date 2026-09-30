@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Script from "next/script";
 import { useSearchParams } from "next/navigation";
 import { useState, FormEvent, ChangeEvent, useEffect, Suspense } from "react";
 import { ContactForm } from "../components/contact/ContactForm";
@@ -8,6 +9,14 @@ import {
   VEHICLE_TYPES,
   TIRE_TYPE_OPTIONS,
 } from "../config/contactOptions";
+import { submitContactForm } from "../actions/contact/ServerAction";
+
+// Declare global grecaptcha interface for TypeScript
+declare global {
+  interface Window {
+    grecaptcha: any;
+  }
+}
 
 function ContactPageContent() {
   const searchParams = useSearchParams();
@@ -24,7 +33,7 @@ function ContactPageContent() {
         return "curation_sourcing";
       case "shop_service":
       case "shop":
-        return "shop_service"; // ✅ Fixed: Return shop_service
+        return "shop_service";
       case "onsite_service":
       case "mobile":
         return "onsite_service";
@@ -59,6 +68,17 @@ function ContactPageContent() {
     }
   }, [serviceParam, onsiteParam]);
 
+  useEffect(() => {
+    // Scope the reCAPTCHA badge's visibility to this route via a body class
+    // instead of deleting its DOM node — the badge script only ever loads
+    // once per session, so removing the node left nothing to recreate it
+    // on client-side navigation back to /contact.
+    document.body.classList.add("contact-route");
+    return () => {
+      document.body.classList.remove("contact-route");
+    };
+  }, []);
+
   // Step 3 States
   const [tireSize, setTireSize] = useState<string>("");
   const [selectedTireType, setSelectedTireType] = useState<string>("");
@@ -74,6 +94,10 @@ function ContactPageContent() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [submittedName, setSubmittedName] = useState<string>("");
+  const [submittedPhone, setSubmittedPhone] = useState<string>("");
+  const [submittedUrgency, setSubmittedUrgency] = useState<string>("");
+  const [referenceNumber, setReferenceNumber] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -82,64 +106,76 @@ function ContactPageContent() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrorMessage("");
 
-    // Extract uncontrolled inputs directly from the form submit event
     const formData = new FormData(e.currentTarget);
-    const contactName = formData.get("contact_name") as string;
-    const contactPhone = formData.get("contact_phone") as string;
-    const companyName = formData.get("company_name") as string;
-    const specialInstructions = formData.get("special_instructions") as string;
+    const contactName = (formData.get("contact_name") as string) || "";
+    const contactPhone = (formData.get("contact_phone") as string) || "";
+    const contactEmail = (formData.get("contact_email") as string) || "";
+    const companyName = (formData.get("company_name") as string) || "";
+    const urgency = (formData.get("service_urgency") as string) || "";
+    const specialInstructions =
+      (formData.get("special_instructions") as string) || "";
 
-    // Safety check against whitespace bypasses on required fields
     if (
-      !contactName?.trim() ||
-      !contactPhone?.trim() ||
-      !locationValue?.trim()
+      !contactName.trim() ||
+      !contactPhone.trim() ||
+      !contactEmail.trim() ||
+      !locationValue.trim()
     ) {
-      alert("Please fill out all required fields.");
+      setErrorMessage("Please fill out all required fields.");
       return;
     }
 
     setIsSubmitting(true);
 
-    // Build the complete snapshot using photoFile state
-    const submissionSnapshot = {
-      submittedAt: new Date().toISOString(),
-      serviceType: selectedService,
-      onsiteOption: selectedOnsiteOption,
-      vehicleType: selectedVehicleType,
-      tireInfo: {
-        size: tireSize || "Not specified",
-        quantity: tireQuantity,
-        position: selectedTireType || "Not specified",
-        photoFileName: photoFile ? photoFile.name : "No photo attached",
-        photoSizeMB: photoFile
-          ? (photoFile.size / (1024 * 1024)).toFixed(2)
-          : "0",
-      },
-      contactLocation: {
-        name: contactName,
+    try {
+      const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+      let token = "";
+
+      // Safely acquire reCAPTCHA token if available
+      if (siteKey && window.grecaptcha) {
+        token = await new Promise<string>((resolve) => {
+          window.grecaptcha.ready(() => {
+            window.grecaptcha
+              .execute(siteKey, { action: "contact_submit" })
+              .then((t: string) => resolve(t))
+              .catch(() => resolve("")); // Fallback empty token on error
+          });
+        });
+      }
+
+      // Dispatch payload to Server Action backend
+      const result = await submitContactForm({
+        serviceType: selectedOnsiteOption || selectedService,
+        fleetSize: selectedVehicleType,
+        fullName: contactName,
+        email: contactEmail,
         phone: contactPhone,
-        location: locationValue,
-        isGpsCaptured,
         companyName: companyName || "N/A",
-        specialInstructions: specialInstructions || "None provided",
-      },
-    };
+        location: locationValue,
+        urgency,
+        message: `Tire Size: ${tireSize || "N/A"} | Tire Type: ${selectedTireType || "N/A"} | Quantity: ${tireQuantity} | Instructions: ${specialInstructions || "None"}`,
+        recaptchaToken: token,
+      });
 
-    // Log formatted snapshot to browser console
-    console.group("🚀 [DISPATCH FORM SUBMISSION SNAPSHOT]");
-    console.log(JSON.stringify(submissionSnapshot, null, 2));
-    console.groupEnd();
-
-    // Save contact name for the success card
-    setSubmittedName(contactName);
-
-    // 1.2s delay for button state breathing room before transition
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      if (result.success) {
+        setSubmittedName(contactName);
+        setSubmittedPhone(contactPhone);
+        setSubmittedUrgency(urgency);
+        setReferenceNumber(result.referenceNumber || "");
+        setIsSubmitted(true);
+      } else {
+        setErrorMessage(result.error || "Submission failed. Please try again.");
+      }
+    } catch (err: any) {
+      console.error("Form submission error:", err);
+      setErrorMessage(
+        err.message || "An unexpected error occurred during submission.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleResetForm = () => {
@@ -152,6 +188,10 @@ function ContactPageContent() {
     setLocationValue("");
     setIsGpsCaptured(false);
     setSubmittedName("");
+    setSubmittedPhone("");
+    setSubmittedUrgency("");
+    setReferenceNumber("");
+    setErrorMessage("");
     setIsSubmitted(false);
   };
 
@@ -198,74 +238,95 @@ function ContactPageContent() {
   };
 
   return (
-    <section className="relative min-h-screen bg-stone-950 text-stone-100 pt-32 sm:pt-40 md:pt-50 px-9 lg:pt-45 pb-10">
-      {/* Background Image and Gradient Container */}
-      <div className="absolute top-0 inset-x-0 h-[500px] pointer-events-none overflow-hidden z-0">
-        <Image
-          src="/contact_main.png"
-          alt="Commercial tire service on Texas highway"
-          fill
-          priority
-          className="w-full h-full object-cover object-[49%_center] opacity-70"
-          unoptimized
+    <>
+      {/* Load Invisible reCAPTCHA v3 Script */}
+      {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+        <Script
+          id="recaptcha-v3"
+          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+          strategy="afterInteractive"
         />
-        {/* Overlay synced inside the exact same container */}
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-stone-950/20 via-stone-950/70 to-stone-950"
-          aria-hidden="true"
-        />
-      </div>
+      )}
 
-      {/* Main Container */}
-      <div className="relative z-10 space-y-18 lg:space-y-25">
-        <header className="max-w-3xl mx-auto">
-          <div>
-            <div>
-              <p className="text-white/90 font-display text-base font-bold uppercase tracking-widest mb-2.5 sm:mb-4">
-                Request Service
-              </p>
-              <div className="w-12 h-[.2rem] bg-red-700" />
+      <section className="relative min-h-screen bg-stone-950 text-stone-100 pt-32 sm:pt-40 md:pt-50 px-9 lg:pt-45 pb-10">
+        {/* Background Image and Gradient Container */}
+        <div className="absolute top-0 inset-x-0 h-[500px] pointer-events-none overflow-hidden z-0">
+          <Image
+            src="/contact_main.png"
+            alt="Commercial tire service on Texas highway"
+            fill
+            priority
+            className="w-full h-full object-cover object-[49%_center] opacity-70"
+            unoptimized
+          />
+          {/* Overlay synced inside the exact same container */}
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-stone-950/20 via-stone-950/70 to-stone-950"
+            aria-hidden="true"
+          />
+        </div>
+
+        {/* Main Container */}
+        <div className="relative z-10 space-y-18 lg:space-y-25">
+          {/* Error Alert Message Container */}
+          {errorMessage && (
+            <div className="max-w-3xl mx-auto p-4 bg-red-950/80 border border-red-800 text-red-200 rounded-xl text-sm font-medium">
+              {errorMessage}
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-5xl font-display text-white/95 leading-tighter sm:leading-13 mt-1 sm:mt-3">
-              Need Immediate Tire Service or a Fleet Quote?
-            </h1>
-            <p className="mt-4 sm:mt-6 text-white text-base sm:text-lg md:text-xl leading-6 max-w-2xl">
-              Select your service type below to send your equipment details
-              directly to dispatch.
-            </p>
-          </div>
-        </header>
+          )}
 
-        {/* Form Component */}
-        <ContactForm
-          selectedService={selectedService}
-          setSelectedService={setSelectedService}
-          selectedOnsiteOption={selectedOnsiteOption}
-          setSelectedOnsiteOption={setSelectedOnsiteOption}
-          selectedVehicleType={selectedVehicleType}
-          setSelectedVehicleType={setSelectedVehicleType}
-          tireSize={tireSize}
-          setTireSize={setTireSize}
-          selectedTireType={selectedTireType}
-          setSelectedTireType={setSelectedTireType}
-          locationValue={locationValue}
-          setLocationValue={setLocationValue}
-          isLocating={isLocating}
-          isGpsCaptured={isGpsCaptured}
-          setIsGpsCaptured={setIsGpsCaptured}
-          handleGetLocation={handleGetLocation}
-          handleSubmit={handleSubmit}
-          isSubmitting={isSubmitting}
-          isSubmitted={isSubmitted}
-          submittedName={submittedName}
-          handleResetForm={handleResetForm}
-          photoFile={photoFile}
-          handlePhotoChange={handlePhotoChange}
-          tireQuantity={tireQuantity}
-          setTireQuantity={setTireQuantity}
-        />
-      </div>
-    </section>
+          <header className="max-w-3xl mx-auto">
+            <div>
+              <div>
+                <p className="text-white/90 font-display text-base font-bold uppercase tracking-widest mb-2.5 sm:mb-4">
+                  Request Service
+                </p>
+                <div className="w-12 h-[.2rem] bg-red-700" />
+              </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-5xl font-display text-white/95 leading-tighter sm:leading-13 mt-1 sm:mt-3">
+                Need Immediate Tire Service or a Fleet Quote?
+              </h1>
+              <p className="mt-4 sm:mt-6 text-white text-base sm:text-lg md:text-xl leading-6 max-w-2xl">
+                Select your service type below to send your equipment details
+                directly to dispatch.
+              </p>
+            </div>
+          </header>
+
+          {/* Form Component */}
+          <ContactForm
+            selectedService={selectedService}
+            setSelectedService={setSelectedService}
+            selectedOnsiteOption={selectedOnsiteOption}
+            setSelectedOnsiteOption={setSelectedOnsiteOption}
+            selectedVehicleType={selectedVehicleType}
+            setSelectedVehicleType={setSelectedVehicleType}
+            tireSize={tireSize}
+            setTireSize={setTireSize}
+            selectedTireType={selectedTireType}
+            setSelectedTireType={setSelectedTireType}
+            locationValue={locationValue}
+            setLocationValue={setLocationValue}
+            isLocating={isLocating}
+            isGpsCaptured={isGpsCaptured}
+            setIsGpsCaptured={setIsGpsCaptured}
+            handleGetLocation={handleGetLocation}
+            handleSubmit={handleSubmit}
+            isSubmitting={isSubmitting}
+            isSubmitted={isSubmitted}
+            submittedName={submittedName}
+            submittedPhone={submittedPhone}
+            submittedUrgency={submittedUrgency}
+            referenceNumber={referenceNumber}
+            handleResetForm={handleResetForm}
+            photoFile={photoFile}
+            handlePhotoChange={handlePhotoChange}
+            tireQuantity={tireQuantity}
+            setTireQuantity={setTireQuantity}
+          />
+        </div>
+      </section>
+    </>
   );
 }
 

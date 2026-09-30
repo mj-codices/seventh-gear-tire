@@ -35,14 +35,17 @@ const steps: Step[] = [
 
 export const HowItWorks: React.FC = () => {
   return (
-    <section className="w-full py-14 md:py-20 px-10 sm:px-17 md:px-20 lg:px-24 xl:px-33">
+    <section
+      id="works"
+      className="scroll-mt-20 w-full py-14 md:py-20 px-10 sm:px-17 md:px-20 lg:px-24 xl:px-33"
+    >
       <div className="text-left mb-12 md:mb-17">
         <h2 className="text-base md:text-[27px] uppercase tracking-[.3rem] text-stone-400">
           How It Works
         </h2>
         <h3 className="mt-5 font-display text-[25px] text-white/90 leading-8 lg:leading-10 max-w-xs md:max-w-md">
-          Three simple steps to direct tire delivery, shop appointments, or
-          mobile installation.
+          Three simple steps to direct tire ordering, volume fleet pricing, and
+          scheduled delivery.
         </h3>
       </div>
 

@@ -140,19 +140,20 @@ export default function ServiceDrawer({ isOpen, onClose }: ServiceDrawerProps) {
                   </>
                 );
 
-                if (item.disabled) {
-                  return (
-                    <div
-                      key={item.title}
-                      className="relative p-6 sm:p-8 sm:pl-20 md:pl-30 bg-stone-900/50 border-b border-stone-800 pointer-events-none select-none"
-                    >
-                      <div className="flex items-center justify-between opacity-40">
-                        {CardContent}
-                      </div>
-                      <ComingSoonBadge className="top-1/2 -translate-y-1/2 right-3 sm:right-6" />
-                    </div>
-                  );
-                }
+        if (item.disabled) {
+  return (
+    <div
+      key={item.title}
+      className="relative p-6 sm:p-8 sm:pl-20 md:pl-30 bg-stone-900/50 border-b border-stone-800 pointer-events-none select-none overflow-hidden"
+    >
+      <div className="flex items-center justify-between opacity-40">
+        {CardContent}
+      </div>
+      {/* Added text-sm sm:text-base to scale up the badge text */}
+      <ComingSoonBadge className="px-18 top-5 -right-5 opacity-50 rotate-[28deg] font-sans drop-shadow-lg/20 h-8 text-sm" />
+    </div>
+  );
+}
 
                 return (
                   <Link

@@ -91,7 +91,7 @@ export async function submitContactForm(data: ContactFormData) {
 
     const resend = new Resend(RESEND_API_KEY);
     const emailResponse = await resend.emails.send({
-      from: "Seventh Gear Tire Works <onboarding@resend.dev>", // Default Resend testing email
+      from: "Seventh Gear Tire Works <dispatch@7thgeartireworks.net>",
       to: CONTACT_NOTIFICATION_EMAIL,
       subject: `New Commercial Tire Inquiry: ${escapeHtml(data.fullName)} [${referenceNumber}]`,
       html: `
@@ -120,7 +120,7 @@ export async function submitContactForm(data: ContactFormData) {
     // the submission or surface an error to the customer.
     try {
       const confirmationResponse = await resend.emails.send({
-        from: "Seventh Gear Tire Works <onboarding@resend.dev>", // Default Resend testing email
+        from: "Seventh Gear Tire Works <dispatch@7thgeartireworks.net>",
         to: data.email,
         subject: `We've got your request — Reference #${referenceNumber}`,
         html: `

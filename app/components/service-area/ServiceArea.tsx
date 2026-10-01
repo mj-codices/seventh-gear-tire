@@ -45,6 +45,7 @@ export default function ServiceArea() {
                   src="/map.png"
                   alt="Service Area Map"
                   fill
+                  sizes="(max-width: 768px) 448px, (max-width: 1024px) 512px, 640px"
                   className="object-cover"
                 />
               {/* Dark overlay gradient */}

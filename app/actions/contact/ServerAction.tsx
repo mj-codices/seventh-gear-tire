@@ -60,6 +60,11 @@ export async function submitContactForm(data: ContactFormData) {
     };
   }
 
+  // CONTACT_NOTIFICATION_EMAIL may hold several comma-separated addresses.
+  const notificationRecipients = CONTACT_NOTIFICATION_EMAIL.split(",")
+    .map((email) => email.trim())
+    .filter(Boolean);
+
   try {
     // 1. Verify reCAPTCHA v3 Token with Google API
     const recaptchaRes = await fetch(
@@ -92,7 +97,7 @@ export async function submitContactForm(data: ContactFormData) {
     const resend = new Resend(RESEND_API_KEY);
     const emailResponse = await resend.emails.send({
       from: "Seventh Gear Tire Works <dispatch@7thgeartireworks.net>",
-      to: CONTACT_NOTIFICATION_EMAIL,
+      to: notificationRecipients,
       subject: `New Commercial Tire Inquiry: ${escapeHtml(data.fullName)} [${referenceNumber}]`,
       html: `
         <h2>New Commercial Tire Inquiry</h2>

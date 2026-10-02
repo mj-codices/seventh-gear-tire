@@ -257,7 +257,7 @@ function ContactPageContent() {
             fill
             priority
             className="w-full h-full object-cover object-[49%_center] opacity-70"
-            unoptimized
+            // unoptimized
           />
           {/* Overlay synced inside the exact same container */}
           <div

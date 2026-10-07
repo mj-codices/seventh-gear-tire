@@ -55,31 +55,31 @@ export default function ServiceArea() {
 
           {/* REGIONAL DATA & CARD SELECTOR (RIGHT) */}
           <div className="lg:col-span-5 flex flex-col justify-center lg:ml-8 xl:pr-10">
-            <p className="mt-8 md:mt-15 lg:-mt-30 text-xl font-bold text-white/90">
+            <p className="mt-8 md:mt-15 lg:-mt-30 xl:mt-10 text-xl lg:text-2xl font-bold text-white/90">
               Where your fleet works, we deliver.
             </p>
 
             {/* Property Types Split Bullet List */}
-            <div className="ml-1 lg:ml-6 mt-4 font-sans">
+            <div className="ml-1 lg:ml-6 mt-4 lg:mt-6 font-sans">
               <ul className="flex flex-col gap-y-4 md:gap-y-6 font-bold text-xs md:text-base text-white/90">
-                <li className="flex items-center gap-4">
-                  <span className="h-2 w-2 rounded-full bg-red-700 shrink-0" />
+                <li className="flex items-center gap-4 lg:gap-6">
+                  <span className="h-2 w-2 lg:h-2.5 lg:w-2.5 rounded-full bg-red-700 shrink-0" />
                   <span>Fleet yards &amp; vehicle staging facilities</span>
                 </li>
-                <li className="flex items-center gap-4">
-                  <span className="h-2 w-2 rounded-full bg-red-700 shrink-0" />
+                <li className="flex items-center gap-4 lg:gap-6">
+                  <span className="h-2 w-2 lg:h-2.5 lg:w-2.5 rounded-full bg-red-700 shrink-0" />
                   <span>Farms, ranches &amp; agricultural land</span>
                 </li>
-                <li className="flex items-center gap-4">
-                  <span className="h-2 w-2 rounded-full bg-red-700 shrink-0" />
+                <li className="flex items-center gap-4 lg:gap-6">
+                  <span className="h-2 w-2 lg:h-2.5 lg:w-2.5 rounded-full bg-red-700 shrink-0" />
                   <span>Active construction &amp; job-site locations</span>
                 </li>
-                <li className="flex items-center gap-4">
-                  <span className="h-2 w-2 rounded-full bg-red-700 shrink-0" />
+                <li className="flex items-center gap-4 lg:gap-6">
+                  <span className="h-2 w-2 lg:h-2.5 lg:w-2.5 rounded-full bg-red-700 shrink-0" />
                   <span>Logistics, freight &amp; distribution terminals</span>
                 </li>
-                <li className="flex items-center gap-4">
-                  <span className="h-2 w-2 rounded-full bg-red-700 shrink-0" />
+                <li className="flex items-center gap-4 lg:gap-6">
+                  <span className="h-2 w-2 lg:h-2.5 lg:w-2.5 rounded-full bg-red-700 shrink-0" />
                   <span>Commercial transit &amp; delivery corridors</span>
                 </li>
               </ul>
@@ -88,7 +88,7 @@ export default function ServiceArea() {
         </div>
 
         {/* SERVICE AREA DISCLAIMER CARD (BOTTOM) */}
-        <div className="ml-1.5 mt-6 md:mt-12 border-t lg:border-none border-stone-900 pt-6 md:pt-12 flex flex-col gap-4 font-sans text-xs md:text-sm lg:text-base text-stone-500">
+        <div className="ml-1.5 mt-6 md:mt-12 lg:mt-2 border-t lg:border-none border-stone-900 pt-6 md:pt-12 lg:pt-10 flex flex-col gap-4 font-sans text-xs md:text-sm lg:text-base text-stone-500">
           <div className="flex items-start gap-3 md:gap-6 max-w-2xl">
             <Info className="w-4 h-4 md:w-6 md:h-6 text-olive-500 flex-shrink-0 mt-0.5" />
             <p>

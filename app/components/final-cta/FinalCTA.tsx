@@ -7,7 +7,7 @@ import ComingSoonBadge from "../ui/ComingSoonBadge";
 
 export default function FinalCTA() {
   return (
-    <section className="relative w-full bg-stone-950 py-20 md:py-30 border-t border-stone-900">
+    <section className="relative w-full bg-stone-950 py-20 md:py-30 2xl:py-40 border-t border-stone-900">
       <div className="container relative mx-auto px-10.5 sm:px-6 lg:px-8 max-w-4xl text-center">
         {/* Section Heading */}
         <h2 className="font-display mx-auto text-2xl sm:text-3xl lg:text-4xl text-white/90 uppercase tracking-wide max-w-sm lg:max-w-md lg:leading-12">

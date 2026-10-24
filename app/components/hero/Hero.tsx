@@ -13,7 +13,7 @@ export default function Hero() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
-    <section className="relative h-svh w-full flex flex-col justify-center p-8 sm:p-14 md:p-16 lg:p-19 xl:p-30 bg-stone-900 overflow-hidden">
+    <section className="relative h-svh w-full flex flex-col justify-center p-8 sm:p-14 md:p-16 lg:p-19 xl:p-30 2xl:p-46 bg-stone-900 overflow-hidden">
       {/* Background Video with Overlay */}
       <div className="absolute inset-0 z-0 hero-video-container">
         <video

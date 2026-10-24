@@ -7,10 +7,10 @@ export default function ServiceArea() {
   return (
     <section 
     id="service"
-    className="scroll-mt-20 relative w-full bg-stone-950 py-15 md:pt-25 md:pb-15 overflow-hidden">
+    className="scroll-mt-20 relative w-full bg-stone-950 py-15 md:pt-25 md:pb-15 2xl:pb-40 overflow-hidden">
       {/* Background ambient accents */}
 
-      <div className="relative w-full px-10.5 sm:px-17 md:px-21 lg:px-24 xl:px-33">
+      <div className="relative w-full px-10.5 sm:px-17 md:px-21 lg:px-24 xl:px-33 2xl:px-46">
         {/* Section Header */}
         <div className="max-w-md mb-10 md:mb-4">
           <h2 className="text-base md:text-[27px] uppercase tracking-[.3rem] text-stone-400">
@@ -25,14 +25,14 @@ export default function ServiceArea() {
         </p>
 
         {/* Main Grid: Visual Map Slot (Left) + Region Data (Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+        <div className="grid grid-cols-1 lg:flex items-stretch">
           {/* MAP / VISUAL CONTAINER SLOT (OUTER SHELL) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-7 bg-stone-900/20 rounded-2xl p-2.5 lg:p-4 border border-stone-900 max-w-md md:max-w-lg lg:max-w-2xl w-full"
+            className="lg:w-7/12 bg-stone-900/20 rounded-2xl p-2.5 lg:p-4 border border-stone-900 max-w-md md:max-w-lg lg:max-w-2xl w-full"
           >
             {/* INNER MAP CONTAINER */}
             <div className="relative w-full h-[300px] md:h-[400px] lg:h-full lg:min-h-[500px] rounded-xl overflow-hidden">
@@ -54,7 +54,7 @@ export default function ServiceArea() {
           </motion.div>
 
           {/* REGIONAL DATA & CARD SELECTOR (RIGHT) */}
-          <div className="lg:col-span-5 flex flex-col justify-center lg:ml-8 xl:pr-10">
+          <div className="lg:flex-1 flex flex-col justify-center lg:ml-40 xl:pr-10">
             <p className="mt-8 md:mt-15 lg:-mt-30 xl:mt-10 text-xl lg:text-2xl font-bold text-white/90">
               Where your fleet works, we deliver.
             </p>

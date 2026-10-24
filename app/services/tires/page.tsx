@@ -92,7 +92,7 @@ export default function Tires() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] w-full flex flex-col justify-center px-12 min-[500px]:px-20 sm:px-20 md:px-29 pt-30 md:pt-50 bg-stone-900 text-white/90 font-display mb-30 overflow-hidden">
+      <section className="relative min-h-[80vh] w-full flex flex-col justify-center px-12 min-[500px]:px-20 sm:px-20 md:px-46 pt-30 md:pt-50 bg-stone-900 text-white/90 font-display mb-30 overflow-hidden">
         {/* Background Image Container with Left Vignette */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -115,9 +115,9 @@ export default function Tires() {
           {/* 1. Main Heading */}
 
           {/* 2. Inline SVG Track / Divider */}
-          <div className="my-10 sm:my-13 lg:my-18 -ml-17 sm:-ml-25 md:-ml-38 min-[500px]:-ml-25 text-stone-600 pointer-events-none w-full max-w-sm min-[400px]:max-w-md sm:max-w-xl md:max-w-2xl">
+          <div className="my-10 sm:my-13 lg:my-18 -ml-17 sm:-ml-25 md:-ml-38 xl:-ml-55 min-[500px]:-ml-25 text-stone-600 pointer-events-none w-full max-w-sm min-[400px]:max-w-md sm:max-w-xl md:max-w-2xl xl:max-w-3xl">
             <svg
-              className="w-full h-10 sm:h-12 md:h-14"
+              className="w-full h-10 sm:h-12 md:h-14 xl:h-16"
               viewBox="0 0 320 32"
               preserveAspectRatio="none"
               fill="none"
@@ -159,7 +159,7 @@ export default function Tires() {
 
       {/* Main Route Content */}
       <section className="flex-1 text-stone-100 mt-10 mb-15 md:mb-20 mx-5 min-[500px]:mx-15 mr-10 p-4 pr-6 md:p-12">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl xl:mx-20">
           {/* Section Header */}
           <div className="flex items-center justify-between pb-4 mb-4 md:mb-10 mt-5 -translate-x-3">
             <h2 className="text-[18px] sm:text-[25px] font-sans text-stone-400 tracking-wider uppercase pl-2 leading-8 sm:leading-11 max-w-[260px] sm:max-w-[350px]">
@@ -239,7 +239,7 @@ export default function Tires() {
       {/* Purchasing & Logistics Section with Horizontal Scroll & Pagination */}
       <section className="w-full bg-stone-900/30 py-10 sm:py-15 overflow-hidden">
         {/* Standard max-w-7xl centered container throughout */}
-        <div className="max-w-7xl mx-auto px-15 sm:px-23 md:px-30 lg:px-28 xl:px-0 xl:ml-25">
+        <div className="max-w-7xl mx-auto px-15 sm:px-23 md:px-30 lg:px-28 xl:px-0 xl:mx-46">
           {/* Section Header with synced left gutter */}
           <div className="flex items-center pb-2 mb-4 sm:mb-8 md:mb-10 pl-0 lg:pl-0 xl:pl-3">
             <h2 className="text-[18px] sm:text-[25px] font-sans text-stone-400 tracking-wide uppercase leading-8 sm:leading-11 max-w-[300px] sm:max-w-[350px]">
@@ -252,7 +252,7 @@ export default function Tires() {
             <div
               ref={scrollRef}
               onScroll={handleScroll}
-              className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-6 sm:gap-14 lg:gap-16
+              className="flex overflow-x-auto xl:overflow-x-hidden snap-x snap-mandatory scrollbar-none gap-6 sm:gap-14 lg:gap-16 2xl:gap-30
              pl-9 sm:pl-15 md:pl-22 lg:pl-21 xl:pl-[max(3.5rem,calc((100vw-80rem)/2+0.25rem))] 
              pb-4 scroll-pl-12 sm:scroll-pl-15 md:scroll-pl-22 lg:scroll-pl-21 xl:scroll-pl-[max(3.5rem,calc((100vw-80rem)/2+3.50rem))] 
              after:content-[''] after:w-10 after:flex-shrink-0"
@@ -313,8 +313,8 @@ export default function Tires() {
         </div>
       </section>
 
-      <section className="w-full bg-stone-950/40 py-13">
-        <div className="max-w-7xl mx-auto px-11 min-[500px]:px-12.5 md:px-22 lg:px-22 xl:px-1 xl:mx-27">
+      <section className="w-full bg-stone-950/40 py-13 xl:py-25">
+        <div className="max-w-7xl mx-auto px-11 min-[500px]:px-12.5 md:px-22 lg:px-22 xl:px-1 xl:mx-46">
           {/* Section Header */}
           <div className="pb-6 md:pb-8 mb-4 pl-4 md:pl-7 lg:pl-7 xl:pl-0">
             <h2 className="text-[18px] sm:text-[25px] md:text-2xl font-sans text-stone-400 tracking-wider uppercase max-w-[250px] sm:max-w-[350px] md:max-w-[340px] sm:leading-11">
@@ -323,7 +323,7 @@ export default function Tires() {
           </div>
 
           {/* 3-Card Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-6 md:gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-6 md:gap-5 2xl:gap-10">
             {PROCESS_STEPS.map((item, idx) => {
               const Icon = item.icon;
               return (

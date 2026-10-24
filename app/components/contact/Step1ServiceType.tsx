@@ -71,7 +71,7 @@ export function Step1ServiceType({
               <label
                 className={`group relative flex items-start gap-3.5 p-5 bg-stone-950/60 border border-stone-900/40 rounded-xl transition-all duration-200 overflow-hidden ${
                   isDisabled
-                    ? "opacity-40 cursor-not-allowed border-stone-900/20"
+                    ? "opacity-40 cursor-not-allowed border-stone-900/20 h-full"
                     : "cursor-pointer hover:border-red-700/60 hover:bg-stone-950/90 active:scale-[0.98] has-[:checked]:border-red-900 has-[:checked]:bg-stone-950/95 has-[:checked]:ring-1 has-[:checked]:ring-red-900"
                 }`}
               >

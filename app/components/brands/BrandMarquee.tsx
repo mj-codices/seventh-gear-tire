@@ -64,7 +64,7 @@ export default function BrandMarquee() {
 
   return (
     // Base Section Container (stone-900)
-    <div className="relative w-full bg-stone-900 pb-10 md:pb-15 pt-1 overflow-hidden z-0">
+    <div className="relative w-full bg-stone-900 pb-10 md:pb-15 2xl:pb-40 pt-1 overflow-hidden z-0">
       {/* 1. Category Marquee Track */}
       <div
         className="w-full overflow-hidden"
@@ -175,9 +175,9 @@ export default function BrandMarquee() {
       </div>
 
       {/* DESKTOP DISPLAY: Desktop Outer Shell with Background Image & Feature Grid */}
-      <div className="hidden lg:block relative mx-auto mt-25 md:mt-20 sm:w-[calc(100%-7rem)] md:w-[calc(100%-9rem)] rounded-2xl bg-stone-950 px-6 pt-3 md:pt-15 pb-20 md:pb-20 border border-stone-700/50 drop-shadow-xl lg:drop-shadow-3xl">
+      <div className="hidden lg:block relative mx-auto mt-25 md:mt-20 sm:w-[calc(100%-7rem)] md:w-[calc(100%-9rem)] xl:w-[calc(100%-22rem)] rounded-2xl bg-stone-950 px-6 xl:px-12 pt-3 md:pt-15 pb-20 md:pb-30 border border-stone-700/50 drop-shadow-xl lg:drop-shadow-3xl">
         {/* Inner Card Container */}
-        <div className="relative mx-auto mt-25 md:mt-5 sm:w-[calc(100%-6rem)] md:w-[calc(100%-4rem)] rounded-2xl bg-stone-950 px-6 sm:pt-15 md:pt-18 sm:pb-20 md:pb-15 drop-shadow-xl lg:drop-shadow-3xl overflow-hidden">
+        <div className="relative mx-auto mt-25 md:mt-5 sm:w-[calc(100%-6rem)] md:w-[calc(100%-4rem)] rounded-2xl bg-stone-950 px-6 sm:pt-15 md:pt-18 xl:pt-40 sm:pb-20 md:pb-15 drop-shadow-xl lg:drop-shadow-3xl overflow-hidden">
           {/* Background Image Layer */}
           <div className="absolute inset-0 pointer-events-none z-0">
             <Image

@@ -275,7 +275,7 @@ function ContactPageContent() {
             </div>
           )}
 
-          <header className="max-w-3xl mx-auto">
+          <header className="max-w-3xl mx-auto xl:-translate-x-15">
             <div>
               <div>
                 <p className="text-white/90 font-display text-base font-bold uppercase tracking-widest mb-2.5 sm:mb-4">

@@ -37,7 +37,7 @@ export const HowItWorks: React.FC = () => {
   return (
     <section
       id="works"
-      className="scroll-mt-20 w-full py-14 md:py-20 px-10 sm:px-17 md:px-20 lg:px-24 xl:px-33"
+      className="scroll-mt-20 w-full py-14 md:py-20 px-10 sm:px-17 md:px-20 lg:px-24 xl:px-33 2xl:px-46"
     >
       <div className="text-left mb-12 md:mb-17">
         <h2 className="text-base md:text-[27px] uppercase tracking-[.3rem] text-stone-400">
@@ -88,7 +88,7 @@ export const HowItWorks: React.FC = () => {
                 <h3 className="text-lg font-semibold text-white tracking-wide">
                   {step.title}.
                 </h3>
-                <p className="mt-3 text-sm text-neutral-400 leading-relaxed max-w-xs md:max-w-none md:pr-4">
+                <p className="mt-3 text-sm text-neutral-400 leading-relaxed max-w-xs md:max-w-none xl:max-w-xl md:pr-4">
                   {step.description}
                 </p>
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Services() {
   return (
-    <section className="relative border-t border-stone-900 bg-stone-950 px-10.5 sm:px-18 md:px-20 lg:px-0 lg:pl-24 lg:pr-10 xl:px-33 pt-15 md:pt-30 pb-20 md:pb-30 xl:pb-35 space-y-10 md:space-y-15 z-10 drop-shadow-xl lg:drop-shadow-4xl">
+    <section className="relative border-t border-stone-900 bg-stone-950 px-10.5 sm:px-18 md:px-20 lg:px-0 lg:pl-24 lg:pr-10 xl:px-33 2xl:px-46 pt-15 md:pt-30 pb-20 md:pb-30 xl:pb-35 space-y-10 md:space-y-15 z-10 drop-shadow-xl lg:drop-shadow-4xl">
       {/* Section Header */}
       <div>
         <h2 className="text-base md:text-[27px] uppercase tracking-[.3rem] text-stone-400 ">

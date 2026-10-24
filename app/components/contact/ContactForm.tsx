@@ -111,7 +111,7 @@ export function ContactForm({
 
   return (
     <>
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl xl:max-w-4xl mx-auto">
         <motion.section
           id="contact-form-section"
           layout={isSubmitted ? true : false}

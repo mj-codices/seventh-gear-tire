@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div>
       {/* Added flex and items-center to safely organize the vertical flow */}
-      <footer className="w-full bg-stone-950 pt-13 sm:pt-20 pb-16 sm:pb-22 flex flex-col items-center leading-none">
+      <footer className="w-full bg-stone-950 pt-13 sm:pt-20 2xl:pt-40 pb-16 sm:pb-22 flex flex-col items-center leading-none">
         <div className="max-w-5xl w-full">
           {/* Left Side: Brand & Identity */}
           <div className="flex justify-center tracking-[.03rem] -mt-2 opacity-95">

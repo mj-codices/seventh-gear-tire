@@ -253,24 +253,25 @@ export default function Tires() {
               ref={scrollRef}
               onScroll={handleScroll}
               className="flex overflow-x-auto xl:overflow-x-hidden snap-x snap-mandatory scrollbar-none gap-6 sm:gap-14 lg:gap-16 2xl:gap-30
-             pl-9 sm:pl-15 md:pl-22 lg:pl-21 xl:pl-[max(3.5rem,calc((100vw-80rem)/2+0.25rem))] 
-             pb-4 scroll-pl-12 sm:scroll-pl-15 md:scroll-pl-22 lg:scroll-pl-21 xl:scroll-pl-[max(3.5rem,calc((100vw-80rem)/2+3.50rem))] 
-             after:content-[''] after:w-10 after:flex-shrink-0"
+             pl-9 sm:pl-15 md:pl-22 lg:pl-21 xl:pl-[max(11.75rem,calc((100vw-80rem)/2+0.25rem))]
+             xl:pr-[clamp(0px,calc(1628px-100vw),11.75rem)]
+             pb-4 scroll-pl-12 sm:scroll-pl-15 md:scroll-pl-22 lg:scroll-pl-21 xl:scroll-pl-[max(11.75rem,calc((100vw-80rem)/2+3.50rem))]
+             after:content-[''] after:w-10 after:flex-shrink-0 xl:after:hidden"
             >
               {LOGISTICS_OPTIONS.map((item, idx) => {
                 const Icon = item.icon;
                 return (
                   <div
                     key={idx}
-                    className="w-[80vw] max-w-[315px] min-[500px]:max-w-[330px] sm:max-w-[400px] shrink-0 snap-start p-5 sm:p-8 rounded-xl bg-stone-950 border border-stone-800/60 flex flex-col justify-between"
+                    className="w-[80vw] max-w-[315px] min-[500px]:max-w-[330px] sm:max-w-[400px] shrink-0 xl:flex-1 xl:min-w-0 snap-start p-5 sm:p-8 xl:p-6 2xl:p-8 rounded-xl bg-stone-950 border border-stone-800/60 flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-3">
-                        <p className="text-2xl sm:text-3xl font-semibold text-olive-600 font-display tracking-wider">
+                        <p className="text-2xl sm:text-3xl xl:text-2xl 2xl:text-3xl font-semibold text-olive-600 font-display tracking-wider">
                           {item.title}
                         </p>
                         <Icon
-                          className={`w-10 h-10 sm:w-12 sm:h-12 text-stone-400 stroke-[1.5] ${item.iconStyles}`}
+                          className={`w-10 h-10 sm:w-12 sm:h-12 xl:w-10 xl:h-10 2xl:w-12 2xl:h-12 shrink-0 text-stone-400 stroke-[1.5] ${item.iconStyles}`}
                         />
                       </div>
                       <p className="text-sm sm:text-base font-extrabold text-stone-200 mt-1 lg:mt-3">
